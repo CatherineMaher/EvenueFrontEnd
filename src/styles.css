@@ -2,25 +2,29 @@
 
 :root {
   --main-color: #a63fdc;
-  --bg-purple:#9A24C1;
-  --dark-purple:#7c3488 ;
-  --purple-gred:#5C127E;
-  --dark-blue:#21145c;
-  --navy:#08011e;
-  --gray-font:#777777;
-  --black-font:#232127;
+  --bg-purple: #9a24c1;
+  --dark-purple: #7c3488;
+  --purple-gred: #5c127e;
+  --dark-blue: #21145c;
+  --navy: #08011e;
+  --gray-font: #777777;
+  --black-font: #232127;
 }
 @font-face {
   font-family: font;
-  src: url('assets/fonts/alfont_com_كاليبري-عريض.ttf');
+  src: url("assets/fonts/PPFragment-SerifRegular.otf");
 }
-body{
+body {
   font-family: font;
-
+  background-color: wheat;
 }
-.btn-color{
-  background-image: linear-gradient(to right,var(--purple-gred),var(--main-color));
- }
+.btn-color {
+  background-image: linear-gradient(
+    to right,
+    var(--purple-gred),
+    var(--main-color)
+  );
+}
 
 /* {
   background-color:;

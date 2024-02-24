@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { EventDetailsComponent } from './components/event-details/event-details.component';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +10,11 @@ import { NavbarComponent } from './navbar/navbar.component';
   imports: [
     RouterOutlet,
     NavbarComponent,
-    HomeComponent
+    HomeComponent,
+    EventDetailsComponent,
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'evenue';
