@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+  --main-color: #a63fdc;
+  --bg-purple:#9A24C1;
+  --dark-purple:#7c3488 ;
+  --purple-gred:#5C127E;
+  --dark-blue:#21145c;
+  --navy:#08011e;
+  --gray-font:#777777;
+  --black-font:#232127;
+}
+@font-face {
+  font-family: font;
+  src: url('assets/fonts/alfont_com_كاليبري-عريض.ttf');
+}
+body{
+  font-family: font;
+
+}
+.btn-color{
+  background-image: linear-gradient(to right,var(--purple-gred),var(--main-color));
+ }
+
+/* {
+  background-color:;
+} */
