@@ -9,6 +9,9 @@ import { LoginComponent } from './components/login/login.component';
 import { CartComponent } from './components/cart/cart.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { EventDetailsComponent } from './components/event-details/event-details.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { SearchComponent } from './components/search/search.component';
+import { SearchPipe } from './components/searchPipe/search.pipe';
 @Component({
   selector: 'app-root',
   standalone: true,
