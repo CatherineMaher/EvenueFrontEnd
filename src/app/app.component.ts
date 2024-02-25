@@ -8,6 +8,7 @@ import { LoginComponent } from './components/login/login.component';
 import { CartComponent } from './components/cart/cart.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { EventDetailsComponent } from './components/event-details/event-details.component';
+import { FooterComponent } from './components/footer/footer.component';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -21,6 +22,7 @@ import { EventDetailsComponent } from './components/event-details/event-details.
     CommonModule,
     RouterModule,
     HttpClientModule,
+    FooterComponent,
     EventDetailsComponent
   ],
   templateUrl: './app.component.html',
