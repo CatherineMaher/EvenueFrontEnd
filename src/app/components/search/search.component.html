@@ -10,7 +10,7 @@
 
 <body>
   <div class="container">
-    <div class="row bg-danger h-75">
+    <div class="row h-75 cover">
       <div class="col-12 text-center p-3">
         <div class="input-group justify-content-center">
           <div class="form-outline d-flex align-items-center w-50" data-mdb-input-init>
@@ -35,64 +35,45 @@
               <option value="Chicago">
             </datalist>
           </div> -->
-          <div class="col-md-2">
+          <div class="col-md-3 col-6 mt-3">
             <input class="form-control" [(ngModel)]="price" list="datalistOptions" id="exampleDataList"
               placeholder="search By Price ...">
             <datalist id="datalistOptions">
-              <option value="San Francisco">
-              <option value="New York">
-              <option value="Seattle">
-              <option value="Los Angeles">
-              <option value="Chicago">
+              <option value="100$">
+              <option value="150$">
+              <option value="50$">
             </datalist>
           </div>
-          <div class="col-md-2">
-            <input class="form-control" [(ngModel)]="location" list="datalistOptions" id="exampleDataList"
+          <div class="col-md-3 col-6 mt-3">
+            <input class="form-control" [(ngModel)]="location" list="locationOptions" id="exampleDataList"
               placeholder="search By Location...">
-            <datalist id="datalistOptions">
-              <option value="San Francisco">
-              <option value="New York">
-              <option value="Seattle">
-              <option value="Los Angeles">
-              <option value="Chicago">
+            <datalist id="locationOptions" class="lochover">
+              <option value="6 October" class="lochover">
+              <option value="New Cairo" class="lochover">
+              <option value="Zamalek" class="lochover">
+              <option value="Zayed" class="lochover">
             </datalist>
           </div>
-          <div class="col-md-2">
-            <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="search By Date ...">
-            <!-- <datalist id="datalistOptions">
-              <option value="San Francisco">
-              <option value="New York">
-              <option value="Seattle">
-              <option value="Los Angeles">
-              <option value="Chicago">
-            </datalist> -->
-          </div>
-
         </div>
       </div>
 
     </div>
-    <!-- <div class="row mt-5">
-        <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="..." alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-              content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-
-      </div> -->
     <div class="row justify-content-around">
       <!-- @for (event of events;let i $index) { -->
-      @if(!name){
-      <div *ngFor="let event of events; let i = index" class="profile-card-6 col-md-5 col-lg-3 col-9 m-2 mt-4  "><img
-          src="../../../assets/imgs/event1.jpg" class="img img-responsive h-100 ">
+      @if(!name&&!price&&!location){
+      <div *ngFor="let event of events; let i = index" class="profile-card-6 col-md-5 col-lg-3 col-9 m-2 mt-4 ">
+        <img src="../../../assets/imgs/event1.jpg" class="img img-responsive h-100 ">
         <div class="profile-name">{{event.title}}
-          <br>{{event.location}}
+          <br>
+          {{event.location}}
         </div>
-        <div class="profile-position">{{event.organizer}}</div>
+        <div class="profile-price profile-position" *ngIf="event.tickets?.length != 0">
+          <h4>
+            price:
+            {{event.tickets?.[0]?.price}}$
+          </h4>
+        </div>
+        <!-- <div class="profile-position">{{event.organizer}}</div> -->
         <div class="profile-overview">
           <div class="profile-overview ">
             <div class="row text-center ">
@@ -112,7 +93,8 @@
                 </div>
                 <div class="col-xs-4">
                   <button
-                    class="btn btn-secondary btnhover text-light fs-7 border-2 border-white rounded-pill px-3 py-1 mb-2 ">Show
+                    class="btn btn-secondary btnhover text-light fs-7 border-2 border-white rounded-pill px-3 py-1 mb-2 "
+                    (click)="Viewmore(event?._id ?? '')">Show
                     More</button>
                 </div>
               </div>
@@ -130,14 +112,21 @@
       </div>
       }
       @else{
-      <!-- @for (user of users|search:term; track i) { -->
-      <div *ngFor="let event of events|search:name; let i = index"
+      <!-- @for (event of events|search:name; track ) { -->
+      <!-- search:name |searchLocation:location |searchPrice:price -->
+      <div *ngFor="let event of events |searchLocation:location |searchPrice:price |search:name; let i = index"
         class="profile-card-6 col-md-5 col-lg-3 col-9 m-2 mt-4  "><img src="../../../assets/imgs/event1.jpg"
           class="img img-responsive h-100 ">
         <div class="profile-name">{{event.title}}
           <br>{{event.location}}
         </div>
-        <div class="profile-position">{{event.organizer}}</div>
+        <div class="profile-price profile-position" *ngIf="event.tickets?.length != 0">
+          <h4>
+            Avaliable Tickets:
+            {{event.tickets?.[i]?.totalTickets}}
+
+          </h4>
+        </div>
         <div class="profile-overview">
           <div class="profile-overview ">
             <div class="row text-center ">
@@ -146,9 +135,9 @@
 
                 <div class="col-xs-4">
                   <!-- @for(tickes of {{event.tickes}}; track $index) -->
-                  <h3>{{event.tickets?.[i]?.totalTickets}}</h3>
+                  <h3>{{event.tickets?.[0]?.price}}$</h3>
                   <!-- } -->
-                  <p>Avaliable Tickets</p>
+                  <p>price</p>
                 </div>
                 <div class="col-xs-4">
 
@@ -174,6 +163,7 @@
         </div>
       </div>
       }
+      <!-- } -->
       <!-- } -->
     </div>
   </div>

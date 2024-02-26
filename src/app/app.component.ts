@@ -8,6 +8,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
 import { CartComponent } from './components/cart/cart.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { EventDetailsComponent } from './components/event-details/event-details.component';
+import { SearchComponent } from './components/search/search.component';
+import { SearchPipe } from './components/searchPipe/search.pipe';
+import { SearchByPricePipe } from './components/searchPipe/searchByPrice/search-by-price.pipe';
+import { SearchLocationPipe } from './components/searchPipe/searchByLocation/search-location.pipe';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -22,7 +27,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     SearchComponent,
     HttpClientModule,
     CommonModule,
-    SearchPipe
+    SearchPipe,
+    SearchByPricePipe,
+    SearchLocationPipe
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
