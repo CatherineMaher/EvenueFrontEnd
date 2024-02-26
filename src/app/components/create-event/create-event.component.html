@@ -1,0 +1,179 @@
+<main class=" bg-info">
+  <h2 class="mt-5 my-3">Add Event</h2>
+<form [formGroup]="registerForm" (ngSubmit)="submitForm(registerForm)">
+    <label for="title">Title</label>
+    <input type="text" id="title" formControlName="title" class="form-control border border-0 my-3">
+    <div *ngIf="registerForm.get('title') && registerForm.get('title')?.touched">
+        <p *ngIf="registerForm.get('title')?.getError('required')" class="text-danger">Event Name is Required</p>
+        <p *ngIf="registerForm.get('title')?.getError('minlength')" class="text-danger">Event Name should be at least 3 words </p>
+        <p *ngIf="registerForm.get('title')?.getError('maxlength')" class="text-danger">Event Name should be maximum 10 words</p>
+    </div>
+    <label for="location">Location</label>
+    <input type="location" id="location" formControlName="location" class="form-control my-3">
+    <div *ngIf="registerForm.get('location')&& registerForm.get('location')?.touched">
+        <p *ngIf="registerForm.get('location')?.getError('required')" class="text-danger">location is Required</p>
+        <p *ngIf="emailErrorMessage" class="alert alert-danger">{{emailErrorMessage}}</p>
+    </div>
+    <label for="organizer">Organizer</label>
+    <input type="organizer" id="organizer" formControlName="organizer" class="form-control my-3">
+    <div *ngIf="registerForm.get('organizer')&& registerForm.get('organizer')?.touched">
+        <p *ngIf="registerForm.get('organizer')?.getError('required')" class="text-danger">Organizer is Required</p>
+        <p *ngIf="emailErrorMessage" class="alert alert-danger">{{emailErrorMessage}}</p>
+    </div>
+
+    <label for="Description">Description</label>
+    <input type="text" id="Description" formControlName="Description" class="form-control my-3">
+    <div *ngIf="registerForm.get('Description')&&registerForm.get('Description')?.touched">
+        <p *ngIf="registerForm.get('Description')?.getError('required')" class="text-danger">Description is Required</p>
+        <p *ngIf="registerForm.get('Description')?.getError('min')" class="text-danger">Minimum Description should be 16</p>
+        <p *ngIf="registerForm.get('Description')?.getError('max')" class="text-danger">Maximum Description should be 60</p>
+    </div>
+    <div *ngIf="this?.facilities?.length!=0">
+      <h2>Chosen Facilities</h2>
+      <div  id="facilities" class="mt-3 mb-3" *ngFor="let facility of this?.facilities ,let ind=index">
+        <input type="text"  [value]="facility" class="form-control w-75 d-inline ms-2">
+        <span class="btn mb-1"(click)="removeFacility(ind)"><i class="fa-solid fa-circle-xmark text-danger fs-4"></i></span>
+
+      </div>
+    </div>
+    <div>
+      <label class=" mainfntclr mt-3 mb-1">
+       Facilities
+      </label>
+      <div>
+        <input type="text"
+        formControlName="facilities"
+         #link class="form-control w-50 d-inline ">
+        <span class=" btn  " (click)="AddFacility()">
+          <i class="fa-solid fa-circle-check text-success ms-2 fs-4"></i>
+        </span>
+      </div>
+    </div>
+    <div *ngIf="this?.instructions?.length!=0">
+      <h2>Chosen instructions</h2>
+      <div  id="instructions" class="mt-3 mb-3" *ngFor="let instruction of this?.instructions ,let ind=index">
+        <input type="text"  [value]="instruction" class="form-control w-75 d-inline ms-2">
+        <span class="btn   mb-1"(click)="removeInstruction(ind)"><i class="fa-solid fa-circle-xmark text-danger fs-4"></i></span>
+
+      </div>
+    </div>
+    <div>
+      <label class=" mainfntclr mt-3 mb-1">
+       instructions
+      </label>
+      <div>
+        <input type="text"
+        formControlName="instructions"
+         #inst class="form-control w-50 d-inline ">
+        <span class=" btn  " (click)="AddInstruction()">
+          <i class="fa-solid fa-circle-check text-success ms-2 fs-4"></i>
+        </span>
+      </div>
+    </div>
+
+    <!-- <div *ngIf="this.eventTime?.length!=0">
+    <label class="fw-bold mainfntclr" for="event_times">Event Time</label>
+    <div id="event_times" class="mt-3 mb-3" *ngFor="let item of eventTime,let ind=index">
+
+      <input type="date" [value]="item?.date" name="" id="">
+      <input type="text"  [value]="item?.hour" class="form-control w-25 d-inline ms-2">
+      <input type="text"  [value]="item?.minute" class="form-control w-25 d-inline ms-2" >
+
+      <span class="btn ms-2 mb-1"(click)="remove(ind)"><i class="fa-solid fa-circle-xmark text-danger fs-4"></i></span>
+    </div>
+  </div> -->
+  <div *ngIf="this.eventTime?.length !== 0">
+    <label class="fw-bold mainfntclr" for="event_times">Event Time</label>
+    <div id="event_times" class="mt-3 mb-3" *ngFor="let event of eventTime; let i = index">
+      <div *ngIf="event.date">
+        Date: {{ event.date }}
+      </div>
+      <div *ngFor="let time of event.times; let j = index">
+        <div>
+          Start: {{ time.start }}
+        </div>
+        <div>
+          End: {{ time.end }}
+        </div>
+
+      </div>
+      <div>
+        <span class="btn mb-1"(click)="removeEvent(i)"><i class="fa-solid fa-circle-xmark text-danger fs-4"></i></span>
+
+      </div>
+    </div>
+  </div>
+    <div>
+      <div class="fw-bold mainfntclr mt-3" >
+        Add Event Time
+      </div>
+      <div>
+        <input type="date"  #date class="form-control w-25 d-inline ms-2">
+        <div *ngIf="this.timeRange?.length !== 0">
+        <div *ngFor="let time of timeRange; let i = index">
+          <input type="time" disabled  [value]="time.start" class="form-control w-75 d-inline ms-2">
+          <input type="time" disabled [value]="time.end" class="form-control w-75 d-inline ms-2">
+          <span class="btn mb-1"(click)="removeTimeRange(i)"><i class="fa-solid fa-circle-xmark text-danger fs-4"></i></span>
+        </div>
+        </div>
+        </div>
+        <input type="time"   #start class="form-control w-25 d-inline ms-2">
+        <input type="time"  #end class="form-control w-25 d-inline ms-2" >
+        <span class=" btn  "(click)="addTimeRange()">
+          <i class="fa-solid fa-circle-check text-success ms-2 fs-4"></i>
+        </span>
+        <span class=" btn  "(click)="Add()">
+          <i class="fa-solid fa-circle-check text-success ms-2 fs-4"></i>
+        </span>
+
+      </div>
+<!--     [selected]="ticket==this.user?.ticket" -->
+<div *ngIf="this.tickets?.length !== 0">
+  <label class="fw-bold mainfntclr" for="tickets">Tickets</label>
+  <div id="tickets" class="mt-3 mb-3" *ngFor="let ticket of tickets; let i = index">
+    <div >
+      Type: {{ ticket.type }}
+    </div>
+    <div >
+      Price: {{ ticket.price }}
+    </div>
+    <div >
+      Reserved Tickets: {{ ticket.reserved }}
+    </div>
+    <div >
+      Total Tickets: {{ ticket.totalTickets }}
+    </div>
+    <div>
+      <span class="btn mb-1"(click)="removeTicket(i)"><i class="fa-solid fa-circle-xmark text-danger fs-4"></i></span>
+    </div>
+  </div>
+</div>
+      <label class=" mainfntclr" for="ticket">Ticket</label>
+      <select #ticketType class="text-dark form-select w-25" (change)="toggleTicketInfo()">
+        <option disabled selected>Select Your ticket</option>
+        <option
+          *ngFor="let ticket of type"
+          [ngValue]="ticket"
+        >
+          {{ ticket }}
+        </option>
+      </select>
+      <!-- {{this.ticketType.value}} -->
+      <div *ngIf="showTicketInfo">
+        <input type="number"   #reservedTicket class="form-control w-25 d-inline ms-2">
+        <input type="number"  #price class="form-control w-25 d-inline ms-2" >
+        <input type="number"  #totalTickets class="form-control w-25 d-inline ms-2" >
+        <span class=" btn " (click)="AddTicket()">
+          <i class="fa-solid fa-circle-check text-success ms-2 fs-4"></i>
+        </span>
+      </div>
+
+    <button class="btn btn-dark mt-5 float-end"> Register</button>
+    <div class="clear-both"></div>
+
+</form>
+
+
+
+
+</main>
