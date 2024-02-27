@@ -12,6 +12,7 @@ import { EventDetailsComponent } from './components/event-details/event-details.
 import { FooterComponent } from './components/footer/footer.component';
 import { SearchComponent } from './components/search/search.component';
 import { SearchPipe } from './components/searchPipe/search.pipe';
+import { TestimonialsComponent } from './components/testimonials/testimonials.component';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -28,7 +29,8 @@ import { SearchPipe } from './components/searchPipe/search.pipe';
     HttpClientModule,
     CommonModule,
     SearchPipe,
-    EventDetailsComponent
+    EventDetailsComponent,
+    TestimonialsComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
