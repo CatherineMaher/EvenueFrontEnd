@@ -16,30 +16,32 @@
             <h4 class="card-title mb-4">Your shopping cart</h4>
 
             <!-- ITEM IN CART  -->
-            <div class="row gy-3 mb-4">
+            <div class="row gy-3 mb-4 shadow-sm p-4 " *ngFor="let ticket of ticket.tickets">
               <div class="col-lg-5">
                 <div class="me-lg-5">
-                  <div class="d-flex">
+                  <div class="d-flex" >
                     <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/11.webp" class="border rounded me-3" style="width: 96px; height: 96px;" />
                     <div class="">
-                      <a href="#" class="nav-link">Amr Diab Concert</a>
+                      <a href="#" class="nav-link">{{ticket.name}}</a>
                       <p class="text-muted">Ticket</p>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="col-lg-2 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
-                <div class="">
-                  <select style="width: 100px;" class="form-select me-4">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                  </select>
-                </div>
-                <div class="">
-                  <p class="h6">$1156.00</p> <br />
-                  <small class="text-muted text-nowrap"> $460.00 / per item </small>
+                
+                <div class="d-flex flex-column text-center col-8"  *ngFor="let detail of ticket.details">
+                  <i class="fas fa-ticket-alt "></i>
+
+                  <p class="h6">{{detail.type}}</p> 
+                  <small class="text-muted text-nowrap">x{{ detail.quantity }} tickets</small>
+                  <div class="px-3">
+                    <select style="width: 30px;" class="form-select me-4" >
+                      <!-- msh mazboota -->
+                      <option *ngFor="let detail of ticket.details">{{detail.quantity}}</option>
+                      
+                    </select>
+                  </div>
                 </div>
               </div>
               <div class="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
@@ -200,3 +202,62 @@
   </div>
 </section> -->
 <!-- Recommended -->
+
+
+
+<div class="card">
+  <div class="row">
+      <div class="col-md-8 cart">
+          <div class="title">
+              <div class="row">
+                  <div class="col"><h4><b>Shopping Cart</b></h4></div>
+                  <!-- <div class="col align-self-center text-right text-muted">3 items</div> -->
+              </div>
+          </div>    
+          <div class="row border-top border-bottom" *ngFor="let ticket of ticket.tickets">
+              <div class="row main align-items-center">
+                  <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/1GrakTl.jpg"></div>
+                  <div class="col">
+                      <div class="row text-muted">{{ticket.name}}</div>
+                      <div class="d-flex col-7">
+                        <div class="d-flex flex-column text-center col-8"  *ngFor="let detail of ticket.details">
+                          <i class="fas fa-ticket-alt "></i>
+        
+                          <p class="h6">{{detail.type}}</p> 
+                          <small class="text-muted text-nowrap">x{{ detail.quantity }} tickets</small>
+                          <div class="col">
+                            <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
+                          </div>
+                          
+                        </div>
+                        <p class="col d-flex "><span>&euro; </span>44.00</p>
+                        <span><button class="border-0 bg-transparent">x</button></span>
+                      </div>
+                  </div>
+                 
+              </div>
+          </div>
+          <div class="back-to-shop"><a href="#">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
+      </div>
+      <div class="col-md-4 summary">
+          <div><h5><b>Summary</b></h5></div>
+          <hr>
+          <div class="row">
+              <div class="col" style="padding-left:0;">ITEMS 3</div>
+              <div class="col text-right">&euro; 132.00</div>
+          </div>
+          <form>
+              <p>SHIPPING</p>
+              <select><option class="text-muted">Standard-Delivery- &euro;5.00</option></select>
+              <p>GIVE CODE</p>
+              <input id="code" placeholder="Enter your code">
+          </form>
+          <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+              <div class="col">TOTAL PRICE</div>
+              <div class="col text-right">&euro; 137.00</div>
+          </div>
+          <button class="btn">CHECKOUT</button>
+      </div>
+  </div>
+  
+</div>

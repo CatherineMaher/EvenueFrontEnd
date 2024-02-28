@@ -5,6 +5,7 @@ import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
 import {jwtDecode} from 'jwt-decode';
+import { GoogleAPIComponent } from '../google-api/google-api.component';
 
 const authToken = localStorage.getItem('authToken');
 const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
@@ -12,7 +13,7 @@ const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule,FormsModule],
+  imports: [CommonModule,ReactiveFormsModule,FormsModule,GoogleAPIComponent],
   providers: [UserService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
