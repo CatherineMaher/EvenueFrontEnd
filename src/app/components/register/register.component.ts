@@ -18,10 +18,8 @@ export class RegisterComponent {
  role="user";
  success = false;
  failure = false;
- 
+
  constructor( private usrsrv: UserService,private router: Router){}
-
-
 emailErrorMessage:string='';
   registerForm: FormGroup = new FormGroup({
     name: new FormControl(null,[Validators.required,Validators.minLength(3),Validators.maxLength(10)]),
@@ -31,7 +29,7 @@ emailErrorMessage:string='';
       role:  new FormControl("user")
   });
 //Validators.pattern("^(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[#?!@$%^&*-]).{8,}$")
-  
+
   Register(submitData:FormGroup) {
         this.usrsrv.addUser(submitData.value).subscribe({
           next:(res:any)=>{
@@ -39,16 +37,15 @@ emailErrorMessage:string='';
             if(res.message=='success'){
               this.success=true;
               console.log("success");
-              // this.router.navigate(['/users']);
+              this.router.navigate(['/login']);
             }
             else{
               this.failure=true;
               this.emailErrorMessage=res.message;
-              
             }
           }
         })
-      
-    
+
+
   }
 }

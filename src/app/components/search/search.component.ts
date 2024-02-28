@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { EventService } from '../../Services/event.service';
+
 import { Event } from '../../interface/event';
 import { CommonModule } from '@angular/common';
 import { count } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { SearchPipe } from '../searchPipe/search.pipe';
+import { EventService } from '../../services/event.service';
 
 @Component({
   selector: 'app-search',
@@ -21,7 +22,7 @@ export class SearchComponent implements OnInit {
   location: string = '';
   price: string = '';
 
-  constructor(private router: Router, private EventModel: EventService) { }
+  constructor(private router: Router, private EventModel:EventService) { }
 
   regSearch() {
     this.EventModel.getEventByname(this.name).subscribe({

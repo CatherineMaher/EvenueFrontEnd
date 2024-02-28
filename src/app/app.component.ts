@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 
 import { RegisterComponent } from './components/register/register.component';
@@ -34,5 +34,7 @@ import { SearchPipe } from './components/searchPipe/search.pipe';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
+
+
   title = 'evenue';
 }

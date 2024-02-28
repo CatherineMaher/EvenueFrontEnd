@@ -1,1 +1,7 @@
+.index{
+  z-index: -9999;
+}
+svg{
+  height: 375px;
+}
 
