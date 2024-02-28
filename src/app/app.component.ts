@@ -13,6 +13,7 @@ import { SearchComponent } from './components/search/search.component';
 import { SearchPipe } from './components/searchPipe/search.pipe';
 import { SearchByPricePipe } from './components/searchPipe/searchByPrice/search-by-price.pipe';
 import { SearchLocationPipe } from './components/searchPipe/searchByLocation/search-location.pipe';
+import { FooterComponent } from './components/footer/footer.component';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -23,6 +24,7 @@ import { SearchLocationPipe } from './components/searchPipe/searchByLocation/sea
     CartComponent,
     RouterModule,
     HttpClientModule,
+    FooterComponent,
     EventDetailsComponent,
     SearchComponent,
     HttpClientModule,
