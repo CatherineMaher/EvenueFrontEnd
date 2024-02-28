@@ -25,6 +25,7 @@ export class NavbarComponent {
   path:any;
   loggedIn:boolean=false;
   ngOnInit(): void {
+    console.log(this.loggedIn);
     this.path=this._ActivatedRoute.snapshot;
     console.log(this.path);
     this._Router.events.subscribe(event => {
@@ -51,6 +52,7 @@ export class NavbarComponent {
   }
 logOut(){
   this._UserService.logOut();
+  this._Router.navigate(['/login']);
 }
 logIn(){
   this._Router.navigate(['/login']);
