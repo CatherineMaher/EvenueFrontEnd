@@ -9,9 +9,12 @@ import { LoginComponent } from './components/login/login.component';
 import { CartComponent } from './components/cart/cart.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { EventDetailsComponent } from './components/event-details/event-details.component';
-import { FooterComponent } from './components/footer/footer.component';
 import { SearchComponent } from './components/search/search.component';
 import { SearchPipe } from './components/searchPipe/search.pipe';
+import { TestimonialsComponent } from './components/testimonials/testimonials.component';
+import { SearchByPricePipe } from './components/searchPipe/searchByPrice/search-by-price.pipe';
+import { SearchLocationPipe } from './components/searchPipe/searchByLocation/search-location.pipe';
+import { FooterComponent } from './components/footer/footer.component';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -28,7 +31,10 @@ import { SearchPipe } from './components/searchPipe/search.pipe';
     HttpClientModule,
     CommonModule,
     SearchPipe,
-    EventDetailsComponent
+    EventDetailsComponent,
+    TestimonialsComponent,
+    SearchByPricePipe,
+    SearchLocationPipe
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

@@ -14,6 +14,7 @@ export interface Time {
 }
 
 export interface Event {
+  _id?: string;
   title?: string;
   location?: string;
   dates?: Dates[];

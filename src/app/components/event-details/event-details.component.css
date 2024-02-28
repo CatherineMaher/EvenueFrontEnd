@@ -13,8 +13,24 @@
   object-fit: cover;
 }
 
+.ticket-container {
+  height: 150px;
+}
+.ticket-container img {
+  height: 100%;
+  object-fit: cover;
+}
+
 @media (max-width: 1300px) {
   .container-lg {
     width: 100% !important; /* Set width to 100% for mobile screens */
   }
+}
+
+/* Custom CSS to style radio buttons */
+.radio-label {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 18px; /* Adjust font size as needed */
 }
