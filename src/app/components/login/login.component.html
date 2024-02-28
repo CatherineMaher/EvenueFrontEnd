@@ -1,7 +1,8 @@
+<div class="vh-100 d-flex justify-content-center align-items-center flex-column">
 
-<form [formGroup]="loginForm" (ngSubmit)="Login(loginForm)">
-    <div class="form justify-content-evenly gap-4 py-4 row  forms m-auto mt-3 w-50 shadow ">
-    
+  <form [formGroup]="loginForm" (ngSubmit)="Login(loginForm)">
+    <div class="form justify-content-evenly gap-4 py-4 row  forms m-auto mt-3  shadow ">
+
         <div class="container d-flex flex-column justify-content-evenly py-2 col-8">
             <input class="inform" type="text" formControlName="email" placeholder="Email"/>
             <div *ngIf="loginForm.get('email')&& loginForm.get('email')?.touched">
@@ -9,7 +10,7 @@
                 <!-- <p *ngIf="loginForm.get('email')?.getError('pattern')" class="text-danger">Email should match the format email.com </p> -->
                 <p *ngIf="emailErrorMessage" class="alert alert-danger">{{emailErrorMessage}}</p>
             </div>
-              
+
         </div>
         <div class="container d-flex flex-column justify-content-evenly py-2 col-8">
             <input class="inform " type="password" formControlName="password" placeholder="Password" />
@@ -26,9 +27,8 @@
            <div class="d-flex justify-content-center"> <app-google-api></app-google-api></div>
             <hr>
         </div>
-        <p  class="ms-lg-auto m-auto text-center d-flex justify-content-center col-8">Don't have an account? &nbsp;<a href="" routerLink="/register"> Register</a></p>
+        <p  class="ms-lg-auto m-auto text-center d-flex justify-content-center col-8">Don't have an account? &nbsp;<a  routerLink="/register"> Register</a></p>
     </div>
-   
     
 
 </form>
@@ -37,6 +37,4 @@
 
 <br><br><br><br><br>
 
-
-
-
+</div>

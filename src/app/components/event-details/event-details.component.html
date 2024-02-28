@@ -4,18 +4,19 @@
   >
     <!-- left of the card -->
     <div class="col-md-5 pt-5 p-0 p-lg-5 rounded-4">
-      <h3 class="fw-bold fs-1">Amr Diab</h3>
-      <p class="fs-3 mt-5">Apr 10 | 07:00pm</p>
-      <p class="fs-3 mt-5">Cubix, El Gouna</p>
+      <h3 class="fw-bold fs-1">{{ myEvent?.title }}</h3>
+      <p class="fs-3 mt-5">{{ firstDate }}</p>
+      <p class="fs-3 mt-5">{{ location }}</p>
 
       <div class="row text-center text-lg-start">
         <div class="col-12 fs-5">Organised by</div>
         <div class="col-12">
-          <img
+          <!-- <img
             src="assets/imgs/rog.png"
             class="img-fluid rounded-4 w-50 org-img"
             alt="..."
-          />
+          /> -->
+          {{ organizer }}
         </div>
       </div>
     </div>
@@ -31,50 +32,162 @@
     <!-- event details -->
     <div class="col-12 mt-2 px-2 px-lg-5 text-lg-start text-start">
       <h3 class="fw-bold fs-4 text-lg-start text-center">About the event</h3>
-      <p class="fs-6 px-2 p-lg-0">
-        El Hadaba is making his way back to the golden shores of El Gouna, Red
-        Sea for an unmatched Eid celebration with his extraordinary style joined
-        by a surprise DJ. Get to witness the mesmerizing vibes of Amr Diab's
-        performance at Cubix on April 10th. With El Hadaba's ability to connect
-        with his fans through his music, it is needless to say that it'll be an
-        unforgettable night, don't miss out on this iconic event. Venue: Cubix,
-        El Gouna
+      <p class="fs-5 px-2 p-lg-0">
+        {{ description }}
       </p>
-      <p><span class="fw-bold px-2 p-lg-0">Venue:</span> Cubix, El Gouna</p>
       <p>
-        <span class="fw-bold px-2 p-lg-0">Dates:</span> 10th of April, 2024 |
-        15th of April, 2024
+        <span class="fw-bold px-2 p-lg-0 fs-5 me-3">Venue:</span> {{ location }}
+      </p>
+      <p>
+        <span class="fw-bold px-2 p-lg-0 fs-5">Dates:</span>
+      </p>
+      <p>
+        <!-- display dates and times -->
+        <span
+          *ngFor="let date of dates; let i = index"
+          class="d-flex justify-content-around gap-md-5 flex-wrap mb-3"
+        >
+          <span *ngFor="let d of date.times; let j = index" class="ms-3">
+            <label class="radio-label">
+              <input
+                type="radio"
+                name="date"
+                class="form-check-input me-3"
+                [(ngModel)]="selectedDate"
+                [value]="{ date: date.date, start: d.start, end: d.end }"
+              />
+              <span class="radio-text">
+                {{ date.date }} | from: {{ d.start }} to {{ d.end }}
+              </span>
+            </label>
+          </span>
+        </span>
       </p>
     </div>
 
     <!-- facilities -->
     <div class="col-12 mt-4 px-2 px-lg-5 text-lg-start text-start">
-      <h3 class="fw-bold fs-4 text-center">Facilities</h3>
-      <div class="d-flex justify-content-around">
-        <p>Wifi</p>
-        <p>Bathroom</p>
-        <p>Restaurant</p>
+      <h3 class="fw-bold fs-4 text-lg-start text-center">Facilities</h3>
+      <div class="d-flex justify-content-around my-4 fs-5">
+        <ul
+          class="d-flex justify-content-around w-100 flex-wrap text-center w-100"
+        >
+          <span
+            *ngFor="let f of facilities; &quot;text-center&quot;"
+            class="ms-3"
+          >
+            <li class="me-5 text-center">{{ f }}</li>
+          </span>
+        </ul>
       </div>
     </div>
 
-    <div class="col-12 mt-4 px-2 px-lg-5 text-lg-start text-start">
-      <!-- buy tickets -->
-      <div class="col-12 mt-4 px-2 px-lg-5 text-lg-start text-start">
+    <!-- instructions -->
+    <div class="col-12 mt-0 px-2 px-lg-5 text-lg-start text-start">
+      <h3 class="fw-bold fs-4 text-lg-start text-center">Instructions</h3>
+      <div class="d-flex justify-content-around my-4 fs-5">
+        <ul
+          class="d-flex justify-content-around w-100 flex-wrap text-center w-100"
+        >
+          <span
+            *ngFor="let ins of instructions; &quot;text-center&quot;"
+            class="ms-3"
+          >
+            <li class="me-5 text-center">{{ ins }}</li>
+          </span>
+        </ul>
+      </div>
+    </div>
+    <!-- buy tickets -->
+    <div class="col-12 mt-0 px-2 px-lg-5 text-lg-start text-start">
+      <div class="col-12 mt-4 px-2 px-lg-0 text-lg-start text-start">
         <h3 class="fw-bold fs-4 text-center">Tickets</h3>
-        <div class="row mt-3 text-center">
-          <div class="col-6">
-            <p class="fs-6 px-2 p-lg-0">Regular</p>
-            <p class="fs-6 px-2 p-lg-0">EGP 500</p>
-            <i class="fa-solid fa-bowl-food"></i>
+        <div class="row mt-3 text-center p-0">
+          <!-- regular ticket -->
+          <div class="col-md-4 mb-3 mb-lg-0">
+            <div class="card bg-info">
+              <div class="ticket-container">
+                <img src="assets/imgs/t2.png" class="card-img-top" alt="..." />
+              </div>
+              <div class="card-body">
+                <h5 class="card-title my-3">Regular</h5>
+
+                <button
+                  class="btn-color rounded-3 p-2 w-25 me-3"
+                  (click)="minusRegular()"
+                >
+                  -
+                </button>
+                <span>{{ regularTicket }}</span>
+                <button
+                  class="btn-color rounded-3 p-2 w-25 ms-3"
+                  (click)="addRegular()"
+                >
+                  +
+                </button>
+              </div>
+            </div>
           </div>
-          <div class="col-6">
-            <p class="fs-6 px-2 p-lg-0">VIP</p>
-            <p class="fs-6 px-2 p-lg-0">EGP 1000</p>
+          <!-- gold ticket -->
+          <div class="col-md-4 mb-3 mb-lg-0">
+            <div class="card bg-info">
+              <div class="ticket-container">
+                <img src="assets/imgs/t3.png" class="card-img-top" alt="..." />
+              </div>
+              <div class="card-body">
+                <h5 class="card-title my-3">Gold</h5>
+
+                <button
+                  class="btn-color rounded-3 p-2 w-25 me-3"
+                  (click)="minusGold()"
+                >
+                  -
+                </button>
+                <span>{{ goldTicket }} </span>
+                <button
+                  class="btn-color rounded-3 p-2 w-25 ms-3"
+                  (click)="addGold()"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- vip ticket -->
+          <div class="col-md-4 mb-3 mb-lg-0">
+            <div class="card bg-info">
+              <div class="ticket-container">
+                <img src="assets/imgs/t1.png" class="card-img-top" alt="..." />
+              </div>
+              <div class="card-body">
+                <h5 class="card-title my-3">VIP</h5>
+                <button
+                  class="btn-color rounded-3 p-2 w-25 me-3"
+                  (click)="minusVip()"
+                >
+                  -
+                </button>
+                <span>{{ vipTicket }} </span>
+                <button
+                  class="btn-color rounded-3 p-2 w-25 ms-3"
+                  (click)="addVip()"
+                >
+                  +
+                </button>
+              </div>
+            </div>
           </div>
         </div>
         <div class="row">
           <div class="col-12">
-            <button class="btn btn-primary w-100 mt-3 btn-color">
+            <button
+              class="btn btn-primary w-100 mt-3 btn-color"
+              [disabled]="
+                (regularTicket === 0 && goldTicket === 0 && vipTicket === 0) ||
+                !selectedDate
+              "
+              (click)="buyTickets()"
+            >
               Buy Tickets
             </button>
           </div>

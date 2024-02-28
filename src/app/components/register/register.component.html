@@ -1,39 +1,43 @@
+<div class="vh-100 d-flex w-100 justify-content-center align-items-center">
 
-    <form [formGroup]="registerForm" (ngSubmit)="Register(registerForm)">
-        <div class="form justify-content-evenly gap-4 py-4 row  forms m-auto mt-3 w-50 shadow ">
-            <div class="container d-flex flex-column justify-content-evenly py-2 col-8">
-                <input class="inform" type="text" formControlName="name" placeholder="Name" />
-                <div *ngIf="registerForm.get('name') && registerForm.get('name')?.touched">
-                    <p  *ngIf="registerForm.get('name')?.getError('required')" class="text-danger">User Name is Required</p>
-                    <p *ngIf="registerForm.get('name')?.getError('minlength')" class="text-danger">User Name should be at least 3 words </p>
-                    <p *ngIf="registerForm.get('name')?.getError('maxlength')" class="text-danger">User Name should be maximum 10 words</p>
-                </div>
-                
-            </div>
-            <div class="container d-flex flex-column justify-content-evenly py-2 col-8">
-                <input class="inform" type="text" formControlName="email" placeholder="Email"/>
-                <div *ngIf="registerForm.get('email')&& registerForm.get('email')?.touched">
-                    <p *ngIf="registerForm.get('email')?.getError('required')" class="text-danger">Email is Required</p>
-                    <!-- <p *ngIf="registerForm.get('email')?.getError('pattern')" class="text-danger">Email should match the format email.com </p> -->
-                    <p *ngIf="emailErrorMessage" class="alert alert-danger">{{emailErrorMessage}}</p>
-                </div>
-                  
-            </div>
-            <div class="container d-flex flex-column justify-content-evenly py-2 col-8">
-                <input class="inform " type="password" formControlName="password" placeholder="Password" />
-                <div *ngIf="registerForm.get('password')&& registerForm.get('password')?.touched">
-                    <p *ngIf="registerForm.get('password')?.getError('required')" class="text-danger">Password is Required</p>
-                    <p *ngIf="registerForm.get('password')?.getError('pattern')" class="text-danger">Password should be Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:</p>
-                </div>
-            </div>
-    
-            <div class="ms-lg-auto m-auto text-center d-flex justify-content-center col-8">
-                <button class="btn btn-color text-light fs-5 border-2 border-white rounded-pill px-4 py-2 " type="button" value="Register" (click)="Register(registerForm)"  [disabled]="registerForm.invalid">Register</button>
-            </div>
 
-        </div>
+      <form [formGroup]="registerForm" (ngSubmit)="Register(registerForm)">
+          <div class="form justify-content-evenly gap-4 py-4 row  forms m-auto mt-3  shadow align-items-center  ">
+              <div class="container d-flex flex-column justify-content-evenly py-2 col-8">
+                  <input class="inform" type="text" formControlName="name" placeholder="Name" />
+                  <div *ngIf="registerForm.get('name') && registerForm.get('name')?.touched">
+                      <p  *ngIf="registerForm.get('name')?.getError('required')" class="text-danger">User Name is Required</p>
+                      <p *ngIf="registerForm.get('name')?.getError('minlength')" class="text-danger">User Name should be at least 3 words </p>
+                      <p *ngIf="registerForm.get('name')?.getError('maxlength')" class="text-danger">User Name should be maximum 10 words</p>
+                  </div>
 
-    </form>
-    <p *ngIf="success" class="mt-2 fs-4 text-success text-center">Login successful! Redirecting...</p>
-    <p *ngIf="failure" class="mt-2 fs-4 text-danger text-center">Login failed. Please check your credentials.</p>
-  <br><br><br><br><br>
+              </div>
+              <div class="container d-flex flex-column justify-content-evenly py-2 col-8">
+                  <input class="inform" type="text" formControlName="email" placeholder="Email"/>
+                  <div *ngIf="registerForm.get('email')&& registerForm.get('email')?.touched">
+                      <p *ngIf="registerForm.get('email')?.getError('required')" class="text-danger">Email is Required</p>
+                      <!-- <p *ngIf="registerForm.get('email')?.getError('pattern')" class="text-danger">Email should match the format email.com </p> -->
+                      <p *ngIf="emailErrorMessage" class="alert alert-danger">{{emailErrorMessage}}</p>
+                  </div>
+
+              </div>
+              <div class="container d-flex flex-column justify-content-evenly py-2 col-8">
+                  <input class="inform " type="password" formControlName="password" placeholder="Password" />
+                  <div *ngIf="registerForm.get('password')&& registerForm.get('password')?.touched">
+                      <p *ngIf="registerForm.get('password')?.getError('required')" class="text-danger">Password is Required</p>
+                      <p *ngIf="registerForm.get('password')?.getError('pattern')" class="text-danger">Password should be Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:</p>
+                  </div>
+              </div>
+
+              <div class="ms-lg-auto m-auto text-center d-flex justify-content-center col-8">
+                  <button class="btn btn-color text-light fs-5 border-2 border-white rounded-pill px-4 py-2 " type="button" value="Register" (click)="Register(registerForm)"  [disabled]="registerForm.invalid">Register</button>
+              </div>
+
+          </div>
+
+      </form>
+      <p *ngIf="success" class="mt-2 fs-4 text-success text-center">Login successful! Redirecting...</p>
+      <p *ngIf="failure" class="mt-2 fs-4 text-danger text-center">Login failed. Please check your credentials.</p>
+    <br><br><br><br><br>
+
+  </div>
