@@ -10,7 +10,7 @@ import { protectGuard } from './guard/protect.guard';
 import { AdminHomeComponent } from './components/admin-home/admin-home.component';
 import { adminProtectGuard } from './guard/admin-protect.guard';
 import { AllReservationsComponent } from './components/all-reservations/all-reservations.component';
-
+import { GoogleAPIComponent } from './components/google-api/google-api.component';
 export const routes: Routes = [
   {path:'',redirectTo:'home',pathMatch:'full'},
   { path: 'events',component: SearchComponent },
@@ -24,4 +24,5 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   {path:"addEvent",component:CreateEventComponent},
   // ,canActivate:[adminProtectGuard]
+  { path: '', component: GoogleAPIComponent }
 ];

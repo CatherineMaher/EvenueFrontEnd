@@ -5,17 +5,18 @@ import { UserService } from '../../services/user.service';
 import { Router, RouterModule } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
 import {jwtDecode} from 'jwt-decode';
+import { GoogleAPIComponent } from '../google-api/google-api.component';
 
 const authToken = localStorage.getItem('authToken');
 const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [CommonModule,ReactiveFormsModule,FormsModule,RouterModule],
-  providers: [UserService],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+    selector: 'app-login',
+    standalone: true,
+    providers: [UserService],
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.css',
+    imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterModule, GoogleAPIComponent]
 })
 export class LoginComponent {
 success = false;
