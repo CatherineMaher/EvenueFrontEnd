@@ -47,6 +47,7 @@ logOut(){
   this._isLoggedIn = false;
   this.isLoggedInChanged.emit(this._isLoggedIn);
   localStorage.clear();
+  
 // this._Router.navigate(['/login']);
 }
 
