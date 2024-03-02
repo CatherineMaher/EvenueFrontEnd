@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchPipe } from '../searchPipe/search.pipe';
 import { SearchByPricePipe } from '../searchPipe/searchByPrice/search-by-price.pipe';
 import { SearchLocationPipe } from '../searchPipe/searchByLocation/search-location.pipe';
-import { EventService } from '../../Services/event.service';
+import { EventService } from '../../services/event.service';
 import { UserService } from '../../services/user.service';
 @Component({
   selector: 'app-search',
