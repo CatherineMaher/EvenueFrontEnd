@@ -10,7 +10,7 @@
 
 <body>
   <div class="container">
-    <div class="row  cover rounded-bottom h-75">
+    <div class="row  cover rounded-bottom ">
       <div class="col-12 text-center p-3">
         <div class="input-group justify-content-center">
           <div class="form-outline d-flex align-items-center w-50" data-mdb-input-init>
@@ -163,7 +163,25 @@
         </div>
       </div>
       }
-      <!-- } -->
-      <!-- } -->
+      <div class="pagination col-12 justify-content-center" >	
+        <!-- *ngFor="let page of numberOfPageArray; track $index" -->
+        @for( page of numberOfPageArray;track $index ){
+          <p>.</p>
+          @if(page == 1){
+
+            <input id="dot-{{page}}" type="radio" name="dots" checked="checked" (click)="nextpage(page)" class="pad-inpunt">	
+          }@else{
+            
+            <input id="dot-{{page}}" type="radio" name="dots" (click)="nextpage(page)" class="pad-inpunt">	
+          }
+          <label for="dot-{{page}}" >{{page}}</label>	
+        }
+        <p>.</p>
+
+        <div class="pacman col-12 justify-content-center"></div>
+        
+      </div>
+      
+
     </div>
   </div>

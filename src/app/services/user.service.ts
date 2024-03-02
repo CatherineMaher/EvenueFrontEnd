@@ -50,4 +50,10 @@ logOut(){
 // this._Router.navigate(['/login']);
 }
 
+addimage(image:any){
+  console.log("image",image);
+  
+  return(this.http.post("http://localhost:7005/api/upload",image));
+}
+
 }
