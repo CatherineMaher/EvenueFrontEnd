@@ -167,7 +167,20 @@
           <i class="fa-solid fa-circle-check text-success ms-2 fs-4"></i>
         </span>
       </div>
+      <label  class="fw-bold mainfntclr" for="image">Coursespecs File
+        <span class="text-danger">*</span></label>
+   <input
+     (change)="onImageFileSelected($event)"
+     name="image"
+      type="file"
+       id="image"
+       formControlName="image"
+        class="form-control my-3">
+   <div *ngIf="registerForm.get('image')&& registerForm.get('image')?.touched">
+       <p *ngIf="registerForm.get('image')?.getError('required')" class="text-danger">Coursespecs File is Required</p>
+       <p *ngIf="registerForm.get('image')?.getError('pattern')" class="text-danger"> Coursespecs File should have only pdf, doc, docx extensions</p>
 
+   </div>
     <button class="btn btn-dark mt-5 float-end"> Register</button>
     <div class="clear-both"></div>
 

@@ -9,7 +9,7 @@ import { MyEvent } from '../interfaces/my-event';
 export class CreateEventService {
 
   constructor(private _HttpClient:HttpClient) { }
-  addEvent(data:MyEvent):Observable<any>{
+  addEvent(data:any):Observable<any>{
     return this._HttpClient.post('http://localhost:7005/events/add',data)
   }
 }
