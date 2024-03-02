@@ -3,48 +3,41 @@
 
 <table class="table table-striped text-center mt-3">
   <thead>
-    <th>Event Name</th>
-    <th>Quantity</th>
-    <th>Total Price</th>
     <th>User Id</th>
+    <th>Event Name</th>
+    <th>Total Price</th>
+    <th>Quantity</th>
     <th>Update</th>
     <th>Delete</th>
   </thead>
   <tbody>
-    <!-- @if(!term){ -->
-    @for (reservation of allReservations; track reservation?._id) {
-    <tr>
-      <td>{{ reservation.eventId?.title }}</td>
-      <td>{{ reservation.quantity }}</td>
-      <td>{{ reservation.totalPrice }}</td>
-      <td>{{ reservation.userId }}</td>
 
-      <td><button class="btn btn-outline-danger">Delete</button></td>
-      <!-- (click)="updatefun(user.id)" -->
-      <td><button class="btn btn-outline-warning">Update</button></td>
-    </tr>
+    @for (reservation of allReservations; track reservation?._id) {
+      @for(event of reservation.events; track event?._id){
+
+        @if(reservation.isPurchased){
+          <tr>
+            <td>{{ reservation.userId }}</td>
+            <td>{{ event.eventId.title }}</td>
+            <td>{{ event.totalPrice }}</td>
+            <td>{{ event.totalQuantity }}</td>
+
+
+            <td><button class="btn btn-outline-danger">Delete</button></td>
+            <!-- (click)="updatefun(user.id)" -->
+            <td><button class="btn btn-outline-warning">Update</button></td>
+          </tr>
+
+          }
+      }
 
     }
-    <!-- } -->
     <!-- @else{
   @for (user of users|search:term; track user.id) {
     <app-one-user [user]="user"></app-one-user>
        }
 } -->
 
-    <div (click)="regNavigate()">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="50"
-        height="50"
-        fill="currentColor"
-        class="bi bi-plus-circle-fill mb-3 mt-5 float-end"
-        viewBox="0 0 16 16"
-      >
-        <path
-          d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z"
-        />
-      </svg>
-    </div>
+   
   </tbody>
 </table>

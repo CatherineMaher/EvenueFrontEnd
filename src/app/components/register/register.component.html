@@ -10,7 +10,6 @@
                       <p *ngIf="registerForm.get('name')?.getError('minlength')" class="text-danger">User Name should be at least 3 words </p>
                       <p *ngIf="registerForm.get('name')?.getError('maxlength')" class="text-danger">User Name should be maximum 10 words</p>
                   </div>
-
               </div>
               <div class="container d-flex flex-column justify-content-evenly py-2 col-8">
                   <input class="inform" type="text" formControlName="email" placeholder="Email"/>
@@ -28,9 +27,22 @@
                       <p *ngIf="registerForm.get('password')?.getError('pattern')" class="text-danger">Password should be Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:</p>
                   </div>
               </div>
+              <label  class="fw-bold mainfntclr" for="image">Coursespecs File
+                <span class="text-danger">*</span></label>
+           <input
+             (change)="onImageFileSelected($event)"
+             name="image"
+              type="file"
+               id="image"
+               formControlName="image"
+                class="form-control my-3">
+           <div *ngIf="registerForm.get('image')&& registerForm.get('image')?.touched">
+               <p *ngIf="registerForm.get('image')?.getError('required')" class="text-danger">Coursespecs File is Required</p>
+               <p *ngIf="registerForm.get('image')?.getError('pattern')" class="text-danger"> Coursespecs File should have only pdf, doc, docx extensions</p>
 
+           </div>
               <div class="ms-lg-auto m-auto text-center d-flex justify-content-center col-8">
-                  <button class="btn btn-color text-light fs-5 border-2 border-white rounded-pill px-4 py-2 " type="button" value="Register" (click)="Register(registerForm)"  [disabled]="registerForm.invalid">Register</button>
+                  <button class="btn btn-color text-light fs-5 border-2 border-white rounded-pill px-4 py-2 " type="submit" value="Register"   [disabled]="registerForm.invalid">Register</button>
               </div>
 
           </div>

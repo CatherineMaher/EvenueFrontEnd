@@ -13,6 +13,7 @@ import { Reservation } from '../../interfaces/reservation';
 export class AllReservationsComponent implements OnInit{
   id:any;
   allReservations:Reservation[]=[];
+ 
   constructor(private _AdminService:AdminServiceService,private _ActivatedRoute:ActivatedRoute){}
   ngOnInit(): void {
     // this.id=this._ActivatedRoute.snapshot.params['id'];
@@ -20,7 +21,8 @@ this._AdminService.getAllReservations().subscribe({
   next:(res)=>{
     if(res.message=="success"){
       this.allReservations=res.data;
-console.log(this.allReservations);
+
+console.log("reservation",this.allReservations);
 
 
     }
