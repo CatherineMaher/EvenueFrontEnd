@@ -6,44 +6,45 @@
 
 
 <!-- cart + summary -->
-<section class="bg-light my-5">
+<!-- <section class="bg-light my-5">
   <div class="container">
-    <div class="row">
+    <div class="row"> -->
       <!-- cart -->
-      <div class="col-lg-9">
+      <!-- <div class="col-lg-9">
         <div class="card border shadow-0">
           <div class="m-4">
             <h4 class="card-title mb-4">Your shopping cart</h4>
 
             <!-- ITEM IN CART  -->
-            <div class="row gy-3 mb-4 shadow-sm p-4 " *ngFor="let ticket of ticket.tickets">
+          <!--  <div class="row gy-3 mb-4 shadow-sm p-4 " *ngFor="let ticket of cartInfo.events">
+            <div class="row gy-3 mb-4 shadow-sm p-4 " >
               <div class="col-lg-5">
                 <div class="me-lg-5">
                   <div class="d-flex" >
                     <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/11.webp" class="border rounded me-3" style="width: 96px; height: 96px;" />
                     <div class="">
-                      <a href="#" class="nav-link">{{ticket.name}}</a>
-                      <p class="text-muted">Ticket</p>
+                      <a href="#" class="nav-link">{{ticket.eventId.title}}</a>
+                      <p class="text-muted">{{ticket.eventId.location}}</p>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-2 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
+              <div class="col-lg-2 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap"> -->
                 
-                <div class="d-flex flex-column text-center col-8"  *ngFor="let detail of ticket.details">
+                <!-- <div class="d-flex flex-column text-center col-8"  *ngFor="let detail of ticket.details">
                   <i class="fas fa-ticket-alt "></i>
 
                   <p class="h6">{{detail.type}}</p> 
                   <small class="text-muted text-nowrap">x{{ detail.quantity }} tickets</small>
                   <div class="px-3">
                     <select style="width: 30px;" class="form-select me-4" >
-                      <!-- msh mazboota -->
+                    
                       <option *ngFor="let detail of ticket.details">{{detail.quantity}}</option>
                       
                     </select>
                   </div>
-                </div>
-              </div>
+                </div> -->
+              <!-- </div>
               <div class="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
                 <div class="float-md-end">
                   <a href="#!" class="btn btn-light border px-2 icon-hover-primary"><i class="fas fa-heart fa-lg px-1 text-secondary"></i></a>
@@ -62,7 +63,7 @@
             </p>
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- cart -->
       <!-- summary -->
       <!-- <div class="col-lg-3">
@@ -107,9 +108,9 @@
         </div>
       </div> -->
       <!-- summary -->
-    </div>
-  </div>
-</section>
+    <!-- </div>
+  </div> -->
+<!-- </section> -->
 <!-- cart + summary -->
 <!-- <section>
   <div class="container my-5">
@@ -214,23 +215,24 @@
                   <!-- <div class="col align-self-center text-right text-muted">3 items</div> -->
               </div>
           </div>    
-          <div class="row border-top border-bottom" *ngFor="let ticket of ticket.tickets">
+          <div class="row border-top border-bottom" *ngFor="let ticket of cartInfo.events">
               <div class="row main align-items-center">
                   <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/1GrakTl.jpg"></div>
                   <div class="col">
-                      <div class="row text-muted">{{ticket.name}}</div>
+                      <div class="row text-muted">{{ticket.eventId.title}}</div>
+                      
                       <div class="d-flex col-7">
-                        <div class="d-flex flex-column text-center col-8"  *ngFor="let detail of ticket.details">
+                        <div class="d-flex flex-column text-center col-8"  *ngFor="let detail of ticket.ticketInfo">
                           <i class="fas fa-ticket-alt "></i>
         
-                          <p class="h6">{{detail.type}}</p> 
+                          <p class="h6">{{detail.ticketInfo.type}}</p> 
                           <small class="text-muted text-nowrap">x{{ detail.quantity }} tickets</small>
                           <div class="col">
                             <a href="#">-</a><a href="#" class="border">1</a><a href="#">+</a>
                           </div>
                           
                         </div>
-                        <p class="col d-flex "><span>&euro; </span>44.00</p>
+                        <p class="col d-flex "><span></span>{{ticket.eventId.location}}</p>
                         <span><button class="border-0 bg-transparent">x</button></span>
                       </div>
                   </div>

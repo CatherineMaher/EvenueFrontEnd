@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Router, RouterModule } from '@angular/router';
@@ -18,11 +18,21 @@ const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
     styleUrl: './login.component.css',
     imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterModule, GoogleAPIComponent]
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 success = false;
 failure = false;
-
+imgpath="";
+imgsrc="";
  constructor( private usrsrv: UserService,private router: Router){}
+  ngOnInit(): void {
+    this.usrsrv.getuser().subscribe({
+      next:(res:any)=>{this.imgpath = res.data.image
+      console.log("imgpath",this.imgpath);
+      }
+
+
+    })
+  }
 
  emailErrorMessage:string='';
    loginForm: FormGroup = new FormGroup({
@@ -31,7 +41,11 @@ failure = false;
        ]),
    });
  //Validators.pattern("^(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[#?!@$%^&*-]).{8,}$")
+  DisplayImage(){
+   this.imgsrc= this.usrsrv.getImageUrl(this.imgpath)
+   console.log(this.imgsrc);
 
+  }
   Login(submitData: FormGroup) {
     const email = submitData.value.email;
     const password = submitData.value.password;

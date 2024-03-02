@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgModule, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-
+import { MatSliderModule } from '@angular/material/slider';
 import { RegisterComponent } from './components/register/register.component';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -17,11 +17,14 @@ import { SearchLocationPipe } from './components/searchPipe/searchByLocation/sea
 import { FooterComponent } from './components/footer/footer.component';
 import { GoogleAPIComponent } from './components/google-api/google-api.component';
 import { LoginComponent } from './components/login/login.component';
+import { SliderComponent } from './components/slider/slider.component';
+
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     RouterOutlet,
+    MatSliderModule,
     NavbarComponent,
     HomeComponent,
     CartComponent,
@@ -45,6 +48,6 @@ import { LoginComponent } from './components/login/login.component';
 })
 export class AppComponent {
 
-
   title = 'evenue';
 }
+

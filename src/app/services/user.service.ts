@@ -26,6 +26,9 @@ export class UserService {
   }
   ///////////////////////////////////////////
 
+  getuser(){
+    return this.http.get(this.url+"/65e23572f4c0cffd33c30da5")
+  }
 
 addUser(data:any){
   return(this.http.post(this.url+"/add",data))
@@ -48,6 +51,9 @@ logOut(){
   this.isLoggedInChanged.emit(this._isLoggedIn);
   localStorage.clear();
 // this._Router.navigate(['/login']);
+}
+getImageUrl(filename: string): any {
+  return `http://localhost:7005/uploads/${filename}`;
 }
 
 }

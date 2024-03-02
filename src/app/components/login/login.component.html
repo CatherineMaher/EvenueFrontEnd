@@ -32,9 +32,16 @@
     
 
 </form>
+
 <p *ngIf="success" class="mt-2 fs-4 text-success text-center">Login successful! Redirecting...</p>
 <p *ngIf="failure" class="mt-2 fs-4 text-danger text-center">Login failed. Please check your credentials.</p>
 
 <br><br><br><br><br>
 
 </div>
+@if (imgsrc) {
+    
+<img [src]="imgsrc"/>
+
+}
+<button type="button" (click)="DisplayImage()"></button>
