@@ -20,14 +20,15 @@
             </div>
         </div>
 
-        <div class="ms-lg-auto m-auto text-center d-flex justify-content-center col-8">
-            <button class="btn btn-color text-light fs-5 border-2 border-white rounded-pill px-4 py-2 " type="button" value="Register" (click)="Login(loginForm)"  [disabled]="loginForm.invalid">Login</button>
+        <div class="ms-lg-auto m-auto text-center d-flex justify-content-center col-8 d-flex flex-column">
+            <button class="btn btn-color text-light fs-5 border-2 border-white rounded-pill px-4 py-2 " type="submit" value="Register" [disabled]="loginForm.invalid">Login</button>
             <br>
-
+            <p>or</p>
+           <div class="d-flex justify-content-center"> <app-google-api></app-google-api></div>
+            <hr>
         </div>
         <p  class="ms-lg-auto m-auto text-center d-flex justify-content-center col-8">Don't have an account? &nbsp;<a  routerLink="/register"> Register</a></p>
     </div>
-
 
 </form>
 <p *ngIf="success" class="mt-2 fs-4 text-success text-center">Login successful! Redirecting...</p>

@@ -19,6 +19,7 @@
 
 body {
   font-family: font;
+  /* background-color: #212529; */
 }
 .bg-purple-ligth{
     background-color:var(--dark-purple);

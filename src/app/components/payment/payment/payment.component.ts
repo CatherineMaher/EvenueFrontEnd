@@ -1,7 +1,7 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { PaymentSuccessComponent } from '../payment-success/payment-success.component';
 import { PaymentFailComponent } from '../payment-fail/payment-fail.component';
-import { render } from 'creditcardpayments/creditCardPayments';
+
 import { loadScript } from '@paypal/paypal-js';
 
 @Component({

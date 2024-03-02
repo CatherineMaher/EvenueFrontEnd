@@ -1,8 +1,18 @@
 export interface Reservation {
   _id?: { $oid: string };
   userId?: { $oid: string };
-  eventId?: { $oid: string ,title:string};
-  quantity?:Number;
-  totalPrice?:Number;
+  events?:[{
+    eventId: { $oid: string,title:String },
+    ticketInfo:[{
+      quantity:Number,
+      type:String
+    }],
+    totalPrice:Number,
+    totalQuantity?:Number
+    _id?:{ $oid: string };
+  }]
+  totalPrice:Number,
+  isPurchased?:Boolean;
+  totalQuantity?:Number
   timestamp?:Date;
 }
