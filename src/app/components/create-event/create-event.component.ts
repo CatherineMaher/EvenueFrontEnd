@@ -51,7 +51,6 @@ timeRange: { start?: number; end?: number }[] = [];
   instructions:string[]=[];
   registerForm!: FormGroup;
   image: any;
-
   ngOnInit(): void {
     this.registerForm= new FormGroup({
       title: new FormControl(null,[Validators.required]),
@@ -66,28 +65,57 @@ timeRange: { start?: number; end?: number }[] = [];
     });
   }
   submitForm(data:any){
-    const formData = new FormData();
+    console.log("dataa",data.value);
     data.controls.dates.setValue(this.eventTime)
     data.controls.tickets.setValue(this.tickets);
     data.controls.facilities.setValue(this.facilities);
     data.controls.instructions.setValue(this.instructions);
+    const formData = new FormData();
+    console.log("image",this.image);
     formData.append('image',this.image);
     formData.append('title', data.get('title').value);
     formData.append('location', data.get('location').value);
+    this.facilities.forEach((value: string) => {
+      formData.append('facilities[]', value);
+    });
+    this.instructions.forEach((value: string) => {
+      formData.append('instructions[]', value);
+    });
+    this.eventTime?.forEach((dateEntry, index) => {
+      if (dateEntry.date) {
+        formData.append(`dates[${index}][date]`, dateEntry.date);
+      }
+      if (dateEntry.times && dateEntry.times.length > 0) {
+        dateEntry.times.forEach((time, index) => {
+          if (time.start !== undefined && time.end !== undefined) {
+            formData.append(`dates[${index}][times][${index}][start]`, time.start.toString());
+            formData.append(`dates[${index}][times][${index}][end]`, time.end.toString());
+          }
+        });
+      }
+    });
+    this.tickets?.forEach((ticket, index) => {
+      if (ticket.type) {
+        formData.append(`tickets[${index}][type]`, ticket.type);
+      }
+      if (ticket.totalTickets !== undefined) {
+        formData.append(`tickets[${index}][totalTickets]`, ticket.totalTickets.toString());
+      }
+      if (ticket.reserved !== undefined) {
+        formData.append(`tickets[${index}][reserved]`, ticket.reserved.toString());
+      }
+      if (ticket.price !== undefined) {
+        formData.append(`tickets[${index}][price]`, ticket.price.toString());
+      }
+    });
     formData.append('organizer', data.get('organizer').value);
     formData.append('Description', data.get('Description').value);
-    formData.append('facilities', data.get('organizer').value);
-    formData.append('instructions', data.get('Description').value);
-    formData.append('dates', data.get('organizer').value);
-    formData.append('tickets', data.get('Description').value);
-    console.log(data.value);
+    console.log("form data",formData.get('tickets[][]'));
     this._CreateEventService.addEvent(formData).subscribe({
       next:(res:any)=>{
         console.log("result from api",res);
-
         if(res.message=='success'){
           console.log('success');
-
           // this._Router.navigate(['/events']);
         }
         else{
