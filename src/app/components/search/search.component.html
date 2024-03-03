@@ -62,7 +62,7 @@
       <!-- @for (event of events;let i $index) { -->
       @if(!name&&!price&&!location){
       <div *ngFor="let event of events; let i = index" class="profile-card-6 col-md-5 col-lg-3 col-9 m-2 mt-4 ">
-        <img src="../../../assets/imgs/event1.jpg" class="img img-responsive h-100 ">
+        <img [src]="event?.image" class="img img-responsive h-100 cover">
         <div class="profile-name">{{event.title}}
           <br>
           {{event.location}}
