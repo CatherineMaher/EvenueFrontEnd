@@ -33,14 +33,8 @@ emailErrorMessage:string='';
 
 onImageFileSelected(event:any){
   this.image = event.target.files[0];
-  // const reader: FileReader = new FileReader();
-  // reader.onloadend = () => {
-  //   // Convert the file to a Base64 string
-  //   const base64String: string = reader.result as string;
-  //   this.image = base64String;
-  //   console.log(this.image);
-  // };
-  console.log(this.image);
+
+  
 }
   Register(submitData:any) {
     const formData = new FormData();
@@ -49,7 +43,6 @@ onImageFileSelected(event:any){
     formData.append('email', submitData.get('email').value);
     formData.append('password', submitData.get('password').value);
     formData.append('role', submitData.get('role').value);
-    console.log("formData",formData);
         this.usrsrv.addUser(formData).subscribe({
           next:(res:any)=>{
             console.log(res);
