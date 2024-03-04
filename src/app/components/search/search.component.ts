@@ -93,15 +93,16 @@ export class SearchComponent implements OnInit {
   nextpage(page:number){
     let i;
     this.events=[];
-    this.counter=this.counter*(page-1);
-  //  console.log("this.counter",this.counter);
-   
+    this.counter = 7*(page-1);
+    console.log("this.counter",this.counter);
+    
     for(i=this.counter;i<(7+this.counter)&&i<this.lengthOfData;i++){
       this.events[i-this.counter]=this.eventPage[i];
       // console.log("this.events[i-this.counter]",this.events[i-this.counter]);
-      // console.log("this.events",this.events);
+      console.log("this.events",this.events);
     }
     this.counter=i;
+    console.log("this.counter =iiiiii",this.counter);
     this.getData();
   }
 
