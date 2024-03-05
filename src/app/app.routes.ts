@@ -14,6 +14,7 @@ import { GoogleAPIComponent } from './components/google-api/google-api.component
 import { AboutComponentComponent } from './components/about-component/about-component.component';
 import { CartComponent } from './components/cart/cart.component';
 export const routes: Routes = [
+
   {path:'',redirectTo:'home',pathMatch:'full'},
   {path:'login',component:LoginComponent,children:[
     { path: '', component: GoogleAPIComponent},

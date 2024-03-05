@@ -1,5 +1,5 @@
-import { UserService } from '../../services/user.service';
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { UserService } from './../../services/user.service';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import {
   ActivatedRoute,
   NavigationStart,
@@ -8,6 +8,7 @@ import {
 } from '@angular/router';
 
 import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -15,8 +16,11 @@ import { CommonModule } from '@angular/common';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit, OnDestroy {
   constructor(private _UserService: UserService, private _Router: Router) {}
+  ngOnDestroy(): void {
+    this.userSub?.unsubscribe();
+  }
   isHomeRoute: boolean = false;
   path: any;
   hasaphoto: boolean = false;
@@ -24,37 +28,29 @@ export class NavbarComponent {
   imageName?: string;
   userName?: string;
   loggedIn: boolean = false;
+  private userSub?: Subscription;
   ngOnInit(): void {
-    // if(localStorage.getItem('userRole')!=null){
+    console.log('Navbar component initialized');
+    this.loggedIn = !!UserService.getUser();
+    this.userSub = UserService.user.subscribe((user) => {
+      // console.log('User subscription triggered:', user);
+      console.log('sub scr btionnnnnnn!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 
-    // }
-    console.log('localStorage.getItem()', localStorage.getItem('userRole'));
-    this._UserService.isLoggedInChanged.subscribe((isLoggedIn) => {
-      console.log('in nav barr', this._UserService._isLoggedIn);
-      if (isLoggedIn) {
-        // this.hasaphoto=true;
-        this.loggedIn = true;
-        console.log('logged in ', this.loggedIn);
-        // this.showPhoto();
-      } else {
-        this.loggedIn = false;
-        console.log('logged in ', this.loggedIn);
+      this.loggedIn = !!user;
+      this.showPhoto();
+      if (localStorage.getItem('userId') != null) {
+        this._UserService.getOneUser(localStorage.getItem('userId')).subscribe({
+          next: (res) => {
+            if (res.message == 'success') {
+              console.log('user log in', res.data);
+              this.imageName = res.data.image;
+              this.userName = res.data.name;
+              this.showPhoto();
+            }
+          },
+        });
       }
     });
-
-    if (localStorage.getItem('userId') != null) {
-      this._UserService.getOneUser(localStorage.getItem('userId')).subscribe({
-        next: (res) => {
-          if (res.message == 'success') {
-            this.imageName = res.data.image;
-            this.hasaphoto = true;
-            // console.log(this.imageName);
-            this.userName = res.data.name;
-            this.showPhoto();
-          }
-        },
-      });
-    }
 
     this._Router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
@@ -64,6 +60,9 @@ export class NavbarComponent {
   }
   logOut() {
     this._UserService.logOut();
+    this.hasaphoto = false;
+    this.imageName = undefined; // Reset image name
+    this.userName = undefined; // Reset user name
   }
   // displayUserInfo() {
   //   console.log("hereeeeeeeeeeeeeeeee");
@@ -81,6 +80,7 @@ export class NavbarComponent {
     console.log('in show photo', this.imageName);
     this.imageUrl = this._UserService.getImageUrl(this.imageName);
     this.hasaphoto = true;
+
     //  console.log(this.imageName);
     //  console.log("this image url",this.imageUrl);
   }

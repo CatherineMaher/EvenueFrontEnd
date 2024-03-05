@@ -60,14 +60,14 @@ imgsrc="";
         console.log("user",user);
         if (user.message=="success") {
           localStorage.setItem('token',user.token);
-          this.usrsrv.saveCurrentUser();
-          this.usrsrv.log();
           this.success = true;
+          console.log(localStorage.getItem('userRole'));
           if(localStorage.getItem('userRole')=='user'){
+            console.log("userrrrrr");
             this.router.navigate(['/home']);
           }
           else if(localStorage.getItem('userRole')=='admin'){
-            this.router.navigate(['adminHome']); // Replace with your desired route
+            this.router.navigate(['/adminHome']); // Replace with your desired route
           }
         } else {
           console.log('User does not exist');
