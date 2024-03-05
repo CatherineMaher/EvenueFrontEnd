@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 
 @Injectable({
@@ -11,10 +11,13 @@ import { BehaviorSubject } from 'rxjs';
 export class UserService {
 
   private url="http://localhost:7005/users";
-
-  constructor(private http:HttpClient,private _Router:Router){}
+  constructor(private http:HttpClient,private _Router:Router){
+    if(localStorage.getItem('token') !=null){
+      this.saveCurrentUser();
+    }
+  }
   /////////////////////////////////////
-  currentUser=new BehaviorSubject(null);//notlogin
+
   _isLoggedIn = false;
   isLoggedInChanged = new EventEmitter<boolean>();
   get isLoggedIn() {
@@ -22,10 +25,12 @@ export class UserService {
   }
   log(){
     this._isLoggedIn = true;
-    this.isLoggedInChanged.emit(this._isLoggedIn);
+    // this.currentUser.next(true);
+    this.isLoggedInChanged.emit( this._isLoggedIn);
+    console.log("log function",this._isLoggedIn);
   }
   ///////////////////////////////////////////
-
+/////elmafrood neshelha
   getuser(){
     return this.http.get(this.url+"/65e23572f4c0cffd33c30da5")
   }
@@ -33,27 +38,31 @@ export class UserService {
 addUser(data:any){
   return(this.http.post(this.url+"/add",data))
 }
-checkCredentials(email: string, password: string) {
-  const data = { email, password };
-  return this.http.post<{ success: boolean, token?: string }>(`${this.url}/login`, data);
-}
-saveCurrentUser(token:any){
 
-  const decodedToken: any = jwtDecode(token);
-  // console.log("decoded token",decodedToken);
-  // Store the decoded data in localStorage
-  // localStorage.setItem('authToken', token);
-  localStorage.setItem('userId', decodedToken.userId);
+
+
+sendUser(data:any):Observable<any>{
+  return this.http.post('http://localhost:7005/users/login',data)
+}
+saveCurrentUser(){
+  console.log("in save cuurent user",this._isLoggedIn);
+  let token:any=localStorage.getItem('token') ;
+  let decodedToken: any = jwtDecode(token);
   localStorage.setItem('userRole', decodedToken.role);
+  console.log("roleeeeeeeeeeeeeee",localStorage.getItem("userRole"))
+  localStorage.setItem('userId', decodedToken.userId);
   }
 logOut(){
   this._isLoggedIn = false;
   this.isLoggedInChanged.emit(this._isLoggedIn);
   localStorage.clear();
-// this._Router.navigate(['/login']);
+this._Router.navigate(['/login']);
 }
-getImageUrl(filename: string): any {
+getImageUrl(filename: any):string {
   return `http://localhost:7005/uploads/${filename}`;
 }
+getOneUser(id: any): Observable<any> {
+  return this.http.get(`http://localhost:7005/users/${id}`)
 
+}
 }

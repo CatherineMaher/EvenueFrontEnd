@@ -1,7 +1,11 @@
 .index{
-  z-index: -9999;
+  /* z-index: -9999; */
 }
 svg{
   height: 375px;
 }
 
+.profileImage{
+  width: 45px !important;
+  height: 45px !important;
+}

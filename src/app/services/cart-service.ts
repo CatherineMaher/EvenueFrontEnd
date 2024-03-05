@@ -15,4 +15,9 @@ export class CartService {
     return this.http.get(this.url+userData)
 
   }
+  updateCart(id:any ,data:any) {
+
+    return this.http.patch(this.url+id,data)
+
+  }
 }

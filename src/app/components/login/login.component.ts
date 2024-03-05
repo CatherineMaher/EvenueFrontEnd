@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
@@ -21,9 +22,12 @@ const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
 export class LoginComponent implements OnInit {
 success = false;
 failure = false;
+ constructor( private usrsrv: UserService,private router: Router,private cdr: ChangeDetectorRef){
+
+ }
 imgpath="";
 imgsrc="";
- constructor( private usrsrv: UserService,private router: Router){}
+//  constructor( private usrsrv: UserService,private router: Router){}
   ngOnInit(): void {
     this.usrsrv.getuser().subscribe({
       next:(res:any)=>{this.imgpath = res.data.image
@@ -47,39 +51,30 @@ imgsrc="";
 
   }
   Login(submitData: FormGroup) {
-    const email = submitData.value.email;
-    const password = submitData.value.password;
     this.success = false;
     this.failure = false;
     // Call a method in the UserService to check if the user exists
-    this.usrsrv.checkCredentials(email, password).subscribe(
-      (user) => {
+    this.usrsrv.sendUser(submitData.value).subscribe({
+      next:(user)=>{
         console.log("user",user);
-        if (user && user.token) {
-          console.log('User exists:', user);
-          // Decode the JWT token
-          this.usrsrv.saveCurrentUser(user.token);
+        if (user.message=="success") {
+          localStorage.setItem('token',user.token);
+          this.usrsrv.saveCurrentUser();
           this.usrsrv.log();
           this.success = true;
-          // Navigate to the next page or perform other actions
           if(localStorage.getItem('userRole')=='user'){
-            this.router.navigate(['/home']); // Replace with your desired route
+            this.router.navigate(['/home']);
           }
           else if(localStorage.getItem('userRole')=='admin'){
-            this.router.navigate(['/adminHome']); // Replace with your desired route
+            this.router.navigate(['adminHome']); // Replace with your desired route
           }
-
         } else {
           console.log('User does not exist');
 
           // Handle the case where the user does not exist
         }
-      },
-      (error) => {
-        this.failure = true;
-        console.error('Error checking user:', error);
-        // Handle the error as needed
       }
+    }
     );
   }
 

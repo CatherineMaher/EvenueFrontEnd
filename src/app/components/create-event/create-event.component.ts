@@ -50,30 +50,38 @@ timeRange: { start?: number; end?: number }[] = [];
   facilities:string[]=[];
   instructions:string[]=[];
   registerForm!: FormGroup;
+  image: any;
 
-  // eventTime?:{hour?:Number,minute?:Number}[]=[];
-  // registerForm: FormGroup = new FormGroup({
-  //   title: new FormControl(null,[Validators.required,Validators.minLength(3),Validators.maxLength(10)]),
-  //   location: new FormControl(null,[Validators.required,Validators.min(16),Validators.max(60)]),
-  //   organizer: new FormControl(null,[Validators.required,Validators.pattern('[a-z0-9]+@[a-z]+\.[a-z]{2,3}')]),
-  //   Description: new FormControl(null,[Validators.required,Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")]),
-  //   facilities: new FormControl(null,[Validators.required,Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")]),
-  //   instructions: new FormControl(null,[Validators.required,Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")]),
-
-  // });
+  ngOnInit(): void {
+    this.registerForm= new FormGroup({
+      title: new FormControl(null,[Validators.required]),
+      location: new FormControl(null,[Validators.required]),
+      organizer: new FormControl(null,[Validators.required]),
+      Description: new FormControl(null,[Validators.required]),
+      facilities:new FormControl([]),
+      instructions:new FormControl([]),
+      dates:new FormControl([]),
+      tickets:new FormControl([]),
+      image:new FormControl(null),
+    });
+  }
   submitForm(data:any){
-    console.log("eventtime",this.eventTime);
-    console.log("tickets",this.tickets);
-    console.log("fac",this.facilities);
-    console.log("inst",this.instructions);
+    const formData = new FormData();
     data.controls.dates.setValue(this.eventTime)
     data.controls.tickets.setValue(this.tickets);
     data.controls.facilities.setValue(this.facilities);
     data.controls.instructions.setValue(this.instructions);
-
-
+    formData.append('image',this.image);
+    formData.append('title', data.get('title').value);
+    formData.append('location', data.get('location').value);
+    formData.append('organizer', data.get('organizer').value);
+    formData.append('Description', data.get('Description').value);
+    formData.append('facilities', data.get('organizer').value);
+    formData.append('instructions', data.get('Description').value);
+    formData.append('dates', data.get('organizer').value);
+    formData.append('tickets', data.get('Description').value);
     console.log(data.value);
-    this._CreateEventService.addEvent(data.value).subscribe({
+    this._CreateEventService.addEvent(formData).subscribe({
       next:(res:any)=>{
         console.log("result from api",res);
 
@@ -92,19 +100,6 @@ timeRange: { start?: number; end?: number }[] = [];
 
   constructor(private _Router:Router,private _CreateEventService:CreateEventService) {}
 
-  ngOnInit(): void {
-
-    this.registerForm= new FormGroup({
-      title: new FormControl(null,[Validators.required]),
-      location: new FormControl(null,[Validators.required]),
-      organizer: new FormControl(null,[Validators.required]),
-      Description: new FormControl(null,[Validators.required]),
-      facilities:new FormControl([]),
-      instructions:new FormControl([]),
-      dates:new FormControl([]),
-      tickets:new FormControl([]),
-    });
-  }
   AddFacility(){
     let link='';
     link= this.link?.nativeElement.value
@@ -209,5 +204,8 @@ timeRange: { start?: number; end?: number }[] = [];
 
 toggleTicketInfo() {
   this.showTicketInfo = !!this.ticketType?.nativeElement.value; // Check if any option is selected
+}
+onImageFileSelected(event:any){
+  this.image = event.target.files[0];
 }
 }

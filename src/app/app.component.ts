@@ -18,6 +18,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { GoogleAPIComponent } from './components/google-api/google-api.component';
 import { LoginComponent } from './components/login/login.component';
 import { SliderComponent } from './components/slider/slider.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
   selector: 'app-root',
@@ -41,8 +42,10 @@ import { SliderComponent } from './components/slider/slider.component';
     EventDetailsComponent,
     TestimonialsComponent,
     SearchByPricePipe,
-    SearchLocationPipe
+    SearchLocationPipe,
+    SweetAlert2Module
   ],
+ 
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

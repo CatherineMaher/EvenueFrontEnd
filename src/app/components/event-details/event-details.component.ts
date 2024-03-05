@@ -38,8 +38,8 @@ export class EventDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.ID = this.myActivate.snapshot.params['_id'];
-    this.detailsService.getEventDetails('65dd0809b5df4a0c2cc3faa1').subscribe({
+    this.ID = this.myActivate.snapshot.params['id'];
+    this.detailsService.getEventDetails(this.ID).subscribe({
       next: (data: any) => {
         console.log(data.data);
         this.myEvent = data.data;
@@ -47,7 +47,6 @@ export class EventDetailsComponent implements OnInit {
         this.description = this.myEvent.Description;
         this.location = this.myEvent.location;
         this.dates = this.myEvent.dates;
-
         this.firstDate = this.dates[0].date;
         this.facilities = this.myEvent.facilities;
         this.organizer = this.myEvent.organizer;
