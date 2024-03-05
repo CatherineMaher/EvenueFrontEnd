@@ -13,10 +13,11 @@ import { AllReservationsComponent } from './components/all-reservations/all-rese
 import { GoogleAPIComponent } from './components/google-api/google-api.component';
 import { AboutComponentComponent } from './components/about-component/about-component.component';
 export const routes: Routes = [
+
+  {path:'',redirectTo:'home',pathMatch:'full'},
   {path:'login',component:LoginComponent,children:[
     { path: '', component: GoogleAPIComponent},
   ]},
-  {path:'',redirectTo:'home',pathMatch:'full'},
   { path: 'events',component: SearchComponent },
   { path: 'checkout/payment', component: PaymentComponent },
   { path: 'details/:id', component: EventDetailsComponent },
