@@ -13,141 +13,139 @@ import { EventService } from '../../services/event.service';
 @Component({
   selector: 'app-search',
   standalone: true,
-  imports: [CommonModule, FormsModule, SearchPipe, SearchByPricePipe, SearchLocationPipe, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    SearchPipe,
+    SearchByPricePipe,
+    SearchLocationPipe,
+    ReactiveFormsModule,
+  ],
   templateUrl: './search.component.html',
-  styleUrl: './search.component.css'
+  styleUrl: './search.component.css',
 })
 export class SearchComponent implements OnInit {
   events: Event[] = [];
   min: any[] = [];
-  name: string = ''
+  name: string = '';
   location: string = '';
   price: string = '';
   img: string = '';
   eventPage: Event[] = [];
-  numberOfPage:number=0;
-  numberOfPageArray:number[]=[]
-  counter :number=0;
-  lengthOfData:number=0
+  numberOfPage: number = 0;
+  numberOfPageArray: number[] = [];
+  counter: number = 0;
+  lengthOfData: number = 0;
   imageUrl?: string;
   hasaphoto?: boolean;
-  imageName?:string;
-   
-   constructor(private router: Router, private EventModel: EventService) {
-     // imageForm :FormGroup = new FormGroup({image:new FormControl(null)})
-    }
-    
-    regSearch() {
+  imageName?: string;
+
+  constructor(private router: Router, private EventModel: EventService) {
+    // imageForm :FormGroup = new FormGroup({image:new FormControl(null)})
+  }
+
+  regSearch() {
     this.EventModel.getEventByname(this.name).subscribe({
       next: (res: any) => {
-        if (res.message == "success" && res.data) {
+        if (res.message == 'success' && res.data) {
           console.log(res);
           console.log(res._id);
-          
-          
         }
-      }
-    })
+      },
+    });
   }
   Viewmore(id: string) {
     // console.log("viewmore", id);
-    this.router.navigate([`/details/${id}`])
+    this.router.navigate([`/details/${id}`]);
   }
-  
-  
+
   ngOnInit(): void {
     this.EventModel.getEvents().subscribe({
       next: (res: any) => {
-        if (res.message == "success" && res.data) {
+        if (res.message == 'success' && res.data) {
           console.log(res.data);
-          console.log("res.data[0]._id", res.data[0]._id);
-          
-          
-          
+          console.log('res.data[0]._id', res.data[0]._id);
+
           this.eventPage = res.data;
           // console.log("this.eventPage",this.eventPage);
-          
+
           // this.imageName=this.eventPage[15].image;
           // console.log("this.imageName",this.imageName);
           this.lengthOfData = this.eventPage.length;
-          this.numberOfPage =Math.ceil(this.lengthOfData/7);
-          for(let x=1;x<=this.numberOfPage;x++) {this.numberOfPageArray.push(x)}
-          console.log("this.numberOfPageArray",this.numberOfPageArray);
-          console.log("this.numberOfPage",this.numberOfPage);
-          
+          this.numberOfPage = Math.ceil(this.lengthOfData / 7);
+          for (let x = 1; x <= this.numberOfPage; x++) {
+            this.numberOfPageArray.push(x);
+          }
+          console.log('this.numberOfPageArray', this.numberOfPageArray);
+          console.log('this.numberOfPage', this.numberOfPage);
+
           let i;
-          console.log("lengthOfData",this.lengthOfData);
-        
-          for(i=0;i<7;i++){
-              this.events[i]=(this.eventPage[i]);
-            }
-            this.counter=i;
+          console.log('lengthOfData', this.lengthOfData);
+
+          for (i = 0; i < 7; i++) {
+            this.events[i] = this.eventPage[i];
+          }
+          this.counter = i;
           this.getData();
         } else {
           console.log("Can't fetch API or data is undefined");
         }
       },
-    })
+    });
   }
 
-  nextpage(page:number){
+  nextpage(page: number) {
     let i;
-    this.events=[];
-    this.counter=this.counter*(page-1);
-  //  console.log("this.counter",this.counter);
-   
-    for(i=this.counter;i<(7+this.counter)&&i<this.lengthOfData;i++){
-      this.events[i-this.counter]=this.eventPage[i];
+    this.events = [];
+    this.counter = this.counter * (page - 1);
+    //  console.log("this.counter",this.counter);
+
+    for (i = this.counter; i < 7 + this.counter && i < this.lengthOfData; i++) {
+      this.events[i - this.counter] = this.eventPage[i];
       // console.log("this.events[i-this.counter]",this.events[i-this.counter]);
       // console.log("this.events",this.events);
     }
-    this.counter=i;
+    this.counter = i;
     this.getData();
   }
 
- getData(){
-  this.events.forEach(event => {
-    let counter = 0;
-    // console.log(event.tickets?.[counter]?.totalTickets);
-    // console.log(counter);
-    if(event.image){
+  getData() {
+    this.events.forEach((event) => {
+      let counter = 0;
+      // console.log(event.tickets?.[counter]?.totalTickets);
+      // console.log(counter);
+      if (event.image) {
+        this.imageName = event?.image;
+        this.imageUrl = this.EventModel.getImageUrl(this.imageName);
 
-      this.imageName=event?.image;
-      this.imageUrl=this.EventModel.getImageUrl(this.imageName);
+        event.image = this.imageUrl;
+        console.log('event.image', event.image);
+      }
+      // console.log(this.imageName,"this.imageName");
 
-      event.image=this.imageUrl;
-      console.log("event.image",event.image);
-      
-    }
-    // console.log(this.imageName,"this.imageName");
-    
-    if (event.dates && event.dates.length > 0) {
-      let mindate = event.dates[0].date;
+      if (event.dates && event.dates.length > 0) {
+        let mindate = event.dates[0].date;
 
-      event.dates.forEach(dat => {
-        // Check if dat.date is defined
-        if (dat.date) {
-          // console.log(dat.date);
+        event.dates.forEach((dat) => {
+          // Check if dat.date is defined
+          if (dat.date) {
+            // console.log(dat.date);
 
-          // Check if dat.date is smaller than mindate
-          if (mindate && dat.date < mindate) {
-            mindate = dat.date;
+            // Check if dat.date is smaller than mindate
+            if (mindate && dat.date < mindate) {
+              mindate = dat.date;
+            }
           }
-
-        }
-      });
-      this.min.push(mindate);
-
-    }
-  });
- }
- showPhoto(){
-  console.log("in show photo",this.imageName);
- this.imageUrl=this.EventModel.getImageUrl(this.imageName);
- this.hasaphoto=true;
-//  console.log(this.imageName);
-//  console.log("this image url",this.imageUrl);
-
-}
-
+        });
+        this.min.push(mindate);
+      }
+    });
+  }
+  showPhoto() {
+    console.log('in show photo', this.imageName);
+    this.imageUrl = this.EventModel.getImageUrl(this.imageName);
+    this.hasaphoto = true;
+    //  console.log(this.imageName);
+    //  console.log("this image url",this.imageUrl);
+  }
 }
