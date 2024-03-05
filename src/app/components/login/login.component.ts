@@ -8,10 +8,11 @@ import { HttpHeaders } from '@angular/common/http';
 import {jwtDecode} from 'jwt-decode';
 import { GoogleAPIComponent } from '../google-api/google-api.component';
 import Swal from 'sweetalert2';
+import { NgZone, inject } from '@angular/core';
 
 const authToken = localStorage.getItem('authToken');
 const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
-
+declare var google:any;
 @Component({
     selector: 'app-login',
     standalone: true,
@@ -23,7 +24,9 @@ const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
 export class LoginComponent implements OnInit {
 success = false;
 failure = false;
- constructor( private usrsrv: UserService,private router: Router,private cdr: ChangeDetectorRef){
+ constructor( private usrsrv: UserService,private router: Router,private cdr: ChangeDetectorRef,
+  private zone: NgZone
+){
 
  }
 imgpath="";
@@ -34,10 +37,41 @@ imgsrc="";
       next:(res:any)=>{this.imgpath = res.data.image
       console.log("imgpath",this.imgpath);
       }
-
-
     })
+
+    google.accounts.id.initialize({
+      client_id:
+        '652762239068-v1m8fl5b3cl4uckkns2lcmvtojtlt56e.apps.googleusercontent.com',
+      callback: (resp: any) =>this.handleLogin (resp),
+    });
+
+    google.accounts.id.renderButton(document.getElementById('google-btn'), {
+      theme: 'filled_violet',
+      size: 'large',
+      shape: 'rectangle',
+      width: 200,
+    });
+
   }
+  private decodeToken(token: string) {
+    return JSON.parse(atob(token.split('.')[1]));
+  }
+
+  handleLogin(response: any) {
+    if (response) {
+      //decode the token
+      const payLoad = this.decodeToken(response.credential);
+      //store in session
+      localStorage.setItem('loggedInUser', JSON.stringify(payLoad));
+      //navigate to home/browse
+      // this.usrsrv.setState(payLoad);
+      this.zone.run(() => {
+        this.router.navigate(['/home']);
+      });
+    }
+  }
+
+  
 
  emailErrorMessage:string='';
    loginForm: FormGroup = new FormGroup({
@@ -100,3 +134,4 @@ imgsrc="";
 
 
 }
+
