@@ -4,55 +4,76 @@ import { CommonModule } from '@angular/common';
 import { CartService } from '../../services/cart-service';
 import { EventDetailsService } from '../../services/event-details.service';
 import { EventService } from '../../services/event.service';
+import { RouterModule } from '@angular/router';
 
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
 export class CartComponent  implements OnInit{
   cartInfo: any ;
-  ticketsQ : any = 5 ;
+  ticketsQ : any ;
   regular:any =0 ;
   gold:any =0;
   vip:any =0;
+  sum:any = 0 ;
+  totalQuantity:any=0;
+  cartSum:any = 0;
+  eventPrice:any = 0;
+  cartPrice:any = 0;
   constructor( private evtsrv: EventService, private evdsrv : EventDetailsService ){
   }
   ngOnInit(): void {
-    // this.evdsrv.getReservationDetails().subscribe({
-    //   next: (cart: any) => {
-    //     this.cartInfo = cart.data.find((reserve:any) => !reserve.isPurchased)
-    //     // console.log(  this.cartInfo.events.ticketInfo);
-    //     // this.cartInfo.events.ticketsInfo.forEach((ticket:any) => {
-    //     // console.log(ticket.type==='regular');
-    //     //   if(ticket.type==='regular'){
-    //     //     this.regular=ticket.quantity;
-    //     //   }
-    //     //   else if(ticket.type==='gold'){
-    //     //     this.gold=ticket.quantity;
-    //     //   }
-    //     //   else if (ticket.type==='vip'){
-    //     //     this.vip=ticket.quantity;
-    //     //   }
-          
-    //     // });
-    //   },
-    //   error: (error:any) => {
-    //     console.error('Error fetching cart information:', error);
-    //   }
-    // });
+   
     this.cartInfo=this.evdsrv.reservationDetails
+    this.totalQuantity = this.cartInfo.length;
+    this.eventPrice =this.totalEventPrice();
     
+    // console.log(this.cartPrice);
+    console.log("mariam",this.totalEventPrice());
+  }
+  totalEventPrice(){
+    this.sum=0;
+    this.cartInfo.forEach((event:any) => {
+      event.tickets.forEach((ticket:any) => {
+        this.sum+=ticket.price;
+     });
+     console.log("sum gowa for each el kbeera",this.sum);
+    }
+    )
+    return this.sum
   }
   
-  minus() {
-      this.ticketsQ--;
+  minus(index:any,type:any) {
+   
+      // this.ticketsQ--;
+      this.cartInfo[index].tickets.forEach((ticket:any) => {
+        console.log(ticket.type);
+        if(ticket.type == type){
+          
+          ticket.quantity--;
+          ticket.price=ticket.price - ticket.SingleTicketPrice;
+          this.eventPrice =this.totalEventPrice();
+          
+        }
+      })
   }
-  add() {
-    this.ticketsQ++;
+  add(index:any,type:any) {
+    // this.ticketsQ++;
+    this.cartInfo[index].tickets.forEach((ticket:any) => {
+      console.log(ticket.type);
+      if(ticket.type == type){
+        
+        ticket.quantity++;
+        ticket.price=ticket.price + ticket.SingleTicketPrice;
+        this.eventPrice =this.totalEventPrice();
+        
+      }
+    })
 }
 delete(evt:any){
  let cartItem = evt.target.closest(".cartItem");

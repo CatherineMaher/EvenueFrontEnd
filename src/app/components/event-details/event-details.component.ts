@@ -134,6 +134,7 @@ export class EventDetailsComponent implements OnInit {
       tickets.push({
         type: 'regular',
         quantity: this.ReservedRegularTickets,
+        SingleTicketPrice:this.regularPrice,
         price: this.regularPrice * this.ReservedRegularTickets,
       });
     }
@@ -141,6 +142,7 @@ export class EventDetailsComponent implements OnInit {
       tickets.push({
         type: 'gold',
         quantity: this.ReservedGoldTickets,
+        SingleTicketPrice:this.goldPrice,
         price: this.goldPrice * this.ReservedGoldTickets,
       });
     }
@@ -148,6 +150,7 @@ export class EventDetailsComponent implements OnInit {
       tickets.push({
         type: 'vip',
         quantity: this.ReservedVipTickets,
+        SingleTicketPrice:this.VipPrice,
         price: this.VipPrice * this.ReservedVipTickets,
       });
     }
