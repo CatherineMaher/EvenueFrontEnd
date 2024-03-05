@@ -30,10 +30,16 @@ export class UserService {
     console.log("log function",this._isLoggedIn);
   }
   ///////////////////////////////////////////
+/////elmafrood neshelha
+  getuser(){
+    return this.http.get(this.url+"/65e23572f4c0cffd33c30da5")
+  }
 
 addUser(data:any){
   return(this.http.post(this.url+"/add",data))
 }
+
+
 
 sendUser(data:any):Observable<any>{
   return this.http.post('http://localhost:7005/users/login',data)
@@ -57,5 +63,6 @@ getImageUrl(filename: any):string {
 }
 getOneUser(id: any): Observable<any> {
   return this.http.get(`http://localhost:7005/users/${id}`)
+
 }
 }

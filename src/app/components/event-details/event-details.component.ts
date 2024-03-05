@@ -38,6 +38,10 @@ export class EventDetailsComponent implements OnInit {
   ReservedGoldTickets: number = 0;
   ReservedVipTickets: number = 0;
 
+  regularPrice: number = 0;
+  goldPrice: number = 0;
+  VipPrice: number = 0;
+
   ID = '0';
   constructor(
     private detailsService: EventDetailsService,
@@ -59,25 +63,28 @@ export class EventDetailsComponent implements OnInit {
         this.organizer = this.myEvent.organizer;
         this.instructions = this.myEvent.instructions;
         this.allTickets = this.myEvent.tickets;
-        console.log(this.allTickets);
+        // console.log(this.allTickets);
         for (let i = 0; i < this.allTickets.length; i++) {
           if (
             this.allTickets[i].type == 'regular' ||
             this.allTickets[i].type == 'Regular'
           ) {
-            this.AvailableRegularTickets += this.allTickets[i].totalTickets;
+            this.AvailableRegularTickets = this.allTickets[i].totalTickets;
+            this.regularPrice = this.allTickets[i].price;
           }
           if (
             this.allTickets[i].type == 'gold' ||
             this.allTickets[i].type == 'Gold'
           ) {
-            this.AvailableGoldTickets += this.allTickets[i].totalTickets;
+            this.AvailableGoldTickets = this.allTickets[i].totalTickets;
+            this.goldPrice = this.allTickets[i].price;
           }
           if (
             this.allTickets[i].type == 'vip' ||
             this.allTickets[i].type == 'Vip'
           ) {
-            this.AvailableVipTickets += this.allTickets[i].totalTickets;
+            this.AvailableVipTickets = this.allTickets[i].totalTickets;
+            this.VipPrice = this.allTickets[i].price;
           }
         }
       },
@@ -120,29 +127,37 @@ export class EventDetailsComponent implements OnInit {
     }
   }
 
-  buyTickets() {
+  addToCart() {
     let tickets = [];
 
     if (this.ReservedRegularTickets > 0) {
       tickets.push({
         type: 'regular',
         quantity: this.ReservedRegularTickets,
+        SingleTicketPrice:this.regularPrice,
+        price: this.regularPrice * this.ReservedRegularTickets,
       });
     }
     if (this.ReservedGoldTickets > 0) {
       tickets.push({
         type: 'gold',
         quantity: this.ReservedGoldTickets,
+        SingleTicketPrice:this.goldPrice,
+        price: this.goldPrice * this.ReservedGoldTickets,
       });
     }
     if (this.ReservedVipTickets > 0) {
       tickets.push({
         type: 'vip',
         quantity: this.ReservedVipTickets,
+        SingleTicketPrice:this.VipPrice,
+        price: this.VipPrice * this.ReservedVipTickets,
       });
     }
     const reservation = {
       eventID: this.ID,
+      title: this.title,
+      location: this.location,
       tickets,
       dateTime: {
         day: this.selectedDate.date,
@@ -150,10 +165,7 @@ export class EventDetailsComponent implements OnInit {
         end: this.selectedDate.end,
       },
     };
-    console.log(this.detailsService.flag);
-    this.detailsService.flag = true;
     this.detailsService.reservationDetails.push(reservation);
-    // this.detailsService.addReservation(reservation);
     console.log(this.detailsService.getReservationDetails());
   }
 }

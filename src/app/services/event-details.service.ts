@@ -7,8 +7,6 @@ import { Injectable } from '@angular/core';
 export class EventDetailsService {
   reservationDetails: any = [];
 
-  flag = false;
-
   getReservationDetails() {
     return this.reservationDetails;
   }
