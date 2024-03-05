@@ -65,7 +65,7 @@ onImageFileSelected(event:any){
               title: `<strong>${err.error.message}</strong>`,
               icon: "info",
               html: `
-                Try to login
+                Try to login.
               `,
               showCloseButton: true,
               // showCancelButton: true,

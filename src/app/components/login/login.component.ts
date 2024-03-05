@@ -7,6 +7,7 @@ import { Router, RouterModule } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
 import {jwtDecode} from 'jwt-decode';
 import { GoogleAPIComponent } from '../google-api/google-api.component';
+import Swal from 'sweetalert2';
 
 const authToken = localStorage.getItem('authToken');
 const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
@@ -73,6 +74,24 @@ imgsrc="";
 
           // Handle the case where the user does not exist
         }
+      },
+      error:(err)=>{
+        // Swal.fire(err.error.message);
+        Swal.fire({
+          title: `<strong>${err.error.message}</strong>`,
+          icon: "error",
+          html: `
+            Try again.
+          `,
+          showCloseButton: true,
+          // showCancelButton: true,
+          focusConfirm: false,
+          confirmButtonText: `
+             OK
+          `,
+          confirmButtonColor: '#5c127e',
+         
+        });
       }
     }
     );

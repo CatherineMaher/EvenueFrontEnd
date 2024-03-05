@@ -9,20 +9,20 @@
                   <!-- <div class="col align-self-center text-right text-muted">3 items</div> -->
               </div>
           </div>    
-          <div class="row border-top border-bottom cartItem" id="{{event._id}}" *ngFor="let event of cartInfo?.events">
+          <div class="row border-top border-bottom cartItem" id="{{event._id}}" *ngFor="let event of cartInfo">
               <div class="row main align-items-center">
                   <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/1GrakTl.jpg"></div>
                   <div class="col position-relative">
 
                       <div class="d-flex justify-content-between">
-                        <div class="row text-muted fs-3 fw-bold">{{event.eventId.title}}</div>
+                        <div class="row text-muted fs-3 fw-bold">{{event.eventID.title}}</div>
                         <button class="border-0 bg-transparent text-dark fw-bold px-4" (click)="delete($event)">x</button>
                       </div>
-                      <p class="col d-flex "><span></span>{{event.eventId.location}}</p>
+                      <p class="col d-flex "><span></span>{{event.eventID.location}}</p>
                     
                    
                       <div class="d-flex col-7">
-                        <div class="d-flex flex-column text-center col-8"  *ngFor="let detail of event.ticketInfo">
+                        <div class="d-flex flex-column text-center col-8"  *ngFor="let detail of event.tickets">
 
                           <i class="fa fa-ticket" aria-hidden="true"></i>
                           <p class="h6">{{detail.type}}</p> 

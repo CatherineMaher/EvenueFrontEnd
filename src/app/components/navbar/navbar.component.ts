@@ -87,4 +87,7 @@ logOut(){
     //  console.log("this image url",this.imageUrl);
 
 }
+openCart(){
+  this._Router.navigate(["/cart"])
+}
 }
