@@ -3,10 +3,12 @@ import { Component} from '@angular/core';
 import {  FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule,ReactiveFormsModule,FormsModule],
+  imports: [CommonModule,ReactiveFormsModule,FormsModule,SweetAlert2Module],
   providers: [UserService],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
@@ -47,6 +49,7 @@ onImageFileSelected(event:any){
           next:(res:any)=>{
             console.log(res);
             if(res.message=='success'){
+              
               this.success=true;
               console.log("success");
               this.router.navigate(['/login']);
@@ -55,6 +58,24 @@ onImageFileSelected(event:any){
               this.failure=true;
               this.emailErrorMessage=res.message;
             }
+          },
+          error:(err)=>{
+            // Swal.fire(err.error.message);
+            Swal.fire({
+              title: `<strong>${err.error.message}</strong>`,
+              icon: "info",
+              html: `
+                Try to login.
+              `,
+              showCloseButton: true,
+              // showCancelButton: true,
+              focusConfirm: false,
+              confirmButtonText: `
+                 OK
+              `,
+              confirmButtonColor: '#5c127e',
+             
+            });
           }
         })
 

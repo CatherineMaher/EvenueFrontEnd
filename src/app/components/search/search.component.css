@@ -122,12 +122,14 @@ label:last-child {margin-right: 0;}
 .pacman {
 	content: '';
 	position: absolute;
-	top: calc(0*var(--ddim));
-	left: calc(123*var(--ddim)/2);
+	/* top: calc(0*var(--ddim)); */
+	left: 45.8%;
 	height: var(--rdim);
 	width: var(--rdim);
 	transition: transform 250ms linear;
 }
+
+
 
 .pacman:before,
 .pacman:after {
@@ -181,3 +183,10 @@ input[id="dot-5"]:checked ~ .pacman {transform: translateX(calc(var(--ddim) + va
 input[id="dot-6"]:checked ~ .pacman {transform: translateX(calc(var(--ddim) + var(--rdim)*5));}
 input[id="dot-7"]:checked ~ .pacman {transform: translateX(calc(var(--ddim) + var(--rdim)*6));}
 input[id="dot-8"]:checked ~ .pacman {transform: translateX(calc(var(--ddim) + var(--rdim)*7));}
+
+.partner{
+  background-image: url("../../../assets/imgs/lee-blanchflower-1dW1vEJLlCQ-unsplash.jpg");
+  background-size: cover;
+  width: 100.8%;
+  background-repeat: no-repeat;
+}

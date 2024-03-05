@@ -118,7 +118,7 @@
                 >
                   -
                 </button>
-                <span>{{ regularTicket }}</span>
+                <span>{{ ReservedRegularTickets }}</span>
                 <button
                   class="btn-color rounded-3 p-2 w-25 ms-3"
                   (click)="addRegular()"
@@ -143,7 +143,7 @@
                 >
                   -
                 </button>
-                <span>{{ goldTicket }} </span>
+                <span>{{ ReservedGoldTickets }} </span>
                 <button
                   class="btn-color rounded-3 p-2 w-25 ms-3"
                   (click)="addGold()"
@@ -167,7 +167,7 @@
                 >
                   -
                 </button>
-                <span>{{ vipTicket }} </span>
+                <span>{{ ReservedVipTickets }} </span>
                 <button
                   class="btn-color rounded-3 p-2 w-25 ms-3"
                   (click)="addVip()"
@@ -183,10 +183,12 @@
             <button
               class="btn btn-primary w-100 mt-3 btn-color"
               [disabled]="
-                (regularTicket === 0 && goldTicket === 0 && vipTicket === 0) ||
+                (ReservedRegularTickets === 0 &&
+                  ReservedGoldTickets === 0 &&
+                  ReservedVipTickets === 0) ||
                 !selectedDate
               "
-              (click)="buyTickets()"
+              (click)="addToCart()"
             >
               Buy Tickets
             </button>

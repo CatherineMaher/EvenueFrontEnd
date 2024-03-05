@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { Router, RouterModule } from '@angular/router';
 import { HttpHeaders } from '@angular/common/http';
 import {jwtDecode} from 'jwt-decode';
 import { GoogleAPIComponent } from '../google-api/google-api.component';
+import Swal from 'sweetalert2';
 
 const authToken = localStorage.getItem('authToken');
 const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
@@ -18,12 +20,25 @@ const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
     styleUrl: './login.component.css',
     imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterModule, GoogleAPIComponent]
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 success = false;
 failure = false;
  constructor( private usrsrv: UserService,private router: Router,private cdr: ChangeDetectorRef){
 
  }
+imgpath="";
+imgsrc="";
+//  constructor( private usrsrv: UserService,private router: Router){}
+  ngOnInit(): void {
+    this.usrsrv.getuser().subscribe({
+      next:(res:any)=>{this.imgpath = res.data.image
+      console.log("imgpath",this.imgpath);
+      }
+
+
+    })
+  }
+
  emailErrorMessage:string='';
    loginForm: FormGroup = new FormGroup({
      email: new FormControl(null,[Validators.required,Validators.pattern('[a-z0-9]+@[a-z]+.[a-z]{2,3}')]),
@@ -31,6 +46,11 @@ failure = false;
        ]),
    });
  //Validators.pattern("^(?=.?[A-Z])(?=.?[a-z])(?=.?[0-9])(?=.?[#?!@$%^&*-]).{8,}$")
+  DisplayImage(){
+   this.imgsrc= this.usrsrv.getImageUrl(this.imgpath)
+   console.log(this.imgsrc);
+
+  }
   Login(submitData: FormGroup) {
     this.success = false;
     this.failure = false;
@@ -54,6 +74,24 @@ failure = false;
 
           // Handle the case where the user does not exist
         }
+      },
+      error:(err)=>{
+        // Swal.fire(err.error.message);
+        Swal.fire({
+          title: `<strong>${err.error.message}</strong>`,
+          icon: "error",
+          html: `
+            Try again.
+          `,
+          showCloseButton: true,
+          // showCancelButton: true,
+          focusConfirm: false,
+          confirmButtonText: `
+             OK
+          `,
+          confirmButtonColor: '#5c127e',
+         
+        });
       }
     }
     );

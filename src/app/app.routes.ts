@@ -12,6 +12,7 @@ import { adminProtectGuard } from './guard/admin-protect.guard';
 import { AllReservationsComponent } from './components/all-reservations/all-reservations.component';
 import { GoogleAPIComponent } from './components/google-api/google-api.component';
 import { AboutComponentComponent } from './components/about-component/about-component.component';
+import { CartComponent } from './components/cart/cart.component';
 export const routes: Routes = [
 
   {path:'',redirectTo:'home',pathMatch:'full'},
@@ -26,8 +27,9 @@ export const routes: Routes = [
   { path: 'adminHome' ,canActivate:[adminProtectGuard],component: AdminHomeComponent },
   { path: 'reservations' ,canActivate:[adminProtectGuard],component: AllReservationsComponent },
   { path:'register', component: RegisterComponent },
-  {path:"addEvent",component:CreateEventComponent},
+  {path:"addEvent",canActivate:[adminProtectGuard],component:CreateEventComponent},
   {path:"about",component:AboutComponentComponent},
+  {path:"cart",component:CartComponent},
   // ,canActivate:[adminProtectGuard]
 
 ];

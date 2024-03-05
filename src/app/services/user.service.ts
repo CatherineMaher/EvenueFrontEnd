@@ -27,6 +27,8 @@ addUser(data:any){
     )
 }
 
+
+
 sendUser(data:any):Observable<any>{
   return this.http
   .post<User>('http://localhost:7005/users/login', data)

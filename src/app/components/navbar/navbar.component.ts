@@ -83,5 +83,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
     //  console.log(this.imageName);
     //  console.log("this image url",this.imageUrl);
-  }
+
+}
+openCart(){
+  this._Router.navigate(["/cart"])
+}
 }

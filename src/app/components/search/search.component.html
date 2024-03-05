@@ -170,18 +170,39 @@
           @if(page == 1){
 
             <input id="dot-{{page}}" type="radio" name="dots" checked="checked" (click)="nextpage(page)" class="pad-inpunt">	
-          }@else{
+          }@else if(page==2){
             
             <input id="dot-{{page}}" type="radio" name="dots" (click)="nextpage(page)" class="pad-inpunt">	
+          }
+          @else{
+            <input id="dot-{{page}}" type="radio" name="dots" (click)="nextpage(page)" class="pad-inpunt">	
+
           }
           <label for="dot-{{page}}" >{{page}}</label>	
         }
         <p>.</p>
 
-        <div class="pacman col-12 justify-content-center"></div>
+        <div class="pacman col-12 justify-content-center d-lg-flex d-none"></div>
         
       </div>
-      
-
     </div>
   </div>
+  <!-- <div class="row partner justify-content-center">
+
+    <div class="col-12  justify-content-center d-flex ">
+      <h1>Our Partner</h1>
+      <div class="d-flex w-50 justify-content-center flex-column">
+        <div>
+          <img src="../../../assets/imgs/wepik_8571486.png" alt="" class="w-100" >
+          <img src="../../../assets/imgs/wepik_8571486.png" alt="" class="w-100">
+          <img src="../../../assets/imgs/wepik_8571486.png" alt="" class="w-100">
+        </div>
+        <div>
+          <img src="../../../assets/imgs/wepik_8571486.png" alt="" class="w-100">
+          <img src="../../../assets/imgs/wepik_8571486.png" alt="" class="w-100">
+          <img src="../../../assets/imgs/wepik_8571486.png" alt="" class="w-100">
+        </div>
+      </div>
+  
+    </div>
+  </div> -->

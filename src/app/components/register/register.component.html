@@ -27,7 +27,7 @@
                       <p *ngIf="registerForm.get('password')?.getError('pattern')" class="text-danger">Password should be Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:</p>
                   </div>
               </div>
-              <label  class="fw-bold mainfntclr" for="image">Coursespecs File
+              <label  class="fw-bold mainfntclr" for="image">Image
                 <span class="text-danger">*</span></label>
            <input
              (change)="onImageFileSelected($event)"
@@ -37,12 +37,13 @@
                formControlName="image"
                 class="form-control my-3">
            <div *ngIf="registerForm.get('image')&& registerForm.get('image')?.touched">
-               <p *ngIf="registerForm.get('image')?.getError('required')" class="text-danger">Coursespecs File is Required</p>
-               <p *ngIf="registerForm.get('image')?.getError('pattern')" class="text-danger"> Coursespecs File should have only pdf, doc, docx extensions</p>
+               <p *ngIf="registerForm.get('image')?.getError('required')" class="text-danger">Image is Required</p>
+               <p *ngIf="registerForm.get('image')?.getError('pattern')" class="text-danger">File should have only jpg, png,etc</p>
 
            </div>
               <div class="ms-lg-auto m-auto text-center d-flex justify-content-center col-8">
-                  <button class="btn btn-color text-light fs-5 border-2 border-white rounded-pill px-4 py-2 " type="submit" value="Register"   [disabled]="registerForm.invalid">Register</button>
+                  <button class="btn btn-color text-light fs-5 border-2 border-white rounded-pill px-4 py-2 " type="submit" value="Register"   [disabled]="registerForm.invalid" >Register</button>
+                 
               </div>
 
           </div>
