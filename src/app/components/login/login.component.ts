@@ -30,13 +30,7 @@ imgpath="";
 imgsrc="";
 //  constructor( private usrsrv: UserService,private router: Router){}
   ngOnInit(): void {
-    this.usrsrv.getuser().subscribe({
-      next:(res:any)=>{this.imgpath = res.data.image
-      console.log("imgpath",this.imgpath);
-      }
 
-
-    })
   }
 
  emailErrorMessage:string='';
@@ -90,7 +84,7 @@ imgsrc="";
              OK
           `,
           confirmButtonColor: '#5c127e',
-         
+
         });
       }
     }
