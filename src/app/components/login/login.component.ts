@@ -33,7 +33,7 @@ imgpath="";
 imgsrc="";
 //  constructor( private usrsrv: UserService,private router: Router){}
   ngOnInit(): void {
-    
+
     google.accounts.id.initialize({
       client_id:
         '652762239068-v1m8fl5b3cl4uckkns2lcmvtojtlt56e.apps.googleusercontent.com',
@@ -67,7 +67,7 @@ imgsrc="";
  }
  }
 
-  
+
 
  emailErrorMessage:string='';
    loginForm: FormGroup = new FormGroup({
@@ -120,7 +120,7 @@ imgsrc="";
              OK
           `,
           confirmButtonColor: '#5c127e',
-         
+
         });
       }
     }
