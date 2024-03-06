@@ -14,7 +14,7 @@ export interface Time {
 }
 
 export interface Event {
-  _id?: string;
+  _id: string;
   image?:any;
   title?: string;
   location?: string;

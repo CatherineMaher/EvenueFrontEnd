@@ -5,6 +5,7 @@ import { FeaturedEventsComponent } from '../featured-events/featured-events.comp
 import { OurNextEventsComponent } from '../our-next-events/our-next-events.component';
 import { RegionalEventsComponent } from '../regional-events/regional-events.component';
 import { EventsPartnersComponent } from '../events-partners/events-partners.component';
+import { CarouselComponent } from '../carousel/carousel.component';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,8 @@ import { EventsPartnersComponent } from '../events-partners/events-partners.comp
     OurNextEventsComponent,
     RegionalEventsComponent,
     EventsPartnersComponent,
+    CarouselComponent
+
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
