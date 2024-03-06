@@ -9,15 +9,18 @@ import {
 
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
+import { LoginComponent } from '../login/login.component';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, LoginComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   constructor(private _UserService: UserService, private _Router: Router) {}
+  isSignClicked: boolean = false;
+
   ngOnDestroy(): void {
     this.userSub?.unsubscribe();
   }
@@ -91,5 +94,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
   openCart() {
     this._Router.navigate(['/cart']);
+  }
+
+  signIn(){
+    this.isSignClicked = !this.isSignClicked;
   }
 }

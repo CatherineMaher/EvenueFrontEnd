@@ -6,6 +6,8 @@
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
+    /* background-color: #3d096e; */
+    /* opacity: 0.8; */
 }
 
 .inform{
@@ -15,5 +17,33 @@
     padding: 5px;
 }
 
+#acc{
+    width:5rem;
+    height: 5rem;
+    background:var(--purple-gred);
 
-  
+}
+/* .img_h{
+    height:35.5rem;
+    /* margin-top: 0.7rem; 
+} 
+.imgdiv{
+    padding: 0;
+   
+}*/
+/* .user{
+    color:#654880;
+
+} */
+/* .regbg{
+    background-image: url("../../../assets/imgs/smoke.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+} */
+
+.allLog{
+    /* background:var(--dark-purple); */
+    /* background-image: url("../../../assets/imgs/registerImage.jpg"); */
+    /* background-size: cover; */
+    /* opacity: 0.5; */
+}
