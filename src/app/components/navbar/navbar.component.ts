@@ -9,6 +9,7 @@ import {
 
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -26,18 +27,22 @@ export class NavbarComponent implements OnInit, OnDestroy {
   hasaphoto: boolean = false;
   imageUrl?: string;
   imageName?: string;
-  userName?: string;
+  userName?: any;
   loggedIn: boolean = false;
   private userSub?: Subscription;
   ngOnInit(): void {
     console.log('Navbar component initialized');
+    console.log(UserService.getUser());
     this.loggedIn = !!UserService.getUser();
-    // this.showPhoto();
+    if (localStorage.getItem('userName') != null) {
+      this.userName = localStorage.getItem('userName');
+      this.hasaphoto = false;
+    }
     if (localStorage.getItem('userId') != null) {
       this._UserService.getOneUser(localStorage.getItem('userId')).subscribe({
         next: (res) => {
           if (res.message == 'success') {
-            console.log("user log in",res.data);
+            console.log('user log in', res.data);
             this.imageName = res.data.image;
             this.userName = res.data.name;
             this.showPhoto();
@@ -46,11 +51,19 @@ export class NavbarComponent implements OnInit, OnDestroy {
       });
     }
     this.userSub = UserService.user.subscribe((user) => {
+      // console.log('User subscription triggered:', user);
+
+      this.loggedIn = !!user;
+      if (localStorage.getItem('userName') != null) {
+        this.userName = localStorage.getItem('userName');
+        this.hasaphoto = false;
+      }
       if (localStorage.getItem('userId') != null) {
+        this.showPhoto();
         this._UserService.getOneUser(localStorage.getItem('userId')).subscribe({
           next: (res) => {
             if (res.message == 'success') {
-              console.log("user log in",res.data);
+              console.log('user log in', res.data);
               this.imageName = res.data.image;
               this.userName = res.data.name;
               this.showPhoto();
@@ -58,13 +71,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
           },
         });
       }
-    // console.log('User subscription triggered:', user);
-    console.log("sub scr btionnnnnnn!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-    this.loggedIn = !!user;
-    this.showPhoto();
-    console.log("photooo",this.hasaphoto);
-
-
+      // else if (localStorage.getItem('userName') != null) {
+      //   this.userName = localStorage.getItem('userName');
+      //   this.hasaphoto = false;
+      // }
     });
 
     this._Router.events.subscribe((event) => {
@@ -76,20 +86,30 @@ export class NavbarComponent implements OnInit, OnDestroy {
   logOut() {
     this._UserService.logOut();
     this.hasaphoto = false;
-    this.imageName = undefined;
-    this.userName = undefined;
+    this.imageName = undefined; // Reset image name
+    this.userName = undefined; // Reset user name
   }
+  // displayUserInfo() {
+  //   console.log("hereeeeeeeeeeeeeeeee");
 
+  //   if (localStorage.getItem('token') != null) {
+  //       this.showPhoto();
+  //       this.hasaphoto=true;
+  //       // this.loggedIn = true;
+  //   }
+  //   // } else {
+  //   //   this.loggedIn = false;
+  //   // }
+  // }
   showPhoto() {
     console.log('in show photo', this.imageName);
     this.imageUrl = this._UserService.getImageUrl(this.imageName);
     this.hasaphoto = true;
 
-     console.log(this.imageName);
-     console.log("this image url",this.imageUrl);
-
-}
-openCart(){
-  this._Router.navigate(["/cart"])
-}
+    //  console.log(this.imageName);
+    //  console.log("this image url",this.imageUrl);
+  }
+  openCart() {
+    this._Router.navigate(['/cart']);
+  }
 }

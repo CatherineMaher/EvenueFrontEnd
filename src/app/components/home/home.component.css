@@ -1,11 +1,14 @@
-
-main
-{
+main {
   background-image: url("../../../assets/imgs/home.jpg");
   /* background-size: contain; */
   background-repeat: no-repeat;
+  background-position: 90% 40%;
   z-index: -999;
 }
-pre{
+pre {
   line-height: 4rem;
+}
+
+.landing {
+  height: calc(100% - 115px);
 }

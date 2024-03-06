@@ -3,7 +3,7 @@
 :root {
   --main-color: #a63fdc;
   --bg-purple: #9a24c1;
-  --pp:#8e3a9d;
+  --pp: #8e3a9d;
   --bg-light: #fafafa;
   --dark-purple: #7c3488;
   --purple-gred: #5c127e;
@@ -21,18 +21,20 @@ body {
   font-family: font;
   /* background-color: #212529; */
 }
-.bg-purple-ligth{
-    background-color:var(--dark-purple);
-
+.bg-purple-ligth {
+  background-color: var(--dark-purple);
 }
-.bg-purple{
-  background-color:var(  --pp);
+.bg-purple {
+  background-color: var(--pp);
 }
 .btn-color {
   background-image: linear-gradient(
     to right,
-    var(--purple-gred),
-    var(--main-color)
+    #3d096e,
+    #460d75,
+    #4f117d,
+    #591484,
+    #62188b
   );
 }
 
@@ -40,5 +42,11 @@ body {
   background-color:;
 } */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  /* font-family: Roboto, "Helvetica Neue", sans-serif; */
+}

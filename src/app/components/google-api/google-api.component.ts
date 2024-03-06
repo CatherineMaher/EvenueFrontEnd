@@ -8,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './google-api.component.css'
 })
 export class GoogleAPIComponent {
+  
 
 }
+
