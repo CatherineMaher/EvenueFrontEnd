@@ -32,13 +32,34 @@ export class NavbarComponent implements OnInit, OnDestroy {
   private userSub?: Subscription;
   ngOnInit(): void {
     console.log('Navbar component initialized');
+    console.log(UserService.getUser());
     this.loggedIn = !!UserService.getUser();
+    if (localStorage.getItem('userName') != null) {
+      this.userName = localStorage.getItem('userName');
+      this.hasaphoto = false;
+    }
+    if (localStorage.getItem('userId') != null) {
+      this._UserService.getOneUser(localStorage.getItem('userId')).subscribe({
+        next: (res) => {
+          if (res.message == 'success') {
+            console.log('user log in', res.data);
+            this.imageName = res.data.image;
+            this.userName = res.data.name;
+            this.showPhoto();
+          }
+        },
+      });
+    }
     this.userSub = UserService.user.subscribe((user) => {
       // console.log('User subscription triggered:', user);
 
       this.loggedIn = !!user;
-      this.showPhoto();
+      if (localStorage.getItem('userName') != null) {
+        this.userName = localStorage.getItem('userName');
+        this.hasaphoto = false;
+      }
       if (localStorage.getItem('userId') != null) {
+        this.showPhoto();
         this._UserService.getOneUser(localStorage.getItem('userId')).subscribe({
           next: (res) => {
             if (res.message == 'success') {

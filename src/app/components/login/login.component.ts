@@ -57,15 +57,14 @@ imgsrc="";
       //decode the token
       const payLoad = this.decodeToken(response.credential);
       //store in session
-      console.log("paylloooooddd",payLoad);
       localStorage.setItem('userName', payLoad.name);
       //navigate to home/browse
       UserService.user.next(true);
       this.zone.run(() => {
         this.router.navigate(['/home']);
-      });
-    }
-  }
+      });
+ }
+ }
 
   
 
