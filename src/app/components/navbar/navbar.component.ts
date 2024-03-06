@@ -33,8 +33,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     console.log('Navbar component initialized');
     this.loggedIn = !!UserService.getUser();
     this.userSub = UserService.user.subscribe((user) => {
-    // console.log('User subscription triggered:', user);
-    console.log("sub scr btionnnnnnn!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+      // console.log('User subscription triggered:', user);
+      console.log('sub scr btionnnnnnn!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 
     this.loggedIn = !!user;
     this.showPhoto();
@@ -67,7 +67,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this._UserService.logOut();
     this.hasaphoto = false;
     this.imageName = undefined; // Reset image name
-  this.userName = undefined; // Reset user name
+    this.userName = undefined; // Reset user name
   }
   // displayUserInfo() {
   //   console.log("hereeeeeeeeeeeeeeeee");
@@ -88,9 +88,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
     //  console.log(this.imageName);
     //  console.log("this image url",this.imageUrl);
-
-}
-openCart(){
-  this._Router.navigate(["/cart"])
-}
+  }
+  openCart() {
+    this._Router.navigate(['/cart']);
+  }
 }

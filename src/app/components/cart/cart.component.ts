@@ -5,113 +5,237 @@ import { CartService } from '../../services/cart-service';
 import { EventDetailsService } from '../../services/event-details.service';
 import { EventService } from '../../services/event.service';
 import { RouterModule } from '@angular/router';
-
+import { loadScript } from '@paypal/paypal-js';
+import { PaymentService } from '../../services/payment.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule,RouterModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './cart.component.html',
-  styleUrl: './cart.component.css'
+  styleUrl: './cart.component.css',
 })
-export class CartComponent  implements OnInit{
-  cartInfo: any ;
-  ticketsQ : any ;
-  regular:any =0 ;
-  gold:any =0;
-  vip:any =0;
-  sum:any = 0 ;
-  totalQuantity:any=0;
-  cartSum:any = 0;
-  eventPrice:any = 0;
-  cartPrice:any = 0;
-  constructor( private evtsrv: EventService, private evdsrv : EventDetailsService ){
+export class CartComponent implements OnInit {
+  cartInfo: any;
+  ticketsQ: any;
+  regular: any = 0;
+  gold: any = 0;
+  vip: any = 0;
+  sum: any = 0;
+  totalQuantity: any = 0;
+  cartSum: any = 0;
+  eventPrice: any = 0;
+  cartPrice: any = 0;
+
+  paypal: any;
+  reserveData: any = [];
+
+  constructor(
+    private evtsrv: EventService,
+    private evdsrv: EventDetailsService,
+    private paymentServeice: PaymentService
+  ) {
+    this.initPaypal();
   }
   ngOnInit(): void {
-   
-    this.cartInfo=this.evdsrv.reservationDetails
+    this.cartInfo = this.evdsrv.reservationDetails;
     this.totalQuantity = this.cartInfo.length;
-    this.eventPrice =this.totalEventPrice();
-    
+    this.eventPrice = this.totalEventPrice();
+
     // console.log(this.cartPrice);
-    console.log("mariam",this.totalEventPrice());
+    console.log('mariam', this.totalEventPrice());
   }
-  totalEventPrice(){
-    this.sum=0;
-    this.cartInfo.forEach((event:any) => {
-      event.tickets.forEach((ticket:any) => {
-        this.sum+=ticket.price;
-     });
-     console.log("sum gowa for each el kbeera",this.sum);
-    }
-    )
-    return this.sum
+  totalEventPrice() {
+    this.sum = 0;
+    this.cartInfo.forEach((event: any) => {
+      event.tickets.forEach((ticket: any) => {
+        this.sum += ticket.price;
+      });
+      console.log('sum gowa for each el kbeera', this.sum);
+    });
+    return this.sum;
   }
-  
-  minus(index:any,type:any) {
-   
-      // this.ticketsQ--;
-      this.cartInfo[index].tickets.forEach((ticket:any) => {
-        console.log(ticket.type);
-        if(ticket.type == type){
-          
-          ticket.quantity--;
-          ticket.price=ticket.price - ticket.SingleTicketPrice;
-          this.eventPrice =this.totalEventPrice();
-          
-        }
-      })
-  }
-  add(index:any,type:any) {
-    // this.ticketsQ++;
-    this.cartInfo[index].tickets.forEach((ticket:any) => {
+
+  minus(index: any, type: any) {
+    // this.ticketsQ--;
+    this.cartInfo[index].tickets.forEach((ticket: any) => {
       console.log(ticket.type);
-      if(ticket.type == type){
-        
-        ticket.quantity++;
-        ticket.price=ticket.price + ticket.SingleTicketPrice;
-        this.eventPrice =this.totalEventPrice();
-        
+      if (ticket.type == type) {
+        ticket.quantity--;
+        ticket.price = ticket.price - ticket.SingleTicketPrice;
+        this.eventPrice = this.totalEventPrice();
       }
-    })
+    });
+  }
+  add(index: any, type: any) {
+    // this.ticketsQ++;
+    this.cartInfo[index].tickets.forEach((ticket: any) => {
+      console.log(ticket.type);
+      if (ticket.type == type) {
+        ticket.quantity++;
+        ticket.price = ticket.price + ticket.SingleTicketPrice;
+        this.eventPrice = this.totalEventPrice();
+      }
+    });
+  }
+  delete(evt: any) {
+    let cartItem = evt.target.closest('.cartItem');
+    cartItem.remove();
+    let cartItemId = cartItem.id;
+    console.log(cartItemId);
+
+    console.log(this.cartInfo.events);
+
+    let updatedcart = this.cartInfo.events.filter(
+      (event: any) => event._id !== cartItemId
+    );
+    console.log('updated cart', updatedcart);
+
+    //  this.cartsrv.updateCart(this.cartInfo._id, { events: updatedcart }).subscribe({
+    //   next: (updatedCart: any) => {
+    //       console.log('Cart updated successfully:', updatedCart);
+    //       // You can update your local cartInfo here if needed
+    //       this.cartInfo = updatedCart;
+    //   },
+    //   error: (error) => {
+    //       console.error('Error updating cart:', error);
+    //   }
+    // });
+
+    //  this.cartsrv.updateCart(this.cartInfo._id,{events:updatedcart});
+
+    //  this.cartsrv.getCartInfo().subscribe({
+    //   next: (cart: any) => {
+    //     console.log(cart);
+    //   },
+    //   error: (error) => {
+    //     console.error('Error fetching cart information:', error);
+    //   }
+    // });
+  }
+
+  // payment
+  async initPaypal() {
+    try {
+      this.paypal = await loadScript({
+        clientId:
+          'AQvAp1GxU6ySWe3jyMpiRsKiw0tmFY52qPZkobaUnVtfJ-6X-8JPgVFZFZFrLBEWXGbb8cYvwRYcYRxD',
+        currency: 'USD',
+      });
+    } catch (error) {
+      console.error('failed to load the PayPal JS SDK script', error);
+    }
+
+    if (this.paypal) {
+      try {
+        await this.paypal
+          .Buttons({
+            style: {
+              layout: 'vertical',
+              color: 'blue',
+              shape: 'rect',
+              label: 'paypal',
+              height: 50,
+            },
+            onInit: (data: any) => {
+              console.log(this.cartInfo);
+            },
+            onApprove: (data: any) => {
+              // this.isSubmitted = true;
+              // this.isSuccess = true;
+
+              // this.cartInfo.forEach((ele: any) => {
+              //   const obj = {
+              //     eventID: ele.eventID,
+              //     tickets: ele.tickets,
+              //     dateTime: ele.dateTime,
+              //   };
+              //   console.log('cart objectttt', obj);
+              // });
+
+              this.cartInfo.forEach((ele: any) => {
+                const ticketsArr: any = [];
+                ele.tickets.forEach((ticket: any) => {
+                  const objTicket = {
+                    type: ticket.type,
+                    quantity: ticket.quantity,
+                  };
+                  ticketsArr.push(objTicket);
+                });
+
+                const reservation = {
+                  eventId: ele.eventID,
+                  tickets: ticketsArr,
+                  dateTime: ele.dateTime,
+                };
+                this.reserveData.push(reservation);
+                // console.log('cart objectttt', reservation);
+                console.log('cart res array', this.reserveData);
+              });
+
+              this.paymentServeice.pay(this.reserveData).subscribe({
+                next: (res: any) => {
+                  console.log(res);
+
+                  Swal.fire({
+                    title: `<strong></strong>`,
+                    icon: 'success',
+                    html: `
+                          Your ticket is reserved successfully
+                          <video class="mt-3 rounded border broder-2" style="max-height: 300px" src="../../../assets/imgs/payment_success_video.mp4" autoplay></video>
+                        `,
+                    showCloseButton: true,
+                    // showCancelButton: true,
+                    focusConfirm: false,
+                    confirmButtonText: `
+                           OK
+                        `,
+                    confirmButtonColor: '#5c127e',
+                  });
+                },
+                error: (err: any) => {
+                  console.log(err);
+                },
+              });
+            },
+            onError: (err: any) => {
+              // this.isFail = true;
+            },
+            currency: 'USD',
+            value: this.eventPrice,
+          })
+          .render('#myPaypalButtons');
+      } catch (error) {
+        console.error('failed to render the PayPal Buttons', error);
+      }
+    }
+  }
 }
-delete(evt:any){
- let cartItem = evt.target.closest(".cartItem");
-  cartItem.remove();
-  let cartItemId  = cartItem.id;
-  console.log(cartItemId);
 
- console.log(this.cartInfo.events);
-
- let updatedcart = this.cartInfo.events.filter((event:any) => event._id!==cartItemId)
- console.log("updated cart", updatedcart);
-
-
-//  this.cartsrv.updateCart(this.cartInfo._id, { events: updatedcart }).subscribe({
-//   next: (updatedCart: any) => {
-//       console.log('Cart updated successfully:', updatedCart);
-//       // You can update your local cartInfo here if needed
-//       this.cartInfo = updatedCart;
-//   },
-//   error: (error) => {
-//       console.error('Error updating cart:', error);
-//   }
-// });
-
-
-
-
-//  this.cartsrv.updateCart(this.cartInfo._id,{events:updatedcart});
-
-
-//  this.cartsrv.getCartInfo().subscribe({
-//   next: (cart: any) => {
-//     console.log(cart);
-//   },
-//   error: (error) => {
-//     console.error('Error fetching cart information:', error);
-//   }
-// });
-
-}
-}
+[
+  {
+    eventID: '65d9b922fc352601512835f0',
+    title: 'Amr Diab 22',
+    location: 'cairo',
+    tickets: [
+      {
+        type: 'regular',
+        quantity: 4,
+        SingleTicketPrice: 105,
+        price: 420,
+      },
+      {
+        type: 'gold',
+        quantity: 4,
+        SingleTicketPrice: 1000,
+        price: 4000,
+      },
+    ],
+    dateTime: {
+      day: '2024-02-23',
+      start: '8',
+      end: '0',
+    },
+  },
+];
