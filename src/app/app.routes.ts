@@ -14,22 +14,36 @@ import { GoogleAPIComponent } from './components/google-api/google-api.component
 import { AboutComponentComponent } from './components/about-component/about-component.component';
 import { CartComponent } from './components/cart/cart.component';
 export const routes: Routes = [
-
-  {path:'',redirectTo:'home',pathMatch:'full'},
-  {path:'login',component:LoginComponent,children:[
-    { path: '', component: GoogleAPIComponent},
-  ]},
-  { path: 'events',component: SearchComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  {
+    path: 'login',
+    component: LoginComponent,
+    children: [{ path: '', component: GoogleAPIComponent }],
+  },
+  { path: 'events', component: SearchComponent },
   { path: 'checkout/payment', component: PaymentComponent },
   { path: 'details/:id', component: EventDetailsComponent },
   // { path: 'details',component: EventDetailsComponent },
-  { path: 'home' ,component: HomeComponent },
-  { path: 'adminHome' ,canActivate:[adminProtectGuard],component: AdminHomeComponent },
-  { path: 'reservations' ,canActivate:[adminProtectGuard],component: AllReservationsComponent },
-  { path:'register', component: RegisterComponent },
-  {path:"addEvent",canActivate:[adminProtectGuard],component:CreateEventComponent},
-  {path:"about",component:AboutComponentComponent},
-  {path:"cart",component:CartComponent},
-  // ,canActivate:[adminProtectGuard]
+  { path: 'home', component: HomeComponent },
+  {
+    path: 'adminHome',
+    canActivate: [adminProtectGuard],
+    component: AdminHomeComponent,
+  },
+  {
+    path: 'reservations',
+    canActivate: [adminProtectGuard],
+    component: AllReservationsComponent,
+  },
+  { path: 'register', component: RegisterComponent },
+  {
+    path: 'addEvent',
+    canActivate: [adminProtectGuard],
+    component: CreateEventComponent,
+  },
 
+  { path: 'about', component: AboutComponentComponent },
+
+  { path: 'cart', component: CartComponent },
+  // ,canActivate:[adminProtectGuard]
 ];

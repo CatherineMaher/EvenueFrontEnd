@@ -37,27 +37,25 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.loggedIn = !!UserService.getUser();
     this.userSub = UserService.user.subscribe((user) => {
       // console.log('User subscription triggered:', user);
-      console.log('sub scr btionnnnnnn!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
 
-    this.loggedIn = !!user;
-    this.showPhoto();
-    if (localStorage.getItem('userId') != null) {
-      this._UserService.getOneUser(localStorage.getItem('userId')).subscribe({
-        next: (res) => {
-          if (res.message == 'success') {
-            console.log("user log in",res.data);
-            this.imageName = res.data.image;
-            this.userName = res.data.name;
-            this.showPhoto();
-          }
-        },
-      });
-    }
-    else if (localStorage.getItem('userName') != null){
-      this.userName = localStorage.getItem('userName');
-      this.hasaphoto = false;
-      
-    }
+      this.loggedIn = !!user;
+      this.showPhoto();
+      if (localStorage.getItem('userId') != null) {
+        this._UserService.getOneUser(localStorage.getItem('userId')).subscribe({
+          next: (res) => {
+            if (res.message == 'success') {
+              console.log('user log in', res.data);
+              this.imageName = res.data.image;
+              this.userName = res.data.name;
+              this.showPhoto();
+            }
+          },
+        });
+      }
+      // else if (localStorage.getItem('userName') != null) {
+      //   this.userName = localStorage.getItem('userName');
+      //   this.hasaphoto = false;
+      // }
     });
 
     this._Router.events.subscribe((event) => {
