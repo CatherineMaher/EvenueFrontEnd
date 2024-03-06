@@ -26,7 +26,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   hasaphoto: boolean = false;
   imageUrl?: string;
   imageName?: string;
-  userName?: string;
+  userName?: any;
   loggedIn: boolean = false;
   private userSub?: Subscription;
   ngOnInit(): void {
@@ -49,6 +49,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
           }
         },
       });
+    }
+    else if (localStorage.getItem('userName') != null){
+      this.userName = localStorage.getItem('userName');
+      this.hasaphoto = false;
+      
     }
     });
 

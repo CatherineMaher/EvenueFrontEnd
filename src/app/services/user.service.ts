@@ -34,6 +34,7 @@ sendUser(data:any):Observable<any>{
   .post<User>('http://localhost:7005/users/login', data)
   .pipe(tap(resData =>{
 const user=new User(resData.email,resData.id,resData.role,resData.token);
+console.log("usserrr fel sservice",user);
 localStorage.setItem('userRole', user.role);
 localStorage.setItem('userId', user.id);
 UserService.user.next(true);// emitted loggrd in

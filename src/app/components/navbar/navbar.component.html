@@ -36,17 +36,22 @@
           <!-- } -->
         </ul>
         <!-- w-lg-25 w-md-25 w-sm-100 -->
-        <i class="fa fa-shopping-cart text-white px-4" aria-hidden="true"  (click)="openCart()"></i>
+        
         <!-- <button id="cart" class="btn-color rounded"></button> -->
+        @if (userName){
+          <div class="me-2 text-white text-center" >Welcome
+            {{userName}}</div>
+        }
         @if(hasaphoto){
 
-            <div class="me-2 text-white text-center" >Welcome
-            {{userName}}</div>
+            <!-- <div class="me-2 text-white text-center" >Welcome
+            {{userName}}</div> -->
           <a  class="nav-link active" aria-current="page" routerLink="/profile">
             <img  [src]="imageUrl" class="profileImage rounded-circle ">
           </a>
         }
         @if (loggedIn) {
+          <i class="fa fa-shopping-cart text-white px-4" aria-hidden="true"  (click)="openCart()"></i>
           <div class="ms-lg-auto m-auto text-center w-25 d-flex justify-content-center">
             <button id="btn1" class="btn btn-color text-light fs-5 border-2 border-white rounded-pill px-4 py-2 " (click)="logOut()">
               Log Out

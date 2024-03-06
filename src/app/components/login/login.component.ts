@@ -33,12 +33,7 @@ imgpath="";
 imgsrc="";
 //  constructor( private usrsrv: UserService,private router: Router){}
   ngOnInit(): void {
-    this.usrsrv.getuser().subscribe({
-      next:(res:any)=>{this.imgpath = res.data.image
-      console.log("imgpath",this.imgpath);
-      }
-    })
-
+    
     google.accounts.id.initialize({
       client_id:
         '652762239068-v1m8fl5b3cl4uckkns2lcmvtojtlt56e.apps.googleusercontent.com',
@@ -62,9 +57,10 @@ imgsrc="";
       //decode the token
       const payLoad = this.decodeToken(response.credential);
       //store in session
-      localStorage.setItem('loggedInUser', JSON.stringify(payLoad));
+      console.log("paylloooooddd",payLoad);
+      localStorage.setItem('userName', payLoad.name);
       //navigate to home/browse
-      // this.usrsrv.setState(payLoad);
+      UserService.user.next(true);
       this.zone.run(() => {
         this.router.navigate(['/home']);
       });
