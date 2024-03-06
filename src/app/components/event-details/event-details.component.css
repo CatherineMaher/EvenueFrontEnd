@@ -1,5 +1,18 @@
+.event-details {
+  /* background-image: linear-gradient(
+    to right bottom,
+    #965eca,
+    #804caa,
+    #6a3b8c,
+    #552b6f,
+    #401c54
+  ); */
+  background-color: #eee;
+  font-size: 50px !important;
+}
+
 .img-container {
-  height: 400px;
+  height: 490px;
 }
 .img-container img {
   height: 100%;

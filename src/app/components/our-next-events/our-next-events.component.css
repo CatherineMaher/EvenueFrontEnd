@@ -104,3 +104,11 @@
   border-color: #9a28d7;
   color: #9a28d7;
 }
+
+.btnhover:hover {
+  background-image: linear-gradient(
+    to right,
+    var(--purple-gred),
+    var(--main-color)
+  );
+}

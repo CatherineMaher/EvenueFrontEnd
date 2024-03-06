@@ -52,6 +52,7 @@ imgsrc="";
     return JSON.parse(atob(token.split('.')[1]));
   }
 
+ 
   handleLogin(response: any) {
     if (response) {
       //decode the token
