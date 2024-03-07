@@ -27,6 +27,7 @@ export class RegisterComponent {
   success = false;
   failure = false;
   image: any;
+  imagePath: string | null = 'assets/imgs/profile_picture.png'; // Variable to store the image path
   constructor(private usrsrv: UserService, private router: Router) {}
   emailErrorMessage: string = '';
   registerForm: FormGroup = new FormGroup({
@@ -45,7 +46,14 @@ export class RegisterComponent {
   });
 
   onImageFileSelected(event: any) {
-    this.image = event.target.files[0];
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.imagePath = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
   }
   Register(submitData: any) {
     const formData = new FormData();

@@ -1,5 +1,5 @@
 import { UserService } from './../../services/user.service';
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import {
   ActivatedRoute,
   NavigationStart,
@@ -10,16 +10,17 @@ import {
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { LoginComponent } from '../login/login.component';
+import { RegisterComponent } from '../register/register.component';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule, CommonModule, LoginComponent],
+  imports: [RouterModule, CommonModule, LoginComponent,RegisterComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   constructor(private _UserService: UserService, private _Router: Router) {}
-  isSignClicked: boolean = false;
+  // isSignClicked: boolean = false;
 
   ngOnDestroy(): void {
     this.userSub?.unsubscribe();
@@ -31,7 +32,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
   imageName?: string;
   userName?: any;
   loggedIn: boolean = false;
+  
   private userSub?: Subscription;
+  @ViewChild('exampleModal') modal: ElementRef |undefined;
+
   ngOnInit(): void {
     console.log('Navbar component initialized');
     this.loggedIn = !!UserService.getUser();
@@ -94,7 +98,4 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this._Router.navigate(['/cart']);
   }
 
-  signIn(){
-    this.isSignClicked = !this.isSignClicked;
-  }
 }

@@ -9,6 +9,7 @@ import {jwtDecode} from 'jwt-decode';
 import { GoogleAPIComponent } from '../google-api/google-api.component';
 import Swal from 'sweetalert2';
 import { NgZone, inject } from '@angular/core';
+import { RegisterComponent } from '../register/register.component';
 
 const authToken = localStorage.getItem('authToken');
 const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
@@ -19,9 +20,12 @@ declare var google:any;
     providers: [UserService],
     templateUrl: './login.component.html',
     styleUrl: './login.component.css',
-    imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterModule, GoogleAPIComponent]
+    imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterModule, GoogleAPIComponent, RegisterComponent]
 })
 export class LoginComponent implements OnInit {
+
+
+  
 success = false;
 failure = false;
  constructor( private usrsrv: UserService,private router: Router,private cdr: ChangeDetectorRef,
@@ -45,6 +49,7 @@ imgsrc="";
       size: 'large',
       shape: 'rectangle',
       width: 200,
+      
     });
 
   }
@@ -64,8 +69,11 @@ imgsrc="";
       this.zone.run(() => {
         this.router.navigate(['/home']);
       });
+     
     }
+
   }
+
 
   
 
