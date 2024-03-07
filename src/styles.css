@@ -20,6 +20,7 @@
 body {
   font-family: font;
   /* background-color: #212529; */
+  scroll-behavior: auto;
 }
 .bg-purple-ligth {
   background-color: var(--dark-purple);

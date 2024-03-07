@@ -37,7 +37,7 @@ imgpath="";
 imgsrc="";
 //  constructor( private usrsrv: UserService,private router: Router){}
   ngOnInit(): void {
-    
+
     google.accounts.id.initialize({
       client_id:
         '652762239068-v1m8fl5b3cl4uckkns2lcmvtojtlt56e.apps.googleusercontent.com',
@@ -57,12 +57,12 @@ imgsrc="";
     return JSON.parse(atob(token.split('.')[1]));
   }
 
+ 
   handleLogin(response: any) {
     if (response) {
       //decode the token
       const payLoad = this.decodeToken(response.credential);
       //store in session
-      console.log("paylloooooddd",payLoad);
       localStorage.setItem('userName', payLoad.name);
       //navigate to home/browse
       UserService.user.next(true);
@@ -75,7 +75,7 @@ imgsrc="";
   }
 
 
-  
+
 
  emailErrorMessage:string='';
    loginForm: FormGroup = new FormGroup({
@@ -128,7 +128,7 @@ imgsrc="";
              OK
           `,
           confirmButtonColor: '#5c127e',
-         
+
         });
       }
     }

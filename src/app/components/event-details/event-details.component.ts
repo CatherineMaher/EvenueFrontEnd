@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { EventDetailsService } from '../../services/event-details.service';
 import { MyEvent } from '../../interfaces/my-event';
 import { ActivatedRoute } from '@angular/router';
@@ -14,6 +14,7 @@ import { Ticket } from '../../interface/event';
   styleUrl: './event-details.component.css',
 })
 export class EventDetailsComponent implements OnInit {
+  @ViewChild('container') containerRef?: ElementRef;
   myEvent: any;
   selectedDate: any;
   ticketsInfo: any;
@@ -92,6 +93,7 @@ export class EventDetailsComponent implements OnInit {
         console.log(err);
       },
     });
+    this.resetScroll();
   }
 
   addRegular() {
@@ -134,7 +136,7 @@ export class EventDetailsComponent implements OnInit {
       tickets.push({
         type: 'regular',
         quantity: this.ReservedRegularTickets,
-        SingleTicketPrice:this.regularPrice,
+        SingleTicketPrice: this.regularPrice,
         price: this.regularPrice * this.ReservedRegularTickets,
       });
     }
@@ -142,7 +144,7 @@ export class EventDetailsComponent implements OnInit {
       tickets.push({
         type: 'gold',
         quantity: this.ReservedGoldTickets,
-        SingleTicketPrice:this.goldPrice,
+        SingleTicketPrice: this.goldPrice,
         price: this.goldPrice * this.ReservedGoldTickets,
       });
     }
@@ -150,7 +152,7 @@ export class EventDetailsComponent implements OnInit {
       tickets.push({
         type: 'vip',
         quantity: this.ReservedVipTickets,
-        SingleTicketPrice:this.VipPrice,
+        SingleTicketPrice: this.VipPrice,
         price: this.VipPrice * this.ReservedVipTickets,
       });
     }
@@ -167,5 +169,9 @@ export class EventDetailsComponent implements OnInit {
     };
     this.detailsService.reservationDetails.push(reservation);
     console.log(this.detailsService.getReservationDetails());
+  }
+
+  resetScroll() {
+    window.scrollTo(0, 0);
   }
 }
