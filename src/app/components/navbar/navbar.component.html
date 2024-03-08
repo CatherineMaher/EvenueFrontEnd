@@ -1,4 +1,4 @@
-<main class="navbarColor position-relative ">
+<main class="navbarColor position-relative">
   <!-- <svg [ngClass]="{'d-none':isHomeRoute,'d-block position-absolute index top-0 start-0 end-0 ': !isHomeRoute}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1311 320"><path fill="#7c3488" fill-opacity="1" d="M0,192L30,192C60,192,120,192,180,181.3C240,171,300,149,360,128C420,107,480,85,540,101.3C600,117,660,171,720,186.7C780,203,840,181,900,165.3C960,149,1020,139,1080,128C1140,117,1200,107,1260,122.7C1320,139,1380,181,1410,202.7L1440,224L1440,0L1410,0C1380,0,1320,0,1260,0C1200,0,1140,0,1080,0C1020,0,960,0,900,0C840,0,780,0,720,0C660,0,600,0,540,0C480,0,420,0,360,0C300,0,240,0,180,0C120,0,60,0,30,0L0,0Z"></path></svg> -->
   <nav class="navbar navbar-expand-lg py-3">
     <div class="container">
@@ -15,7 +15,8 @@
       </button>
       <div class="collapse justify-content-center navbar-collapse" id="navbarSupportedContent">
         <!-- ms-md-auto w-sm-100 w-50 w-md-100 -->
-        <ul class="navbar-nav text-center fw-bold justify-content-center w-100 w-lg-50 align-items-center navbar-links">
+        <ul
+          class="navbar-nav text-center fw-bold justify-content-center w-100 w-lg-50 align-items-center navbar-links gap-2">
           <!-- @if (!loggedIn) {
   <li class="nav-item">
     <a class="nav-link" routerLink="login" routerLinkActive="active">Login</a>
@@ -48,7 +49,7 @@
 
         <!-- <div class="me-2 text-white text-center" >Welcome
             {{userName}}</div> -->
-        <a class="nav-link active rounded-circle" aria-current="page">
+        <a class="nav-link text-center my-4 my-lg-0 rounded-circle" aria-current="page">
           <img [src]="imageUrl" class="profileImage rounded-circle" />
         </a>
         } @if (loggedIn) {
@@ -56,7 +57,7 @@
           <i class="fa fa-shopping-cart px-4" aria-hidden="true" (click)="openCart()"></i>
         </li>
         <div class="ms-lg-auto m-auto text-center w-25 d-flex justify-content-center">
-          <button id="btn1" class="fs-5 border-2 border-white rounded-pill px-4 py-2 login-logout-btn"
+          <button id="btn1" class=" fs-5 border-0 border-white rounded-pill px-4 py-2 login-logout-btn"
             (click)="logOut()">
             Log Out
           </button>
@@ -110,9 +111,7 @@
             aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
-
                 <div class="modal-body">
-
                   <div class="close-btn text-end px-2 pt-2">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
@@ -133,18 +132,12 @@
             </div>
           </div>
         </div> -->
-
         </div>
         }
       </div>
     </div>
   </nav>
-
-
-
-
 </main>
-
 
 <!-- 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
