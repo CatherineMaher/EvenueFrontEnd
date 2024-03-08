@@ -1,24 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { EventDetailsService } from '../../services/event-details.service';
 import { MyEvent } from '../../interfaces/my-event';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Ticket } from '../../interface/event';
+import { EventService } from '../../services/event.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-event-details',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,ReactiveFormsModule],
   templateUrl: './event-details.component.html',
   styleUrl: './event-details.component.css',
 })
 export class EventDetailsComponent implements OnInit {
+  @ViewChild('container') containerRef?: ElementRef;
   myEvent: any;
   selectedDate: any;
   ticketsInfo: any;
 
   title: string = '';
+  imageName: string = '';
+  imageUrl: string = '';
+  hasaphoto: boolean = false;
   description: string = '';
   location: string = '';
   dates: any;
@@ -43,9 +49,22 @@ export class EventDetailsComponent implements OnInit {
   VipPrice: number = 0;
 
   ID = '0';
+  email?:string=''
+  feedback?:string=''
+  FeedBackForm: FormGroup = new FormGroup({
+    feedback: new FormControl(null),
+    email: new FormControl(null, [
+      Validators.required,
+      Validators.pattern('[a-z0-9]+@[a-z]+.[a-z]{2,3}'),
+    ]),
+  });
+
   constructor(
     private detailsService: EventDetailsService,
-    private myActivate: ActivatedRoute
+    private myActivate: ActivatedRoute,
+    private EventModel: EventService
+    // private myActivate: ActivatedRoute,
+    
   ) {}
 
   ngOnInit(): void {
@@ -55,6 +74,8 @@ export class EventDetailsComponent implements OnInit {
         console.log(data.data);
         this.myEvent = data.data;
         this.title = this.myEvent.title;
+        // this.imageName = this.myEvent.image;
+        this.imageName = this.EventModel.getImageUrl(this.myEvent.image);
         this.description = this.myEvent.Description;
         this.location = this.myEvent.location;
         this.dates = this.myEvent.dates;
@@ -63,7 +84,7 @@ export class EventDetailsComponent implements OnInit {
         this.organizer = this.myEvent.organizer;
         this.instructions = this.myEvent.instructions;
         this.allTickets = this.myEvent.tickets;
-        // console.log(this.allTickets);
+        console.log(this.allTickets);
         for (let i = 0; i < this.allTickets.length; i++) {
           if (
             this.allTickets[i].type == 'regular' ||
@@ -92,6 +113,7 @@ export class EventDetailsComponent implements OnInit {
         console.log(err);
       },
     });
+    this.resetScroll();
   }
 
   addRegular() {
@@ -134,7 +156,7 @@ export class EventDetailsComponent implements OnInit {
       tickets.push({
         type: 'regular',
         quantity: this.ReservedRegularTickets,
-        SingleTicketPrice:this.regularPrice,
+        SingleTicketPrice: this.regularPrice,
         price: this.regularPrice * this.ReservedRegularTickets,
       });
     }
@@ -142,7 +164,7 @@ export class EventDetailsComponent implements OnInit {
       tickets.push({
         type: 'gold',
         quantity: this.ReservedGoldTickets,
-        SingleTicketPrice:this.goldPrice,
+        SingleTicketPrice: this.goldPrice,
         price: this.goldPrice * this.ReservedGoldTickets,
       });
     }
@@ -150,7 +172,7 @@ export class EventDetailsComponent implements OnInit {
       tickets.push({
         type: 'vip',
         quantity: this.ReservedVipTickets,
-        SingleTicketPrice:this.VipPrice,
+        SingleTicketPrice: this.VipPrice,
         price: this.VipPrice * this.ReservedVipTickets,
       });
     }
@@ -167,5 +189,14 @@ export class EventDetailsComponent implements OnInit {
     };
     this.detailsService.reservationDetails.push(reservation);
     console.log(this.detailsService.getReservationDetails());
+  }
+
+  resetScroll() {
+    window.scrollTo(0, 0);
+  }
+
+  Feedback(FeedBackForm:any){
+
+  
   }
 }

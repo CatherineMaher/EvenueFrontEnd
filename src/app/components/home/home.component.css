@@ -12,3 +12,20 @@ pre {
 .landing {
   height: calc(100% - 115px);
 }
+
+.landing-title {
+  /* background-color: rgba(0, 0, 0, 0.1); */
+  padding: 20px;
+}
+
+.evenue-color {
+  color: #ffffff;
+}
+
+.fs-1 {
+  font-size: 2rem;
+}
+
+.fs-3 {
+  font-size: 1rem;
+}

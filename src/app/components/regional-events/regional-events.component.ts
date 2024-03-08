@@ -1,5 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { EventsPartnersComponent } from '../events-partners/events-partners.component';
+import { RouterModule } from '@angular/router';
 
 // import Swiper from 'swiper';
 
@@ -8,7 +9,7 @@ import { EventsPartnersComponent } from '../events-partners/events-partners.comp
 @Component({
   selector: 'app-regional-events',
   standalone: true,
-  imports: [EventsPartnersComponent],
+  imports: [EventsPartnersComponent, RouterModule],
   templateUrl: './regional-events.component.html',
   styles: ['./regional-events.component.css'],
 })

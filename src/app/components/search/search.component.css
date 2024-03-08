@@ -17,13 +17,61 @@
 .profile-card-6 img {
   transition: all 0.15s linear;
 }
+#search-button{
+  background-color: #3d096e;
+  color:white;
+}
+#search-input{
+  border: 1px solid #3d096e;
+  outline: none;
+  /* outline: 2px solid #3d096e; */
+ height:38px;
+ border-top-left-radius: 5px;
+ border-bottom-left-radius: 5px;
 
-/* .profile-price {
-  position: absolute;
-  top: 11px;
-  right: 15px;
-   color: ; 
-} */
+}
+.filter{
+  background-color: #3d096e;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  /* padding:5px; */
+  height: 38px;
+  /* width:100rem; */
+  /* padding: 5px 10px;
+  padding-right: 2px;
+  padding-left: 7px; */
+  
+
+}
+
+.filter i {
+  padding: 13px;
+}
+
+
+#exampleDataList{
+  width:100px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  outline: none;
+  padding: 2px;
+}
+#exampleDataList2{
+  width:100px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  outline: none;
+  padding: 2px;
+}
 
 .profile-card-6 .profile-name {
   position: absolute;
@@ -167,6 +215,15 @@ label:last-child {margin-right: 0;}
 
 
 
+@media (min-width: 992px) {
+  .search-wrapper {
+    width: 50% !important;
+  }
+
+  .filter-wrapper {
+width: 25% !important;
+  }
+}
 
 
 
@@ -189,4 +246,8 @@ input[id="dot-8"]:checked ~ .pacman {transform: translateX(calc(var(--ddim) + va
   background-size: cover;
   width: 100.8%;
   background-repeat: no-repeat;
+}
+
+.bg-gray{
+  background-color: gray;
 }
