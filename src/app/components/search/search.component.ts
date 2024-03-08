@@ -100,53 +100,40 @@ export class SearchComponent implements OnInit {
     this.events=[];
     this.counter = 7*(page-1);
     this.imageName='';
-    console.log("this.counter",this.counter);
-    
-    // this.events.forEach(event => {console.log("event.image in next/n",event.image);
-    // })
+
     for(i=this.counter;i<(7+this.counter)&&i<this.lengthOfData;i++){
-      
-      
-      console.log("i-this.counter",this.events[i-this.counter]);
+
       this.events[i-this.counter]=this.eventPage[i];
-      // console.log("this.events[i-this.counter]",this.events[i-this.counter]);
       
     }
-    this.counter=i;
-    // console.log("this.counter =iiiiii",this.counter);
+
     this.getData();
+    console.log("this.counter",this.counter);
+
+    this.counter=i;
   }
 
  getData(){
   this.events.forEach(event => {
-    // let counter = 0;
-    // event.image=''
-    // console.log(event.tickets?.[counter]?.totalTickets);
-    // console.log(counter);
+
     if(event.image){
       console.log("this.imageName",this.imageName);
       this.imageName='';
       console.log("this.imageName",this.imageName);
       this.imageName=event?.image;
+      this.imageName=this.imageName?.split("/")[`${this.imageName?.split("/").length-1}`];
+
       this.imageUrl=this.EventModel.getImageUrl(this.imageName);
       
       event.image=this.imageUrl;
-      // console.log("event.image",event.image);
-      // console.log("this.imageUrl",this.imageUrl);
-      // event.image='';
-      
+
     }
-    // console.log(this.imageName,"this.imageName");
     
     if (event.dates && event.dates.length > 0) {
       let mindate = event.dates[0].date;
 
       event.dates.forEach(dat => {
-        // Check if dat.date is defined
         if (dat.date) {
-          // console.log(dat.date);
-
-          // Check if dat.date is smaller than mindate
           if (mindate && dat.date < mindate) {
             mindate = dat.date;
           }
@@ -156,10 +143,10 @@ export class SearchComponent implements OnInit {
       this.min.push(mindate);
 
     }
-    // event.image=''
-  });
- }
 
+  });
+
+ }
 
  showPhoto(){
   console.log("in show photo",this.imageName);
