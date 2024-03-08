@@ -51,4 +51,8 @@ export class FeaturedEventsComponent implements OnInit {
       },
     })
   }
+  Viewmore(id: string) {
+    // console.log("viewmore", id);
+    this.router.navigate([`/details/${id}`]);
+  }
 }

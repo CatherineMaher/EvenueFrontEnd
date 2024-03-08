@@ -19,6 +19,8 @@ export class UserService {
   }
   /////////////////////////////////////
   addUser(data: any) {
+    console.log("addUser");
+    
     return this.http.post(this.url + '/add', data);
   }
 
@@ -62,9 +64,11 @@ export class UserService {
   getImageUrl(filename: any): string {
     return `http://localhost:7005/uploads/${filename}`;
   }
+
   getOneUser(id: any): Observable<any> {
     return this.http.get(`http://localhost:7005/users/${id}`);
   }
+  
   logOut(): void {
     localStorage.clear();
     UserService.user.next(false);

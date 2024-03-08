@@ -10,7 +10,7 @@
 
             <div class="event-content-wrap positioning-event-8 mb-4">
               <figure>
-                <a href="#"><img [src]="event.image" alt="1" /></a>
+                <a (click)="Viewmore(event?._id ?? '')"><img [src]="event.image" alt="1" /></a>
               </figure>
               <header class="entry-header">
                 <h3 class="entry-title">{{ event.title }}</h3>
@@ -20,7 +20,7 @@
             }@else if(i+1==5){
             <div class="event-content-wrap positioning-event-9 mb-4">
               <figure>
-                <a href="#"><img [src]="event.image" alt="1" /></a>
+                <a (click)="Viewmore(event?._id ?? '')"><img [src]="event.image" alt="1" /></a>
               </figure>
               <header class="entry-header">
                 <h3 class="entry-title">{{ event.title }}</h3>
@@ -31,7 +31,7 @@
 
             <div class="event-content-wrap positioning-event-{{ i + 1 }} mb-4">
               <figure>
-                <a href="#"><img [src]="event.image" alt="1" /></a>
+                <a (click)="Viewmore(event?._id ?? '')"><img [src]="event.image" alt="1" /></a>
               </figure>
               <header class="entry-header">
                 <h3 class="entry-title">{{ event.title }}</h3>
@@ -41,24 +41,7 @@
 
             }
           </div>
-          <!-- <div class="event-content-wrap positioning-event-2">
-                        <figure>
-                            <a href="#"><img src="assets/imgs/2.jpg" alt=""></a>
-                        </figure>
-                        <header class="entry-header">
-                            <h3 class="entry-title">Street art fest</h3>
-                            <div class="posted-date">November 28</div>
-                        </header>
-                    </div>
-                    <div class="event-content-wrap positioning-event-3">
-                        <figure>
-                            <a href="#"><img src="assets/imgs/3.jpg" alt=""></a>
-                        </figure>
-                        <header class="entry-header">
-                            <h3 class="entry-title">Anabelle in concert</h3>
-                            <div class="posted-date">August 28</div>
-                        </header>
-                    </div> -->
+
           <div class="event-content-wrap positioning-event-4 half">
             <figure>
               <a href="#"
@@ -87,24 +70,7 @@
               <div class="posted-date">August 28</div>
             </header>
           </div>
-          <!-- <div class="event-content-wrap positioning-event-8">
-                        <figure>
-                            <a href="#"><img src="assets/imgs/modern.jpg" alt="1"></a>
-                        </figure>
-                        <header class="entry-header">
-                            <h3 class="entry-title">Modern Ballet</h3>
-                            <div class="posted-date">August 25</div>
-                        </header>
-                    </div>
-                    <div class="event-content-wrap positioning-event-9">
-                        <figure>
-                            <a href="#"><img src="assets/imgs/smoke.jpg" alt=""></a>
-                        </figure>
-                        <header class="entry-header">
-                            <h3 class="entry-title">Smoke show</h3>
-                            <div class="posted-date">August 28</div>
-                        </header>
-                    </div> -->
+
           <div class="event-content-wrap positioning-event-10 half">
             <figure>
               <a href="#"

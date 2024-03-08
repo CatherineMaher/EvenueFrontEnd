@@ -24,6 +24,7 @@ export class EventService {
     return this._HttpClient.put(`http://localhost:7005/events/${id}`, data);
   }
   getImageUrl(filename: any):string {
+
     return `http://localhost:7005/uploads/${filename}`;
   }
 }
