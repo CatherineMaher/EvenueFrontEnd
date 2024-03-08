@@ -50,6 +50,9 @@ export class RegisterComponent {
 
   onImageFileSelected(event: any) {
     this.imageFile = event.target.files[0];
+    this.image = event.target.files[0];
+    console.log('uuuuuuuuuuuuuuu', this.imageFile);
+    console.log('2222222222222222', this.image);
     if (this.imageFile) {
       const reader = new FileReader();
       reader.onload = (e: any) => {
@@ -83,6 +86,7 @@ export class RegisterComponent {
     formData.append('email', submitData.get('email').value);
     formData.append('password', submitData.get('password').value);
     formData.append('role', submitData.get('role').value);
+    console.log(formData.get('image'));
     this.usrsrv.addUser(formData).subscribe({
       next: (res: any) => {
         console.log(res);

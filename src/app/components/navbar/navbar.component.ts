@@ -1,5 +1,12 @@
 import { UserService } from './../../services/user.service';
-import { ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import {
   ActivatedRoute,
   NavigationStart,
@@ -14,7 +21,7 @@ import { RegisterComponent } from '../register/register.component';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterModule, CommonModule, LoginComponent,RegisterComponent],
+  imports: [RouterModule, CommonModule, LoginComponent, RegisterComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
@@ -32,9 +39,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
   imageName?: string;
   userName?: any;
   loggedIn: boolean = false;
-  
+
   private userSub?: Subscription;
-  @ViewChild('exampleModal') modal: ElementRef |undefined;
+  @ViewChild('exampleModal') modal: ElementRef | undefined;
 
   ngOnInit(): void {
     console.log('Navbar component initialized');
@@ -108,8 +115,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   //   // }
   // }
   showPhoto() {
-    console.log('in show photo', this.imageName);
     this.imageUrl = this._UserService.getImageUrl(this.imageName);
+    console.log('in show photo', this.imageUrl);
     this.hasaphoto = true;
 
     //  console.log(this.imageName);
@@ -118,5 +125,4 @@ export class NavbarComponent implements OnInit, OnDestroy {
   openCart() {
     this._Router.navigate(['/cart']);
   }
-
 }
