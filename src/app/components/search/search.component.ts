@@ -102,10 +102,12 @@ export class SearchComponent implements OnInit {
     this.imageName='';
     console.log("this.counter",this.counter);
     
-    this.events.forEach(event => {console.log("event.image in next/n",event.image);
-    })
+    // this.events.forEach(event => {console.log("event.image in next/n",event.image);
+    // })
     for(i=this.counter;i<(7+this.counter)&&i<this.lengthOfData;i++){
       
+      
+      console.log("i-this.counter",this.events[i-this.counter]);
       this.events[i-this.counter]=this.eventPage[i];
       // console.log("this.events[i-this.counter]",this.events[i-this.counter]);
       
@@ -117,11 +119,13 @@ export class SearchComponent implements OnInit {
 
  getData(){
   this.events.forEach(event => {
-    let counter = 0;
+    // let counter = 0;
     // event.image=''
     // console.log(event.tickets?.[counter]?.totalTickets);
     // console.log(counter);
     if(event.image){
+      console.log("this.imageName",this.imageName);
+      this.imageName='';
       console.log("this.imageName",this.imageName);
       this.imageName=event?.image;
       this.imageUrl=this.EventModel.getImageUrl(this.imageName);
