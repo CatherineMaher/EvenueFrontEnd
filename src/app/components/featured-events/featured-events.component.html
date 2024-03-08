@@ -10,7 +10,7 @@
 
             <div class="event-content-wrap positioning-event-8 mb-4">
               <figure>
-                <a href="#"><img [src]="event.image" alt="1" /></a>
+                <a (click)="Viewmore(event?._id ?? '')"><img [src]="event.image" alt="1" /></a>
               </figure>
               <header class="entry-header">
                 <h3 class="entry-title">{{ event.title }}</h3>
@@ -20,7 +20,7 @@
             }@else if(i+1==5){
             <div class="event-content-wrap positioning-event-9 mb-4">
               <figure>
-                <a href="#"><img [src]="event.image" alt="1" /></a>
+                <a (click)="Viewmore(event?._id ?? '')"><img [src]="event.image" alt="1" /></a>
               </figure>
               <header class="entry-header">
                 <h3 class="entry-title">{{ event.title }}</h3>
@@ -31,7 +31,7 @@
 
             <div class="event-content-wrap positioning-event-{{ i + 1 }} mb-4">
               <figure>
-                <a href="#"><img [src]="event.image" alt="1" /></a>
+                <a (click)="Viewmore(event?._id ?? '')"><img [src]="event.image" alt="1" /></a>
               </figure>
               <header class="entry-header">
                 <h3 class="entry-title">{{ event.title }}</h3>

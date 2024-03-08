@@ -3,14 +3,15 @@ import { EventDetailsService } from '../../services/event-details.service';
 import { MyEvent } from '../../interfaces/my-event';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Ticket } from '../../interface/event';
 import { EventService } from '../../services/event.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-event-details',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,ReactiveFormsModule],
   templateUrl: './event-details.component.html',
   styleUrl: './event-details.component.css',
 })
@@ -48,10 +49,22 @@ export class EventDetailsComponent implements OnInit {
   VipPrice: number = 0;
 
   ID = '0';
+  email?:string=''
+  feedback?:string=''
+  FeedBackForm: FormGroup = new FormGroup({
+    feedback: new FormControl(null),
+    email: new FormControl(null, [
+      Validators.required,
+      Validators.pattern('[a-z0-9]+@[a-z]+.[a-z]{2,3}'),
+    ]),
+  });
+
   constructor(
     private detailsService: EventDetailsService,
     private myActivate: ActivatedRoute,
     private EventModel: EventService
+    // private myActivate: ActivatedRoute,
+    
   ) {}
 
   ngOnInit(): void {
@@ -180,5 +193,10 @@ export class EventDetailsComponent implements OnInit {
 
   resetScroll() {
     window.scrollTo(0, 0);
+  }
+
+  Feedback(FeedBackForm:any){
+
+  
   }
 }

@@ -201,4 +201,21 @@
       </div>
     </div>
   </div>
+  <div class="row justify-content-center  mt-4">
+    <div class="col-12 d-flex justify-content-center flex-column align-items-center bg-gray">
+      <form [formGroup]="FeedBackForm" (ngSubmit)="Feedback(FeedBackForm)">
+        <label>Email</label>
+        <input type="text" formControlName="email" [value]="email" name="email">
+        <div *ngIf="FeedBackForm.get('email')&& FeedBackForm.get('email')?.touched">
+          <p *ngIf="FeedBackForm.get('email')?.getError('required')" class="text-danger">Email is Required</p>
+          <!-- <p *ngIf="registerForm.get('email')?.getError('pattern')" class="text-danger">Email should match the format email.com </p> -->
+          <p *ngIf="FeedBackForm.get('email')?.getError('pattern')" class="alert alert-danger">Enter vaild Email</p>
+      </div>
+        <label>You FeedBack</label>
+        <input formControlName="feedback" type="text" [value]="feedback" name="feedback">
+        <input type="submit">
+      </form>
+    </div>
+   </div>
+
 </div>
