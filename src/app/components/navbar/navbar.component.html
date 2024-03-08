@@ -25,15 +25,11 @@
         class="collapse justify-content-center navbar-collapse"
         id="navbarSupportedContent"
       >
-        <!-- ms-md-auto w-sm-100 w-50 w-md-100 -->
+
         <ul
           class="navbar-nav text-center fw-bold justify-content-center w-100 w-lg-50 align-items-center navbar-links"
         >
-          <!-- @if (!loggedIn) {
-  <li class="nav-item">
-    <a class="nav-link" routerLink="login" routerLinkActive="active">Login</a>
-  </li>
-} -->
+
           <!-- @if (loggedIn) { -->
           <li class="nav-item mb-3 mb-lg-0 rounded-5">
             <a
@@ -68,22 +64,23 @@
               >Contact Us</a
             >
           </li>
-
-          <!-- } -->
         </ul>
-        <!-- w-lg-25 w-md-25 w-sm-100 -->
 
-        <!-- <button id="cart" class="btn-color rounded"></button> -->
         @if (userName){
-        <div class="me-2 text-white text-center">Welcome {{ userName }}</div>
-        } @if(hasaphoto){
+        <div class="me-2 text-white text-center">Welcome {{ userName }}{{role}}  </div>
+        }
 
-        <!-- <div class="me-2 text-white text-center" >Welcome
-            {{userName}}</div> -->
-        <a class="nav-link active rounded-circle" aria-current="page">
-          <img [src]="imageUrl" class="profileImage rounded-circle" />
-        </a>
-        } @if (loggedIn) {
+     @if (loggedIn) {
+
+
+        @if(hasaphoto&&role=='user'){
+          <!-- <div class="me-2 text-white text-center" >Welcome
+              {{userName}}</div> -->
+          <a class="nav-link active rounded-circle" aria-current="page">
+            <img [src]="imageUrl" class="profileImage rounded-circle" />
+          </a>
+          }
+   
         <li
           class="nav-item mb-3 mb-lg-0 rounded-5 list-unstyled text-center cart"
         >

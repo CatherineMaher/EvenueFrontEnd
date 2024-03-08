@@ -31,7 +31,7 @@ export class CarouselComponent implements OnInit {
           this.Events = res.data;
           let lengthOfEvent = this.Events.length;
         // this.Events=  this.Events.slice(0,10);
-        this.Events=  this.Events.slice(10,lengthOfEvent);
+        this.Events=  this.Events.slice(0,lengthOfEvent);
           console.log(this.Events);
 
           this.Events.forEach(event => {
@@ -78,6 +78,7 @@ export class CarouselComponent implements OnInit {
     nav: true
   }
   navigateEventDetails(id:string){
+
     this._Router.navigate([`/details/${id}`])
   }
 }
