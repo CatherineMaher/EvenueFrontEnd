@@ -13,6 +13,8 @@ import { AllReservationsComponent } from './components/all-reservations/all-rese
 import { GoogleAPIComponent } from './components/google-api/google-api.component';
 import { AboutComponentComponent } from './components/about-component/about-component.component';
 import { CartComponent } from './components/cart/cart.component';
+import { AboutComponent } from './components/about/about.component';
+import { ContactUsComponent } from './components/contact-us/contact-us.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
@@ -42,8 +44,9 @@ export const routes: Routes = [
     component: CreateEventComponent,
   },
 
-  { path: 'about', component: AboutComponentComponent },
+  { path: 'about', component: AboutComponent },
 
   { path: 'cart', component: CartComponent },
+  { path: 'contact-us', component: ContactUsComponent },
   // ,canActivate:[adminProtectGuard]
 ];
