@@ -4,11 +4,12 @@ import { Router } from '@angular/router';
 import { Event } from '../../interface/event';
 import { CommonModule } from '@angular/common';
 import { count } from 'rxjs';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SearchPipe } from '../searchPipe/search.pipe';
 import { SearchByPricePipe } from '../searchPipe/searchByPrice/search-by-price.pipe';
 import { SearchLocationPipe } from '../searchPipe/searchByLocation/search-location.pipe';
 import { EventService } from '../../services/event.service';
+import { UserService } from '../../services/user.service';
 // import { UserService } from '../../services/user.service';
 @Component({
   selector: 'app-search',
@@ -29,11 +30,12 @@ export class SearchComponent implements OnInit {
   numberOfPageArray:number[]=[]
   counter :number=0;
   lengthOfData:number=0
-  imageUrl?: string;
+  imageUrl?: string='';
   hasaphoto?: boolean;
   imageName?:string;
+
    
-   constructor(private router: Router, private EventModel: EventService) {
+   constructor(private router: Router, private EventModel: EventService , private UserModel : UserService) {
      // imageForm :FormGroup = new FormGroup({image:new FormControl(null)})
     }
     
@@ -83,6 +85,8 @@ export class SearchComponent implements OnInit {
             }
             this.counter=i;
           this.getData();
+        
+          
         } else {
           console.log("Can't fetch API or data is undefined");
         }
@@ -91,33 +95,41 @@ export class SearchComponent implements OnInit {
   }
 
   nextpage(page:number){
+    
     let i;
     this.events=[];
     this.counter = 7*(page-1);
+    this.imageName='';
     console.log("this.counter",this.counter);
     
+    this.events.forEach(event => {console.log("event.image in next/n",event.image);
+    })
     for(i=this.counter;i<(7+this.counter)&&i<this.lengthOfData;i++){
+      
       this.events[i-this.counter]=this.eventPage[i];
       // console.log("this.events[i-this.counter]",this.events[i-this.counter]);
-      console.log("this.events",this.events);
+      
     }
     this.counter=i;
-    console.log("this.counter =iiiiii",this.counter);
+    // console.log("this.counter =iiiiii",this.counter);
     this.getData();
   }
 
  getData(){
   this.events.forEach(event => {
     let counter = 0;
+    // event.image=''
     // console.log(event.tickets?.[counter]?.totalTickets);
     // console.log(counter);
     if(event.image){
-
+      console.log("this.imageName",this.imageName);
       this.imageName=event?.image;
       this.imageUrl=this.EventModel.getImageUrl(this.imageName);
-
+      
       event.image=this.imageUrl;
-      console.log("event.image",event.image);
+      // console.log("event.image",event.image);
+      // console.log("this.imageUrl",this.imageUrl);
+      // event.image='';
       
     }
     // console.log(this.imageName,"this.imageName");
@@ -140,15 +152,18 @@ export class SearchComponent implements OnInit {
       this.min.push(mindate);
 
     }
+    // event.image=''
   });
  }
+
+
  showPhoto(){
   console.log("in show photo",this.imageName);
  this.imageUrl=this.EventModel.getImageUrl(this.imageName);
  this.hasaphoto=true;
-//  console.log(this.imageName);
-//  console.log("this image url",this.imageUrl);
 
 }
+
+
 
 }

@@ -18,7 +18,7 @@
       >
         <div class="next-event-wrap">
           <figure>
-            <a href="#"><img [src]="event?.image" alt="1" /></a>
+            <a (click)="Viewmore(event?._id ?? '')"><img [src]="event?.image" alt="1" /></a>
             <div class="event-rating fs-6">Exclusive</div>
           </figure>
           <header class="entry-header">

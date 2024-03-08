@@ -247,3 +247,7 @@ input[id="dot-8"]:checked ~ .pacman {transform: translateX(calc(var(--ddim) + va
   width: 100.8%;
   background-repeat: no-repeat;
 }
+
+.bg-gray{
+  background-color: gray;
+}
