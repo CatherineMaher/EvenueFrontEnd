@@ -1,19 +1,27 @@
-<div
-  #container
-  class="container"
-  class="container-lg w-100 p-4 p-lg-0 d-flex justify-content-center my-5"
->
-  <div
-    class="row event-details p-0 py-3 rounded-4 text-center text-lg-start shadow"
-  >
+<div class="event-details-page p-4">
+  <div class="row event-details p-0 py-3 rounded-4 text-center text-lg-start">
     <!-- left of the card -->
-    <div class="col-md-5 pt-5 p-0 p-lg-5 rounded-4 text-center">
-      <p class="fw-bold">{{ myEvent?.title }}</p>
-      <p class="mt-5">{{ firstDate }}</p>
-      <p class="mt-5 fs-2">{{ location }}</p>
+    <div class="col-md-5 p-0 p-lg-5 rounded-4 text-center">
+      <h1 class="display-1">{{ myEvent?.title }}</h1>
+      <div class="d-flex w-100 justify-content-center gap-5">
+        <i
+          class="fa-solid fa-calendar-days d-flex align-items-center text-center"
+        ></i>
+        <p class="mt-4 fitst-date d-flex align-items-center text-center">
+          {{ firstDate }}
+        </p>
+      </div>
+      <div class="d-flex w-100 justify-content-center gap-5">
+        <i
+          class="fa-solid fa-location-dot d-flex align-items-center text-center"
+        ></i>
+        <p class="mt-4 fitst-date d-flex align-items-center text-center">
+          {{ location }}
+        </p>
+      </div>
 
-      <div class="row text-center text-lg-start mt-4 text-center">
-        <div class="col-12 text-center">Organised by</div>
+      <div class="row text-center text-lg-start mt-2 text-center">
+        <div class="col-12 text-center ticket-text">Organised by</div>
         <div class="col-12 fs-2 text-center">
           {{ organizer }}
         </div>
@@ -21,25 +29,22 @@
     </div>
     <!-- card image -->
     <div class="col-md-7 p-0 img-container">
-      <img
-        src="assets/imgs/amr.jpg"
-        class="img-fluid rounded-5 w-100 p-3"
-        alt="..."
-      />
+      <img [src]="imageName" class="img-fluid rounded-3 w-100 p-3" alt="..." />
     </div>
 
     <!-- event details -->
     <div class="col-12 mt-2 px-2 px-lg-5 text-lg-start text-start">
-      <p class="text-lg-start text-center">About the event</p>
-      <p class="px-2 p-lg-0 fs-4 mb-5">
+      <p class="text-lg-start text-center ps-lg-5 fw-bold">About the event</p>
+      <p class="px-2 ps-lg-5 fs-3 mb-5 text-muted text-center text-lg-start">
         {{ description }}
       </p>
-      <p>
-        <span class="fw-bold px-2 p-lg-0 fs-5 me-3">Venue:</span> {{ location }}
+      <p class="ps-lg-5 text-lg-start text-center fw-bold">
+        Venue:<span class="px-2 p-lg-0 me-3 ps-lg-4 fs-3 text-muted">{{
+          location
+        }}</span>
       </p>
-      <p>
-        <span class="fw-bold px-2 p-lg-0 fs-5">Dates:</span>
-      </p>
+      <hr class="mt-5" />
+      <p class="mt-5 text-center fw-bold">Dates</p>
       <p>
         <!-- display dates and times -->
         <span
@@ -51,11 +56,11 @@
               <input
                 type="radio"
                 name="date"
-                class="form-check-input me-3"
+                class="form-check-input me-3 mt-0"
                 [(ngModel)]="selectedDate"
                 [value]="{ date: date.date, start: d.start, end: d.end }"
               />
-              <span class="radio-text">
+              <span class="radio-text fs-4 d-flex align-items-center">
                 {{ date.date }} | from: {{ d.start }} to {{ d.end }}
               </span>
             </label>
@@ -66,7 +71,7 @@
 
     <!-- facilities -->
     <div class="col-12 mt-4 px-2 px-lg-5 text-lg-start text-start">
-      <h3 class="fw-bold fs-4 text-lg-start text-center">Facilities</h3>
+      <p class="text-center mb-5 fw-bold">Facilities</p>
       <div class="d-flex justify-content-around my-4 fs-5">
         <ul
           class="d-flex justify-content-around w-100 flex-wrap text-center w-100"
@@ -75,7 +80,7 @@
             *ngFor="let f of facilities; &quot;text-center&quot;"
             class="ms-3"
           >
-            <li class="me-5 text-center">{{ f }}</li>
+            <li class="me-5 text-center fs-3">{{ f }}</li>
           </span>
         </ul>
       </div>
@@ -83,7 +88,7 @@
 
     <!-- instructions -->
     <div class="col-12 mt-0 px-2 px-lg-5 text-lg-start text-start">
-      <h3 class="fw-bold fs-4 text-lg-start text-center">Instructions</h3>
+      <p class="text-center my-5 fw-bold">Instructions</p>
       <div class="d-flex justify-content-around my-4 fs-5">
         <ul
           class="d-flex justify-content-around w-100 flex-wrap text-center w-100"
@@ -92,7 +97,7 @@
             *ngFor="let ins of instructions; &quot;text-center&quot;"
             class="ms-3"
           >
-            <li class="me-5 text-center">{{ ins }}</li>
+            <li class="me-5 text-center fs-3">{{ ins }}</li>
           </span>
         </ul>
       </div>
@@ -100,11 +105,11 @@
     <!-- buy tickets -->
     <div class="col-12 mt-0 px-2 px-lg-5 text-lg-start text-start">
       <div class="col-12 mt-4 px-2 px-lg-0 text-lg-start text-start">
-        <h3 class="fw-bold fs-4 text-center">Tickets</h3>
+        <p class="text-center">Tickets</p>
         <div class="row mt-3 text-center p-0">
           <!-- regular ticket -->
           <div class="col-md-4 mb-3 mb-lg-0">
-            <div class="card bg-info">
+            <div class="card">
               <div class="ticket-container">
                 <img src="assets/imgs/t2.png" class="card-img-top" alt="..." />
               </div>

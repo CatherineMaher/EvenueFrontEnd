@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Ticket } from '../../interface/event';
+import { EventService } from '../../services/event.service';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -21,6 +22,9 @@ export class EventDetailsComponent implements OnInit {
   ticketsInfo: any;
 
   title: string = '';
+  imageName: string = '';
+  imageUrl: string = '';
+  hasaphoto: boolean = false;
   description: string = '';
   location: string = '';
   dates: any;
@@ -58,6 +62,8 @@ export class EventDetailsComponent implements OnInit {
   constructor(
     private detailsService: EventDetailsService,
     private myActivate: ActivatedRoute,
+    private EventModel: EventService
+    // private myActivate: ActivatedRoute,
     
   ) {}
 
@@ -68,6 +74,8 @@ export class EventDetailsComponent implements OnInit {
         console.log(data.data);
         this.myEvent = data.data;
         this.title = this.myEvent.title;
+        // this.imageName = this.myEvent.image;
+        this.imageName = this.EventModel.getImageUrl(this.myEvent.image);
         this.description = this.myEvent.Description;
         this.location = this.myEvent.location;
         this.dates = this.myEvent.dates;

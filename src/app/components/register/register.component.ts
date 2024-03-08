@@ -27,7 +27,10 @@ export class RegisterComponent {
   success = false;
   failure = false;
   image: any;
-  imagePath: string | null = 'assets/imgs/profile_picture.png'; // Variable to store the image path
+  imageFile: any;
+  imagePath: string | null = 'assets/imgs/profile_picture.png';
+  isProfileImageSelected = false;
+
   constructor(private usrsrv: UserService, private router: Router) {}
   emailErrorMessage: string = '';
   registerForm: FormGroup = new FormGroup({
@@ -46,15 +49,36 @@ export class RegisterComponent {
   });
 
   onImageFileSelected(event: any) {
-    const file = event.target.files[0];
-    if (file) {
+    this.imageFile = event.target.files[0];
+    this.image = event.target.files[0];
+    console.log('uuuuuuuuuuuuuuu', this.imageFile);
+    console.log('2222222222222222', this.image);
+    if (this.imageFile) {
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.imagePath = e.target.result;
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(this.imageFile);
+      this.isProfileImageSelected = true;
     }
   }
+
+  removeProfileImageHandler(event: MouseEvent) {
+    const targetElement = event.target as HTMLElement;
+
+    if (targetElement) {
+      if (this.imageFile) {
+        targetElement.classList.add('show');
+      } else {
+        targetElement.classList.remove('show');
+      }
+    }
+
+    this.imagePath = 'assets/imgs/profile_picture.png';
+    this.imageFile = null;
+    this.isProfileImageSelected = false;
+  }
+
   Register(submitData: any) {
     const formData = new FormData();
     formData.append('image', this.image);
@@ -62,6 +86,7 @@ export class RegisterComponent {
     formData.append('email', submitData.get('email').value);
     formData.append('password', submitData.get('password').value);
     formData.append('role', submitData.get('role').value);
+    console.log(formData.get('image'));
     this.usrsrv.addUser(formData).subscribe({
       next: (res: any) => {
         console.log(res);
