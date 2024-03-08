@@ -33,9 +33,9 @@
           <p class=" event-subtitle fs-2 fw-bold ">Dates</p>
           <p class="d-flex w-100 justify-content-center justify-content-lg-start">
             <!-- display dates and times -->
-            <span *ngFor="let date of dates; let i = index" class="d-flex flex-wrap d-lg-block">
-              <span *ngFor="let d of date.times; let j = index" class="">
-                <label class="radio-label d-flex">
+            <span *ngFor="let date of dates; let i = index" class="d-flex flex-wrap d-lg-block ">
+              <span *ngFor="let d of date.times; let j = index" class="" style="min-width: 190px">
+                <label class="radio-label d-flex mb-3">
                   <div>
                     <input type="radio" name="date" class="form-check-input me-3" [(ngModel)]="selectedDate"
                       [value]="{ date: date.date, start: d.start, end: d.end }" />

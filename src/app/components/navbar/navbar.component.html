@@ -4,31 +4,19 @@
     <div class="container">
       <a class="navbar-brand position-relative mb-1" routerLink="home">
         <img src="assets/imgs/cloud.png" alt="logo" />
-        <h4
-          class="position-absolute top-50 start-50 pt-2 translate-middle text-white"
-        >
+        <h4 class="position-absolute top-50 start-50 pt-2 translate-middle text-white">
           Evenue
         </h4>
       </a>
-      <button
-        class="navbar-toggler toggle-btn"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+      <button class="navbar-toggler toggle-btn" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+        aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div
-        class="collapse justify-content-center navbar-collapse"
-        id="navbarSupportedContent"
-      >
+      <div class="collapse justify-content-center navbar-collapse" id="navbarSupportedContent">
         <!-- ms-md-auto w-sm-100 w-50 w-md-100 -->
         <ul
-          class="navbar-nav text-center fw-bold justify-content-center w-100 w-lg-50 align-items-center navbar-links"
-        >
+          class="navbar-nav text-center fw-bold justify-content-center w-100 w-lg-50 align-items-center navbar-links gap-2">
           <!-- @if (!loggedIn) {
   <li class="nav-item">
     <a class="nav-link" routerLink="login" routerLinkActive="active">Login</a>
@@ -36,37 +24,18 @@
 } -->
           <!-- @if (loggedIn) { -->
           <li class="nav-item mb-3 mb-lg-0 rounded-5">
-            <a
-              class="nav-link fs-5 text-light rounded-5"
-              aria-current="page"
-              routerLink="/home"
-              routerLinkActive="active"
-              >Home</a
-            >
+            <a class="nav-link fs-5 text-light rounded-5" aria-current="page" routerLink="/home"
+              routerLinkActive="active">Home</a>
           </li>
           <li class="nav-item mb-3 mb-lg-0 rounded-5">
-            <a
-              class="nav-link fs-5 text-light rounded-5"
-              routerLink="/events"
-              routerLinkActive="active"
-              >Events</a
-            >
+            <a class="nav-link fs-5 text-light rounded-5" routerLink="/events" routerLinkActive="active">Events</a>
           </li>
           <li class="nav-item mb-3 mb-lg-0 rounded-5">
-            <a
-              class="nav-link fs-5 text-light rounded-5"
-              routerLink="/about"
-              routerLinkActive="active"
-              >About</a
-            >
+            <a class="nav-link fs-5 text-light rounded-5" routerLink="/about" routerLinkActive="active">About</a>
           </li>
           <li class="nav-item mb-3 mb-lg-0 rounded-5">
-            <a
-              class="nav-link fs-5 text-light rounded-5"
-              routerLink="/contact-us"
-              routerLinkActive="active"
-              >Contact Us</a
-            >
+            <a class="nav-link fs-5 text-light rounded-5" routerLink="/contact-us" routerLinkActive="active">Contact
+              Us</a>
           </li>
 
           <!-- } -->
@@ -80,38 +49,22 @@
 
         <!-- <div class="me-2 text-white text-center" >Welcome
             {{userName}}</div> -->
-        <a
-          class="nav-link text-center my-4 my-lg-0 rounded-circle"
-          aria-current="page"
-        >
+        <a class="nav-link text-center my-4 my-lg-0 rounded-circle" aria-current="page">
           <img [src]="imageUrl" class="profileImage rounded-circle" />
         </a>
         } @if (loggedIn) {
-        <li
-          class="nav-item mb-3 mb-lg-0 rounded-5 list-unstyled text-center cart"
-        >
-          <i
-            class="fa fa-shopping-cart px-4"
-            aria-hidden="true"
-            (click)="openCart()"
-          ></i>
+        <li class="nav-item mb-3 mb-lg-0 rounded-5 list-unstyled text-center cart">
+          <i class="fa fa-shopping-cart px-4" aria-hidden="true" (click)="openCart()"></i>
         </li>
-        <div
-          class="ms-lg-auto m-auto text-center w-25 d-flex justify-content-center"
-        >
-          <button
-            id="btn1"
-            class="fs-5 border-2 border-white rounded-pill px-4 py-2 login-logout-btn"
-            (click)="logOut()"
-          >
+        <div class="ms-lg-auto m-auto text-center w-25 d-flex justify-content-center">
+          <button id="btn1" class=" fs-5 border-0 border-white rounded-pill px-4 py-2 login-logout-btn"
+            (click)="logOut()">
             Log Out
           </button>
         </div>
 
         } @else {
-        <div
-          class="ms-lg-auto m-auto text-center w-25 d-flex justify-content-center"
-        >
+        <div class="ms-lg-auto m-auto text-center w-25 d-flex justify-content-center">
           <!-- <button
           (click)="signIn()" 
             id="btn1"
@@ -121,23 +74,14 @@
             Sign In
           </button> -->
 
-          <button
-            id="btn1"
-            type="button"
+          <button id="btn1" type="button"
             class="btn btn-color text-light fs-5 border-2 border-white rounded-pill px-4 py-2 login-logout-btn"
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
-          >
+            data-bs-toggle="modal" data-bs-target="#exampleModal">
             Sign in
           </button>
 
-          <div
-            class="modal modal-login fade"
-            id="exampleModal"
-            tabindex="-1"
-            aria-labelledby="staticBackdropLabel"
-            aria-hidden="true"
-          >
+          <div class="modal modal-login fade" id="exampleModal" tabindex="-1" aria-labelledby="staticBackdropLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <!-- <div class="modal-header">
@@ -146,12 +90,7 @@
                 </div> -->
                 <div class="modal-body">
                   <div class="close-btn text-end px-2 pt-2">
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <app-login></app-login>
                 </div>
@@ -168,23 +107,13 @@
             </div>
           </div>
 
-          <div
-            class="modal modal-register fade"
-            id="registermodal"
-            tabindex="-1"
-            aria-labelledby="registerModalLabel"
-            aria-hidden="true"
-          >
+          <div class="modal modal-register fade" id="registermodal" tabindex="-1" aria-labelledby="registerModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-body">
                   <div class="close-btn text-end px-2 pt-2">
-                    <button
-                      type="button"
-                      class="btn-close"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <app-register></app-register>
                 </div>
