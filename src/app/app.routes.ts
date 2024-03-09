@@ -61,7 +61,7 @@ export const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'cart', canActivate:[protectGuard],component: CartComponent },
   { path: 'contact-us', component: ContactUsComponent },
-  {path:'review/:id',component:ReviewsComponent}
+  {path:'review/:id',component:ReviewsComponent},
   {path:'error',component:ErrorPageComponent},
   { path: '**', redirectTo:'error',pathMatch:'full' },
 
