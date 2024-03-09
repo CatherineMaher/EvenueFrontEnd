@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminServiceService } from '../services/admin-service.service';
-import { MyEvent } from '../interfaces/my-event';
+import { AdminServiceService } from '../../services/admin-service.service';
+import { MyEvent } from '../../interfaces/my-event';
 import { CommonModule } from '@angular/common';
 
 @Component({
