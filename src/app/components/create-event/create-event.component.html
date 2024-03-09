@@ -28,7 +28,7 @@
         <p *ngIf="registerForm.get('Description')?.getError('min')" class="text-danger">Minimum Description should be 16</p>
         <p *ngIf="registerForm.get('Description')?.getError('max')" class="text-danger">Maximum Description should be 60</p>
     </div>
-    
+
       <label class=" mainfntclr mt-3 mb-1">
       <h4> Facilities</h4>
       </label>
@@ -41,16 +41,16 @@
         </span>
       </div>
       <div *ngIf="this?.facilities?.length!=0">
-        
+
         <div  id="facilities" class="mt-3 mb-3  col-4 d-flex" *ngFor="let facility of this?.facilities ,let ind=index">
           <input type="text" disabled  [value]="facility" class="form-control w-75 d-inline ms-2 bg-transparent border-transparent">
           <span class="btn"(click)="removeFacility(ind)"><i class="fa-solid fa-circle-xmark text-danger fs-4"></i></span>
-  
+
         </div>
       </div>
       <div>
     </div>
-   
+
       <label class=" mainfntclr mt-3 mb-1">
        <h4>Instructions</h4>
       </label>
@@ -66,30 +66,20 @@
         <div  id="instructions" class="mt-3 mb-3 col-4 d-flex" *ngFor="let instruction of this?.instructions ,let ind=index">
           <input type="text" disabled  [value]="instruction" class="form-control w-75 d-inline ms-2 bg-transparent border-transparent">
           <span class="btn "(click)="removeInstruction(ind)"><i class="fa-solid fa-circle-xmark text-danger fs-4"></i></span>
-  
+
         </div>
       </div>
       <div>
     </div>
 
-    <!-- <div *ngIf="this.eventTime?.length!=0">
-    <label class="fw-bold mainfntclr" for="event_times">Event Time</label>
-    <div id="event_times" class="mt-3 mb-3" *ngFor="let item of eventTime,let ind=index">
 
-      <input type="date" [value]="item?.date" name="" id="">
-      <input type="text"  [value]="item?.hour" class="form-control w-25 d-inline ms-2">
-      <input type="text"  [value]="item?.minute" class="form-control w-25 d-inline ms-2" >
 
-      <span class="btn ms-2 mb-1"(click)="remove(ind)"><i class="fa-solid fa-circle-xmark text-danger fs-4"></i></span>
-    </div>
-  </div> -->
- 
     <div>
       <label class="fw-bold mainfntclr mt-3" >
         <h4>Add Event Time</h4>
       </label>
       <div>
-       
+
         <div *ngIf="this.timeRange?.length !== 0">
         <div *ngFor="let time of timeRange; let i = index">
           <input type="time" disabled  [value]="time.start" class="form-control w-75 d-inline ms-2">
@@ -97,32 +87,28 @@
           <span class="btn mb-1"(click)="removeTimeRange(i)"><i class="fa-solid fa-circle-xmark text-danger fs-4"></i></span>
         </div>
         </div>
-        
+
         </div>
-     
+
         <div class="d-flex align-items-center gap-5" >
            <div class="d-flex flex-column flex-md-row">
               <input type="date"  #date class="form-control  d-inline ms-2">
               <input type="time"   #start class="form-control  d-inline ms-2">
               <input type="time"  #end class="form-control  d-inline ms-2" >
            </div>
-            
+
           <div >
               <span class=" btn"(click)="Add()">
                 <i class="fa-solid fa-plus-circle text-success fs-4"></i>
               </span>
           </div>
         </div>
-      
-        
-    
+
+
+
     </div>
-        <!-- <span class=" btn  "(click)="addTimeRange()">
-          <i class="fa-solid fa-circle-check text-success ms-2 fs-4"></i>
-        </span> -->
-        <!-- <div> -->
-        <!-- </div> -->
-     
+
+
 
       <div *ngIf="this.eventTime?.length !== 0">
         <label class="fw-bold mainfntclr" for="event_times">Added dates</label>
@@ -138,13 +124,13 @@
               <div>
                 <b>&nbsp;&nbsp;End:</b> {{ time.end }}
               </div>
-            
+
             </div>
           </div>
           <!-- XBUTTON -->
           <div>
             <span class="btn mb-3"(click)="removeEvent(i)"><i class="fa-solid fa-circle-xmark text-danger fs-4"></i></span>
-    
+
           </div>
         </div>
       </div>
@@ -185,7 +171,7 @@
             <div >
              <b>&nbsp;&nbsp; Total Tickets: </b>{{ ticket.totalTickets }}
             </div>
-            
+
          </div>
          <div>
           <span class="btn "(click)="removeTicket(i)"><i class="fa-solid fa-circle-xmark text-danger fs-4"></i></span>
@@ -194,7 +180,7 @@
       </div>
       <label class=" mainfntclr mt-4" for="image"><h4>Event Image</h4></label>
         <!-- <span class="text-danger">*</span>/ -->
-      
+
    <input
      (change)="onImageFileSelected($event)"
      name="image"
@@ -208,8 +194,8 @@
 
    </div>
    <div class="d-flex justify-content-center">
-     
-      <button class="btn mt-5 btn-color text-white mb-5 rounded-4" type="submit" [disabled]="registerForm.invalid" >Add Event</button>
+
+      <button class="btn mt-5 btn-color text-white mb-5 rounded-4 px-4 py-2" type="submit" [disabled]="registerForm.invalid" >Add Event</button>
    </div>
     <div class="clear-both"></div>
 

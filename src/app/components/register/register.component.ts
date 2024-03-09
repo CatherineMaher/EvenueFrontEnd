@@ -30,7 +30,6 @@ export class RegisterComponent {
   imageFile: any;
   imagePath: string | null = 'assets/imgs/profile_picture.png';
   isProfileImageSelected = false;
-
   constructor(private usrsrv: UserService, private router: Router) {}
   emailErrorMessage: string = '';
   registerForm: FormGroup = new FormGroup({

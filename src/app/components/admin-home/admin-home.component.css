@@ -5,3 +5,6 @@
   color:var(--dark-purple)
   
 }
+.chart-container {
+  border: none !important; 
+}

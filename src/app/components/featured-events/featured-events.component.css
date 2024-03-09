@@ -1,3 +1,6 @@
+.cursor-pointer{
+  cursor: pointer;
+}
 .homepage-featured-events {
   height: auto;
   padding: 110px 0 150px;

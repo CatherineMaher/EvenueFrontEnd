@@ -75,4 +75,8 @@ svg {
   left: 50%;
   bottom:68%;
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 }

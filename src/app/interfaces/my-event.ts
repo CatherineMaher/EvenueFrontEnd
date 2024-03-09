@@ -1,5 +1,5 @@
 export interface MyEvent {
-  _id?: { $oid: string };
+  _id:  string ;
   image?:any;
   title?: string;
   location?: string;

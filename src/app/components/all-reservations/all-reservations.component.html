@@ -7,43 +7,21 @@
     <th>Event Name</th>
     <th>Total Price</th>
     <th>Quantity</th>
-    <!-- <th>Update</th> -->
-    <!-- <th>Delete</th> -->
   </thead>
   <tbody>
 
     @for (reservation of allReservations; track reservation?._id) {
       @for(event of reservation.events; track event?._id){
-
-        @if(reservation.isPurchased){
           <tr>
             <td>{{ reservation.userId }}</td>
             <td>{{ event.eventId.title }}</td>
             <td>{{ event.totalPrice }}</td>
             <td>{{ event.totalQuantity }}</td>
           </tr>
-            <!-- <td>
-              <button class="btn btn-outline-danger"
-              [attr.data-bs-target]="'#staticBackdrop' + reservation._id"
-              data-bs-target="#staticBackdrop"
-               data-bs-toggle="modal"
-                data-bs-target="#exampleModal" >Delete {{user.id}}</button>
-            </td> -->
-            <!-- <td><button class="btn btn-outline-danger">Delete</button></td>
-             -->
-            <!-- (click)="updatefun(user.id)" -->
-            <!-- <td><button class="btn btn-outline-warning">Update</button></td> -->
 
-
-          }
       }
 
     }
-    <!-- @else{
-  @for (user of users|search:term; track user.id) {
-    <app-one-user [user]="user"></app-one-user>
-       }
-} -->
 
 
   </tbody>
