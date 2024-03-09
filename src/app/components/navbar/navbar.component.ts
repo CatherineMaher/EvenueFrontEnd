@@ -128,6 +128,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   routeToProfile() {
-    this._Router.navigate([`/profile/${this.user._id}`]);
+    let myId=localStorage.getItem('userId');
+    this._Router.navigate([`/profile/${myId}`]);
   }
 }

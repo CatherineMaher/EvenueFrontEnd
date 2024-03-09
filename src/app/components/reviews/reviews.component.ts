@@ -49,7 +49,7 @@ export class ReviewsComponent implements OnInit{
         if(res.message=='success'){
           console.log("here",res.data);
           
-          // this._Router.navigate(['/profile']);
+          this._Router.navigate([`/profile/${this.userId}`]);
         }
     
       }
