@@ -53,11 +53,31 @@ export class SearchByPricePipe implements PipeTransform {
     const filteredList: any[] = [];
 
     list.forEach(event => {
-      if (event.tickets?.some((ticket: any) => ticket?.price.toString().includes(term))) {
-        filteredList.push({ ...event }); // Create a shallow copy of the event and add to filtered list
+      // if (event.tickets?.some((ticket: any) => ticket?.price.toString().includes(term))) {
+      //   filteredList.push({ ...event }); // Create a shallow copy of the event and add to filtered list
+      // }
+      const minPrice = this.getMinPrice(event.tickets);
+      if (minPrice !== null && minPrice.toString().includes(term)) {
+        filteredList.push({ ...event });
       }
     });
 
     return filteredList;
+  }
+
+  private getMinPrice(tickets: any[]): number | null {
+    if (!tickets || tickets.length === 0) {
+      return null;
+    }
+
+    let minPrice = tickets[0].price;
+
+    for (let i = 1; i < tickets.length; i++) {
+      if (tickets[i].price < minPrice) {
+        minPrice = tickets[i].price;
+      }
+    }
+
+    return minPrice;
   }
 }
