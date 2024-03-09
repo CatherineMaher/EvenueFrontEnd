@@ -20,22 +20,22 @@
           class="navbar-nav text-center fw-bold justify-content-center w-100 w-lg-50 align-items-center navbar-links gap-2">
 
           @if(!loggedIn||role=='user'){
-            <li class="nav-item mb-3 mb-lg-0 rounded-5">
-              <a class="nav-link fs-5 text-light rounded-5" aria-current="page" routerLink="/home"
-                routerLinkActive="active">Home</a>
-            </li>
+          <li class="nav-item mb-3 mb-lg-0 rounded-5">
+            <a class="nav-link fs-5 text-light rounded-5" aria-current="page" routerLink="/home"
+              routerLinkActive="active">Home</a>
+          </li>
 
           }
           @if(role=='admin'){
 
-            <li class="nav-item mb-3 mb-lg-0 rounded-5">
-              <a class="nav-link fs-5 text-light rounded-5" aria-current="page" routerLink="/adminHome"
-                routerLinkActive="active">Home</a>
-            </li>
-            <li class="nav-item mb-3 mb-lg-0 rounded-5">
-              <a class="nav-link fs-5 text-light rounded-5" aria-current="page" routerLink="/addEvent"
-                routerLinkActive="active">Add Event</a>
-            </li>
+          <li class="nav-item mb-3 mb-lg-0 rounded-5">
+            <a class="nav-link fs-5 text-light rounded-5" aria-current="page" routerLink="/adminHome"
+              routerLinkActive="active">Home</a>
+          </li>
+          <li class="nav-item mb-3 mb-lg-0 rounded-5">
+            <a class="nav-link fs-5 text-light rounded-5" aria-current="page" routerLink="/addEvent"
+              routerLinkActive="active">Add Event</a>
+          </li>
           }
           <li class="nav-item mb-3 mb-lg-0 rounded-5">
             <a class="nav-link fs-5 text-light rounded-5" routerLink="/events" routerLinkActive="active">Events</a>
@@ -44,11 +44,11 @@
             <a class="nav-link fs-5 text-light rounded-5" routerLink="/about" routerLinkActive="active">About</a>
           </li>
           @if(!loggedIn||role=='user'){
-         
-            <li class="nav-item mb-3 mb-lg-0 rounded-5">
-              <a class="nav-link fs-5 text-light rounded-5" routerLink="/contact-us" routerLinkActive="active">Contact
-                Us</a>
-            </li>
+
+          <li class="nav-item mb-3 mb-lg-0 rounded-5">
+            <a class="nav-link fs-5 text-light rounded-5" routerLink="/contact-us" routerLinkActive="active">Contact
+              Us</a>
+          </li>
           }
 
           <!-- } -->
@@ -63,12 +63,23 @@
         <!-- <div class="me-2 text-white text-center" >Welcome
             {{userName}}</div> -->
         <a class="nav-link text-center my-4 my-lg-0 rounded-circle" aria-current="page">
-          <img [src]="imageUrl" class="profileImage rounded-circle" />
+          <img [src]="imageUrl" class="profileImage cursor-pointer  rounded-circle" (click)="routeToProfile()" />
         </a>
         } @if (loggedIn) {
         <li class="nav-item mb-3 mb-lg-0 rounded-5 list-unstyled text-center cart">
-          <i class="fa fa-shopping-cart px-4" aria-hidden="true" (click)="openCart()"></i>
+         
+        <div class="position-relative">
+           
+            <i class="fa fa-shopping-cart px-4  shop" aria-hidden="true" (click)="openCart()">
+              </i>
+              <span class="badge rounded-pill bg-danger position-absolute badgeNumber" >
+                <!-- style="left:51px;bottom:23px" -->
+                {{ cartItemCount }}
+              </span>
+        </div>
         </li>
+
+
         <div class="ms-lg-auto m-auto text-center w-25 d-flex justify-content-center">
           <button id="btn1" class=" fs-5 border-0 border-white rounded-pill px-4 py-2 login-logout-btn"
             (click)="logOut()">
@@ -78,14 +89,7 @@
 
         } @else {
         <div class="ms-lg-auto m-auto text-center w-25 d-flex justify-content-center">
-          <!-- <button
-          (click)="signIn()"
-            id="btn1"
-            class="btn btn-color text-light fs-5 border-2 border-white rounded-pill px-4 py-2 login-logout-btn"
-
-          >
-            Sign In
-          </button> -->
+       
 
           <button id="btn1" type="button"
             class="btn btn-color text-light fs-5 border-2 border-white rounded-pill px-4 py-2 login-logout-btn"
@@ -97,25 +101,13 @@
             aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
-                <!-- <div class="modal-header">
-                  <h5 class="modal-title">Modal title</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div> -->
+    
                 <div class="modal-body">
                   <div class="close-btn text-end px-2 pt-2">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <app-login></app-login>
                 </div>
-                <!-- <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                    Close
-                  </button>
-                  <button type="button" id="btn2" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registermodal"
-                  >
-                    Register
-                  </button>
-                </div> -->
               </div>
             </div>
           </div>
@@ -133,18 +125,6 @@
               </div>
             </div>
           </div>
-
-          <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-                <app-login></app-login>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-              </div>
-            </div>
-          </div>
-        </div> -->
         </div>
         }
       </div>
@@ -152,22 +132,3 @@
   </nav>
 </main>
 
-<!--
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-
-        <app-login class="position-fixed top-0 left-0"></app-login>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send message</button>
-      </div>
-    </div>
-  </div>
-</div> -->

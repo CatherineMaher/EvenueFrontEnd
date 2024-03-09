@@ -18,6 +18,7 @@ import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
+import { BadgeService } from '../../services/badge.service';
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -26,22 +27,30 @@ import { RegisterComponent } from '../register/register.component';
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-  constructor(private _UserService: UserService, private _Router: Router) {}
+  constructor(private _UserService: UserService, private _Router: Router, private badgeService: BadgeService) {
+    this.badgeService.cartItemCount$.subscribe((count) => {
+      this.cartItemCount = count;
+    });
+  }
   // isSignClicked: boolean = false;
-
+  showBadge = false; // Initially, the badge is hidden
+  badgeCount = 0; 
   ngOnDestroy(): void {
     this.userSub?.unsubscribe();
   }
   isHomeRoute: boolean = false;
   path: any;
-  role:any;
+  role: any;
   hasaphoto: boolean = false;
   imageUrl?: string;
   imageName?: string;
   userName?: any;
   loggedIn: boolean = false;
-  @ViewChild('exampleModal') modal: ElementRef | undefined;
+  cartItemCount:number = 0;
+  user: any;
+
   private userSub?: Subscription;
+  @ViewChild('exampleModal') modal: ElementRef | undefined;
   ngOnInit(): void {
     console.log('Navbar component initialized');
     console.log(UserService.getUser());
@@ -56,9 +65,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
         next: (res) => {
           if (res.message == 'success') {
             console.log('user log in', res.data);
+            this.user = res.data;
             this.imageName = res.data.image;
             this.userName = res.data.name;
-            this.role=res.data.role;
+            this.role = res.data.role;
             this.showPhoto();
           }
         },
@@ -81,13 +91,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
               console.log('user log in', res.data);
               this.imageName = res.data.image;
               this.userName = res.data.name;
-              this.role=res.data.role;
+              this.role = res.data.role;
               this.showPhoto();
             }
           },
         });
       }
-
     });
 
     this._Router.events.subscribe((event) => {
@@ -95,13 +104,15 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.isHomeRoute = event.url === '/home';
       }
     });
+
+    this.badgeService.cartItemCount$.subscribe((count) => (this.cartItemCount = count));
   }
   logOut() {
     this._UserService.logOut();
     this.hasaphoto = false;
     this.imageName = undefined; // Reset image name
     this.userName = undefined; // Reset user name
-    this.role=undefined;
+    this.role = undefined;
   }
 
   showPhoto() {
@@ -114,5 +125,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
   openCart() {
     this._Router.navigate(['/cart']);
+  }
+
+  routeToProfile() {
+    this._Router.navigate([`/profile/${this.user._id}`]);
   }
 }

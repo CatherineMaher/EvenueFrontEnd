@@ -47,7 +47,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SearchByPricePipe,
     SearchLocationPipe,
     SweetAlert2Module,
-    //ToastrModule,
+   
     
   ],
  

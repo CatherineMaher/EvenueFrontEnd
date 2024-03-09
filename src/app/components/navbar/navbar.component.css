@@ -41,6 +41,7 @@ svg {
 
 .cart {
   cursor: pointer;
+
 }
 .nav-item .fa-shopping-cart {
   color: white;
@@ -69,4 +70,13 @@ svg {
   color: #fafafa !important;
   transition: 0.5s !important;
   color: #c487e5 !important;
+}
+.badgeNumber{
+  left: 50%;
+  bottom:68%;
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
 }

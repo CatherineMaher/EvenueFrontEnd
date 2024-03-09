@@ -7,6 +7,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { Ticket } from '../../interface/event';
 import { EventService } from '../../services/event.service';
 import { UserService } from '../../services/user.service';
+import { BadgeService } from '../../services/badge.service';
 
 @Component({
   selector: 'app-event-details',
@@ -56,6 +57,7 @@ export class EventDetailsComponent implements OnInit {
     private detailsService: EventDetailsService,
     private myActivate: ActivatedRoute,
     private EventModel: EventService,
+    private badgeService : BadgeService,
     private _Router:Router
     // private myActivate: ActivatedRoute,
     
@@ -184,6 +186,7 @@ export class EventDetailsComponent implements OnInit {
       },
     };
     this.detailsService.reservationDetails.push(reservation);
+    this.badgeService.incrementCartItemCount();
     console.log(this.detailsService.getReservationDetails());
 
     }

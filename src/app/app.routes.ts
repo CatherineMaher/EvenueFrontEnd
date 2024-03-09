@@ -15,6 +15,7 @@ import { AboutComponentComponent } from './components/about-component/about-comp
 import { CartComponent } from './components/cart/cart.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { ReviewsComponent } from './components/reviews/reviews.component';
 import { AdminAlleventsComponent } from './components/admin-allevents/admin-allevents.component';
 import { AllUsersComponent } from './components/all-users/all-users.component';
@@ -59,11 +60,12 @@ export const routes: Routes = [
   },
 
   { path: 'about', component: AboutComponent },
-  { path: 'cart', canActivate:[protectGuard],component: CartComponent },
+  { path: 'cart', canActivate: [protectGuard], component: CartComponent },
   { path: 'contact-us', component: ContactUsComponent },
-  {path:'review/:id',component:ReviewsComponent},
-  {path:'error',component:ErrorPageComponent},
-  { path: '**', redirectTo:'error',pathMatch:'full' },
+  { path: 'profile/:id', component: UserProfileComponent },
+  { path: 'review/:id', component: ReviewsComponent },
+  { path: 'error', component: ErrorPageComponent },
+  { path: '**', redirectTo: 'error', pathMatch: 'full' },
 
   // ,canActivate:[adminProtectGuard]
 ];
