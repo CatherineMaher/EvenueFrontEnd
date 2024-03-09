@@ -20,6 +20,7 @@ export class TestimonialsComponent implements OnInit {
       next: (res: any) => {
         if (res.message == 'success' && res.data) {
           this.reviews = res.data;
+          this.reviews=this.reviews.slice(this.reviews.length-3,this.reviews.length);
           this.getData();
         } else {
           console.log("Can't fetch API or data is undefined");

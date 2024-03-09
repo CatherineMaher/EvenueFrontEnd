@@ -29,7 +29,7 @@
         <ul
           class="navbar-nav text-center fw-bold justify-content-center w-100 w-lg-50 align-items-center navbar-links gap-2"
         >
-          @if(!loggedIn||role=='user'){
+          @if(!loggedIn||role=='user'||userName!='admin'){
           <li class="nav-item mb-3 mb-lg-0 rounded-5">
             <a
               data-bs-toggle="collapse"
@@ -97,7 +97,7 @@
               >About</a
             >
           </li>
-          @if(!loggedIn||role=='user'){
+          @if(!loggedIn||role=='user'||userName!='admin'){
 
           <li class="nav-item mb-3 mb-lg-0 rounded-5">
             <a

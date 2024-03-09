@@ -33,13 +33,13 @@ export class AdminHomeComponent implements OnInit{
     next:(res)=>{
       if(res.message=="success"){
         this.allEventsNum=res.length;
-      
+
         this.Events=res.data;
         this.Events=this.Events.map((event:any)=>event.tickets)
-        
+
         this.getAllticketsNumbers(this.Events);
         this.getAllticketsReserved(this.Events);
-   
+
       }
     }
   });
@@ -79,28 +79,30 @@ export class AdminHomeComponent implements OnInit{
     });
 
     this.reservationMonths = Array.from(monthTotals.keys());
+    console.log(this.reservationMonths);
+
     this.reservationPrices= Array.from(monthTotals.values());
   }
 getAllticketsNumbers(Events:any){
   for (let i = 0; i < Events.length; i++) {
-    const currentArray = Events[i]; 
+    const currentArray = Events[i];
     for (let j = 0; j < currentArray.length; j++) {
       this.totalTickets+= parseInt(currentArray[j].totalTickets) ;
-   
+
     }
   }
- 
+
 }
 getAllticketsReserved(Events:any){
   for (let i = 0; i < Events.length; i++) {
-    const currentArray = Events[i]; 
+    const currentArray = Events[i];
     for (let j = 0; j < currentArray.length; j++) {
       this.reservedTickets+= parseInt(currentArray[j].reserved) ;
-   
+
     }
   }
-  
-  
+
+
 }
   createReservationChart() {
 
@@ -142,8 +144,8 @@ getAllticketsReserved(Events:any){
             {
                 data: [this.totalTickets, this.reservedTickets],
                 backgroundColor: ['#333', '#7C3488'],
-                
-                
+
+
             }
         ]
     };
@@ -159,5 +161,5 @@ getAllticketsReserved(Events:any){
         }
     };
 }
-  
+
 }

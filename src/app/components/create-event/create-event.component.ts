@@ -88,26 +88,46 @@ export class CreateEventComponent implements OnInit {
     this.instructions.forEach((value: string) => {
       formData.append('instructions[]', value);
     });
-    this.eventTime?.forEach((dateEntry, index) => {
+    this.eventTime?.forEach((dateEntry, outerIndex) => {
       if (dateEntry.date) {
-        formData.append(`dates[${index}][date]`, dateEntry.date);
+        formData.append(`dates[${outerIndex}][date]`, dateEntry.date);
       }
       if (dateEntry.times && dateEntry.times.length > 0) {
-        dateEntry.times.forEach((time, index) => {
+        dateEntry.times.forEach((time, innerIndex) => { // Using 'innerIndex' for the inner loop
           if (time.start !== undefined && time.end !== undefined) {
             formData.append(
-              `dates[${index}][times][${index}][start]`,
+              `dates[${outerIndex}][times][${innerIndex}][start]`, // Using both 'outerIndex' and 'innerIndex'
               time.start.toString()
             );
             formData.append(
-              `dates[${index}][times][${index}][end]`,
+              `dates[${outerIndex}][times][${innerIndex}][end]`, // Using both 'outerIndex' and 'innerIndex'
               time.end.toString()
             );
           }
         });
       }
-
     });
+
+    // this.eventTime?.forEach((dateEntry, index) => {
+    //   if (dateEntry.date) {
+    //     formData.append(`dates[${index}][date]`, dateEntry.date);
+    //   }
+    //   if (dateEntry.times && dateEntry.times.length > 0) {
+    //     dateEntry.times.forEach((time, index) => {
+    //       if (time.start !== undefined && time.end !== undefined) {
+    //         formData.append(
+    //           `dates[${index}][times][${index}][start]`,
+    //           time.start.toString()
+    //         );
+    //         formData.append(
+    //           `dates[${index}][times][${index}][end]`,
+    //           time.end.toString()
+    //         );
+    //       }
+    //     });
+    //   }
+
+    // });
     this.tickets?.forEach((ticket, index) => {
       if (ticket.type) {
         formData.append(`tickets[${index}][type]`, ticket.type);
@@ -131,6 +151,7 @@ export class CreateEventComponent implements OnInit {
     formData.append('organizer', data.get('organizer').value);
     formData.append('Description', data.get('Description').value);
     console.log('form data', formData.get('tickets[][]'));
+    console.log('form data', formData.get('dates[]'));
     this._CreateEventService.addEvent(formData).subscribe({
       next: (res: any) => {
         console.log('result from api', res);
@@ -148,7 +169,7 @@ export class CreateEventComponent implements OnInit {
   constructor(
     private _Router: Router,
     private _CreateEventService: CreateEventService,
-   
+
   ) {}
 
   AddFacility() {
