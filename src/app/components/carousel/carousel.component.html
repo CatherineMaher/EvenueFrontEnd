@@ -2,9 +2,9 @@
 
   <ng-container *ngFor="let event of Events">
 
-    <ng-template carouselSlide [id]="event._id">
-      <div class="photo-container" (mouseover)="isHovered[event._id] = true" (mouseout)="isHovered[event._id] = false">
-        <img class=" p-1" [src]="event.image" [title]="event?.title" (click)="navigateEventDetails(event._id)">
+    <ng-template carouselSlide [id]="event._id" >
+      <div class="photo-container cursor-pointer" (click)="navigateEventDetails(event._id)" (mouseover)="isHovered[event._id] = true" (mouseout)="isHovered[event._id] = false">
+        <img class=" p-1" [src]="event.image" [title]="event?.title" >
         <div class="overlay" [ngClass]="{'show': isHovered[event._id]}"></div>
       </div>
       <p class="text-center">{{event.title}}</p>

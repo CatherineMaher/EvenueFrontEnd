@@ -78,6 +78,8 @@ export class CarouselComponent implements OnInit {
     nav: true
   }
   navigateEventDetails(id:string){
-    this._Router.navigate([`/details/${id}`])
+    console.log(id,"id");
+    
+    this._Router.navigate([`/details/${id}`]);
   }
 }
