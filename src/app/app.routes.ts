@@ -16,6 +16,8 @@ import { CartComponent } from './components/cart/cart.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
 import { ReviewsComponent } from './components/reviews/reviews.component';
+import { AdminAlleventsComponent } from './admin-allevents/admin-allevents.component';
+import { AllUsersComponent } from './components/all-users/all-users.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
