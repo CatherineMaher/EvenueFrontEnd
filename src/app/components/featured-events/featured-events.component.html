@@ -2,13 +2,17 @@
   <div class="container">
     <div class="row">
       <div class="col-12">
-        <div class="featured-events-wrap flex flex-wrap justify-content-between">
+        <div
+          class="featured-events-wrap flex flex-wrap justify-content-between"
+        >
           <div *ngFor="let event of eventPage; let i = index">
             @if(i+1==4){
 
             <div class="event-content-wrap positioning-event-8 mb-4">
-              <figure>
-                <a (click)="Viewmore(event?._id ?? '')"><img [src]="event.image" alt="1" /></a>
+              <figure class="cursor-pointer">
+                <a (click)="Viewmore(event?._id ?? '')"
+                  ><img [src]="event.image" alt="1"
+                /></a>
               </figure>
               <header class="entry-header">
                 <h3 class="entry-title">{{ event.title }}</h3>
@@ -17,8 +21,10 @@
             </div>
             }@else if(i+1==5){
             <div class="event-content-wrap positioning-event-9 mb-4">
-              <figure>
-                <a (click)="Viewmore(event?._id ?? '')"><img [src]="event.image" alt="1" /></a>
+              <figure class="cursor-pointer">
+                <a (click)="Viewmore(event?._id ?? '')"
+                  ><img [src]="event.image" alt="1"
+                /></a>
               </figure>
               <header class="entry-header">
                 <h3 class="entry-title">{{ event.title }}</h3>
@@ -27,9 +33,15 @@
             </div>
             } @else if(i+1==1||i+1==2||i+1==3){
 
-            <div class="event-content-wrap positioning-event-{{ i + 1 }} mb-4 cursor-pointer">
+            <div
+              class="event-content-wrap positioning-event-{{
+                i + 1
+              }} mb-4 cursor-pointer"
+            >
               <figure>
-                <a (click)="Viewmore(event?._id ?? '')"><img [src]="event.image" alt="1" /></a>
+                <a (click)="Viewmore(event?._id ?? '')"
+                  ><img [src]="event.image" alt="1"
+                /></a>
               </figure>
               <header class="entry-header">
                 <h3 class="entry-title">{{ event.title }}</h3>
@@ -40,24 +52,38 @@
             }
           </div>
 
-          <div class="event-content-wrap positioning-event-4 half">
+          <div
+            class="event-content-wrap positioning-event-4 half d-none d-lg-block"
+          >
             <figure>
-              <a routerLink="/events"><img src="assets/imgs/events-in-london.jpg" alt="" /></a>
+              <a routerLink="/events"
+                ><img src="assets/imgs/events-in-london.jpg" alt=""
+              /></a>
             </figure>
           </div>
-          <div class="event-content-wrap positioning-event-5 half">
+          <div
+            class="event-content-wrap positioning-event-5 half d-none d-lg-block"
+          >
             <figure>
-              <a routerLink="/events"><img src="assets/imgs/check-july.png" alt="" /></a>
+              <a routerLink="/events"
+                ><img src="assets/imgs/check-july.png" alt=""
+              /></a>
             </figure>
           </div>
-          <div class="event-content-wrap positioning-event-6 half">
+          <div
+            class="event-content-wrap positioning-event-6 half d-none d-lg-block"
+          >
             <figure>
-              <a routerLink="/events"><img src="assets/imgs/summer-festivals.jpg" alt="" /></a>
+              <a routerLink="/events"
+                ><img src="assets/imgs/summer-festivals.jpg" alt=""
+              /></a>
             </figure>
           </div>
-          <div class="event-content-wrap positioning-event-7">
+          <div class="event-content-wrap positioning-event-7 d-none d-lg-block">
             <figure>
-              <a routerLink="/events"><img src="assets/imgs/90.jpg" alt="" /></a>
+              <a routerLink="/events"
+                ><img src="assets/imgs/90.jpg" alt=""
+              /></a>
             </figure>
             <header class="entry-header">
               <h3 class="entry-title">90’s Disco Night</h3>
@@ -65,14 +91,22 @@
             </header>
           </div>
 
-          <div class="event-content-wrap positioning-event-10 half">
+          <div
+            class="event-content-wrap positioning-event-10 half d-none d-lg-block"
+          >
             <figure>
-              <a routerLink="/events"><img src="assets/imgs/summer-festival.jpg" alt="" /></a>
+              <a routerLink="/events"
+                ><img src="assets/imgs/summer-festival.jpg" alt=""
+              /></a>
             </figure>
           </div>
-          <div class="event-content-wrap positioning-event-11 half">
+          <div
+            class="event-content-wrap positioning-event-11 half d-none d-lg-block"
+          >
             <figure>
-              <a routerLink="/events"><img src="assets/imgs/autumn.jpg" alt="" /></a>
+              <a routerLink="/events"
+                ><img src="assets/imgs/autumn.jpg" alt=""
+              /></a>
             </figure>
           </div>
         </div>

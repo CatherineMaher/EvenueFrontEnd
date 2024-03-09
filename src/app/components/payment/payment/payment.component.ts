@@ -21,6 +21,8 @@ export class PaymentComponent {
   // ##Credit Card information:
   // 4032038489822472
   // 03/2029
+  // 11112
+  // (222) 554-6236
   // John Doe
 
   // ##Account information:

@@ -31,11 +31,17 @@
 .homepage-next-events .next-event-wrap {
   margin-top: 96px;
   text-align: center;
+  transition: 0.3s;
+}
+
+.homepage-next-events .next-event-wrap:hover {
+  transform: translateY(-15px) scale(1.05);
 }
 
 .homepage-next-events .next-event-wrap figure {
   position: relative;
   margin: 0;
+  cursor: pointer;
 }
 
 .homepage-next-events .next-event-wrap figure img {

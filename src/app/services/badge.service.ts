@@ -12,6 +12,12 @@ export class BadgeService {
     const currentCount = this.cartItemCountSubject.value;
     this.cartItemCountSubject.next(currentCount + 1);
   }
+
+  decrementCartItemCount() {
+    const currentCount = this.cartItemCountSubject.value;
+    this.cartItemCountSubject.next(currentCount - 1);
+  }
+
   reset() {
     this.cartItemCountSubject.next(0);
   }

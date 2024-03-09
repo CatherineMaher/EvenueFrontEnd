@@ -62,8 +62,16 @@ export const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'cart', canActivate: [protectGuard], component: CartComponent },
   { path: 'contact-us', component: ContactUsComponent },
-  { path: 'profile/:id', component: UserProfileComponent },
-  { path: 'review/:id', component: ReviewsComponent },
+  {
+    path: 'profile/:id',
+    canActivate: [protectGuard],
+    component: UserProfileComponent,
+  },
+  {
+    path: 'review/:id',
+    canActivate: [protectGuard],
+    component: ReviewsComponent,
+  },
   { path: 'error', component: ErrorPageComponent },
   { path: '**', redirectTo: 'error', pathMatch: 'full' },
 

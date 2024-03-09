@@ -37,7 +37,7 @@ export class CartComponent implements OnInit {
     private evdsrv: EventDetailsService,
     private paymentServeice: PaymentService,
     private badgeService: BadgeService,
-    private router : Router
+    private router: Router
   ) {
     this.initPaypal();
   }
@@ -84,38 +84,17 @@ export class CartComponent implements OnInit {
   }
   delete(evt: any) {
     let cartItem = evt.target.closest('.cartItem');
-    cartItem.remove();
-    let cartItemId = cartItem.id;
+    let cartItemId = evt.target.getAttribute('data-event-id');
     console.log(cartItemId);
+    cartItem.remove();
+    this.badgeService.decrementCartItemCount();
 
-    console.log(this.cartInfo.events);
-
-    let updatedcart = this.cartInfo.events.filter(
-      (event: any) => event._id !== cartItemId
+    let updatedcart = this.cartInfo.filter(
+      (event: any) => event.eventID !== cartItemId
     );
-    console.log('updated cart', updatedcart);
 
-    //  this.cartsrv.updateCart(this.cartInfo._id, { events: updatedcart }).subscribe({
-    //   next: (updatedCart: any) => {
-    //       console.log('Cart updated successfully:', updatedCart);
-    //       // You can update your local cartInfo here if needed
-    //       this.cartInfo = updatedCart;
-    //   },
-    //   error: (error) => {
-    //       console.error('Error updating cart:', error);
-    //   }
-    // });
-
-    //  this.cartsrv.updateCart(this.cartInfo._id,{events:updatedcart});
-
-    //  this.cartsrv.getCartInfo().subscribe({
-    //   next: (cart: any) => {
-    //     console.log(cart);
-    //   },
-    //   error: (error) => {
-    //     console.error('Error fetching cart information:', error);
-    //   }
-    // });
+    this.cartInfo = updatedcart;
+    this.evdsrv.reservationDetails = updatedcart;
   }
   resetCounter() {
     this.badgeService.reset();
@@ -181,9 +160,10 @@ export class CartComponent implements OnInit {
                 // console.log('cart objectttt', reservation);
                 console.log('cart res array', this.reserveData);
               });
-              console.log("RESERVEDATA",this.reserveData);
+              console.log('RESERVEDATA', this.reserveData);
               this.paymentServeice.pay(this.reserveData).subscribe({
                 next: (res: any) => {
+                  console.log('sweeeet alert');
                   console.log(res);
 
                   Swal.fire({
@@ -191,8 +171,9 @@ export class CartComponent implements OnInit {
                     icon: 'success',
                     html: `
                           
-                          <video class="mt-3 rounded border broder-2" style="max-height: 300px" src="../../../assets/imgs/payment_success_video.mp4" autoplay></video>
-                          Your ticket is reserved successfully
+                    <div> <video class="mt-3 rounded border broder-2" style="max-height: 300px" src="../../../assets/imgs/payment_success_video.mp4" autoplay></video>
+                    </div>
+                    <div><p class='fs-3 fw-bold text-success'>Your ticket is reserved successfully</p> </div>
                         `,
                     showCloseButton: true,
                     // showCancelButton: true,

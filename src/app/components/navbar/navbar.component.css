@@ -31,17 +31,16 @@ svg {
 
 .navbar-links li {
   width: 20%;
+  transition: 0.5s;
 }
 
 .navbar-links li:hover {
   background-color: #62188b;
   color: #fafafa;
-  transition: 0.5s;
 }
 
 .cart {
   cursor: pointer;
-
 }
 .nav-item .fa-shopping-cart {
   color: white;
@@ -52,17 +51,21 @@ svg {
 .nav-item:hover .fa-shopping-cart {
   color: #c487e5;
 }
+.login-logout-btn {
+  transition: 0.5s !important;
+}
 
 .login-logout-btn:hover {
   background-color: #62188b !important;
   color: #fafafa !important;
-  transition: 0.5s !important;
 }
 
 .profileImage {
   width: 45px !important;
   height: 45px !important;
   background-color: transparent;
+  cursor: pointer;
+  object-fit: cover;
 }
 
 .nav-link.active {
@@ -71,12 +74,11 @@ svg {
   transition: 0.5s !important;
   color: #c487e5 !important;
 }
-.badgeNumber{
+.badgeNumber {
   left: 50%;
-  bottom:68%;
+  bottom: 68%;
 
-.cursor-pointer {
-  cursor: pointer;
-}
-
+  .cursor-pointer {
+    cursor: pointer;
+  }
 }

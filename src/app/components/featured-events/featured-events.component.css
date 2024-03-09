@@ -1,4 +1,4 @@
-.cursor-pointer{
+.cursor-pointer {
   cursor: pointer;
 }
 .homepage-featured-events {
@@ -17,6 +17,10 @@
 
 .homepage-featured-events .event-content-wrap figure {
   margin: -36px -18px;
+  transition: 0.3s;
+}
+.homepage-featured-events .event-content-wrap figure:hover {
+  transform: translateY(-15px) scale(1.05);
 }
 
 .homepage-featured-events .event-content-wrap figure img {

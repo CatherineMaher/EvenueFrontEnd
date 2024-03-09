@@ -27,8 +27,6 @@ export class OurNextEventsComponent implements OnInit {
           let lengthOfEvent = this.eventPage.length;
           this.eventPage = this.eventPage.splice(0, 3);
           this.getData();
-
-          console.log(this.eventPage);
         } else {
           console.log("Can't fetch API or data is undefined");
         }
@@ -43,7 +41,6 @@ export class OurNextEventsComponent implements OnInit {
         this.imageUrl = this.EventModel.getImageUrl(this.imageName);
 
         event.image = this.imageUrl;
-        console.log('event.image', event.image);
       }
       // console.log(this.imageName,"this.imageName");
 
@@ -67,7 +64,6 @@ export class OurNextEventsComponent implements OnInit {
   }
 
   Viewmore(id: string) {
-    // console.log("viewmore", id);
     this.router.navigate([`/details/${id}`]);
   }
 }

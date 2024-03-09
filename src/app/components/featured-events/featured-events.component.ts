@@ -31,17 +31,12 @@ export class FeaturedEventsComponent implements OnInit {
             lengthOfEvent
           );
 
-          console.log(this.eventPage);
           this.eventPage.forEach((event) => {
-            // let counter = 0;
-            // console.log(event.tickets?.[counter]?.totalTickets);
-            // console.log(counter);
             if (event.image) {
               this.imageName = event?.image;
               this.imageUrl = this.EventModel.getImageUrl(this.imageName);
 
               event.image = this.imageUrl;
-              console.log('event.image', event.image);
             }
           });
         } else {
@@ -51,7 +46,6 @@ export class FeaturedEventsComponent implements OnInit {
     });
   }
   Viewmore(id: string) {
-    // console.log("viewmore", id);
     this.router.navigate([`/details/${id}`]);
   }
 }

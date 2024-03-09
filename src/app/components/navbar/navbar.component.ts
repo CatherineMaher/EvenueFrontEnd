@@ -27,14 +27,18 @@ import { BadgeService } from '../../services/badge.service';
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-  constructor(private _UserService: UserService, private _Router: Router, private badgeService: BadgeService) {
+  constructor(
+    private _UserService: UserService,
+    private _Router: Router,
+    private badgeService: BadgeService
+  ) {
     this.badgeService.cartItemCount$.subscribe((count) => {
       this.cartItemCount = count;
     });
   }
   // isSignClicked: boolean = false;
   showBadge = false; // Initially, the badge is hidden
-  badgeCount = 0; 
+  badgeCount = 0;
   ngOnDestroy(): void {
     this.userSub?.unsubscribe();
   }
@@ -46,14 +50,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
   imageName?: string;
   userName?: any;
   loggedIn: boolean = false;
-  cartItemCount:number = 0;
+  cartItemCount: number = 0;
   user: any;
 
   private userSub?: Subscription;
   @ViewChild('exampleModal') modal: ElementRef | undefined;
   ngOnInit(): void {
-    console.log('Navbar component initialized');
-    console.log(UserService.getUser());
     this.loggedIn = !!UserService.getUser();
     if (localStorage.getItem('userName') != null) {
       this.userName = localStorage.getItem('userName');
@@ -64,7 +66,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
       this._UserService.getOneUser(localStorage.getItem('userId')).subscribe({
         next: (res) => {
           if (res.message == 'success') {
-            console.log('user log in', res.data);
             this.user = res.data;
             this.imageName = res.data.image;
             this.userName = res.data.name;
@@ -75,8 +76,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
       });
     }
     this.userSub = UserService.user.subscribe((user) => {
-      // console.log('User subscription triggered:', user);
-
       this.loggedIn = !!user;
       if (localStorage.getItem('userName') != null) {
         this.userName = localStorage.getItem('userName');
@@ -88,7 +87,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this._UserService.getOneUser(localStorage.getItem('userId')).subscribe({
           next: (res) => {
             if (res.message == 'success') {
-              console.log('user log in', res.data);
               this.imageName = res.data.image;
               this.userName = res.data.name;
               this.role = res.data.role;
@@ -105,7 +103,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.badgeService.cartItemCount$.subscribe((count) => (this.cartItemCount = count));
+    this.badgeService.cartItemCount$.subscribe(
+      (count) => (this.cartItemCount = count)
+    );
   }
   logOut() {
     this._UserService.logOut();
@@ -117,18 +117,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   showPhoto() {
     this.imageUrl = this._UserService.getImageUrl(this.imageName);
-    console.log('in show photo', this.imageUrl);
     this.hasaphoto = true;
-
-    //  console.log(this.imageName);
-    //  console.log("this image url",this.imageUrl);
   }
   openCart() {
     this._Router.navigate(['/cart']);
   }
 
   routeToProfile() {
-    let myId=localStorage.getItem('userId');
+    let myId = localStorage.getItem('userId');
     this._Router.navigate([`/profile/${myId}`]);
   }
 }
