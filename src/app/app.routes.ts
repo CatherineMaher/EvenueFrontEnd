@@ -15,6 +15,7 @@ import { AboutComponentComponent } from './components/about-component/about-comp
 import { CartComponent } from './components/cart/cart.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
@@ -48,5 +49,6 @@ export const routes: Routes = [
 
   { path: 'cart', component: CartComponent },
   { path: 'contact-us', component: ContactUsComponent },
+  { path: 'profile/:id', component: UserProfileComponent },
   // ,canActivate:[adminProtectGuard]
 ];

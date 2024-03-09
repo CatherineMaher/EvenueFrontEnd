@@ -44,13 +44,13 @@
 
         <!-- <button id="cart" class="btn-color rounded"></button> -->
         @if (userName){
-        <div class="me-2 text-white text-center">Welcome {{ userName }}</div>
+        <div class="me-2 text-white text-center cursor-pointer " (click)="routeToProfile()">Welcome {{ userName }}</div>
         } @if(hasaphoto){
 
         <!-- <div class="me-2 text-white text-center" >Welcome
             {{userName}}</div> -->
         <a class="nav-link text-center my-4 my-lg-0 rounded-circle" aria-current="page">
-          <img [src]="imageUrl" class="profileImage rounded-circle" />
+          <img [src]="imageUrl" class="profileImage cursor-pointer  rounded-circle" (click)="routeToProfile()" />
         </a>
         } @if (loggedIn) {
         <li class="nav-item mb-3 mb-lg-0 rounded-5 list-unstyled text-center cart">

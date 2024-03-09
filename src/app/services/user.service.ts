@@ -19,8 +19,8 @@ export class UserService {
   }
   /////////////////////////////////////
   addUser(data: any) {
-    console.log("addUser");
-    
+    console.log('addUser');
+
     return this.http.post(this.url + '/add', data);
   }
 
@@ -68,7 +68,7 @@ export class UserService {
   getOneUser(id: any): Observable<any> {
     return this.http.get(`http://localhost:7005/users/${id}`);
   }
-  
+
   logOut(): void {
     localStorage.clear();
     UserService.user.next(false);

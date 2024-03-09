@@ -39,6 +39,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   imageName?: string;
   userName?: any;
   loggedIn: boolean = false;
+  user: any;
 
   private userSub?: Subscription;
   @ViewChild('exampleModal') modal: ElementRef | undefined;
@@ -56,6 +57,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
         next: (res) => {
           if (res.message == 'success') {
             console.log('user log in', res.data);
+            this.user = res.data;
             this.imageName = res.data.image;
             this.userName = res.data.name;
             this.showPhoto();
@@ -124,5 +126,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
   openCart() {
     this._Router.navigate(['/cart']);
+  }
+
+  routeToProfile() {
+    this._Router.navigate([`/profile/${this.user._id}`]);
   }
 }
