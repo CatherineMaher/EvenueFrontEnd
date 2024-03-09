@@ -7,17 +7,11 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RatingModule } from 'primeng/rating';
 import { UserService } from '../../services/user.service';
 
-// @Component({
-//   selector: 'app-reviews',
-//   standalone: true,
-//   imports: [RatingModule,CommonModule,FormsModule,ReactiveFormsModule],
-//   templateUrl: './reviews.component.html',
-//   styleUrl: './reviews.component.css',
-// })
+
 @Component({
   selector: 'app-reviews',
   standalone: true,
@@ -33,21 +27,34 @@ import { UserService } from '../../services/user.service';
 export class ReviewsComponent implements OnInit{
   constructor(
     private myActivate: ActivatedRoute,
-    private usrModel: UserService
+    private usrModel: UserService,
+    private _Router:Router
   ) {}
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.ReviewForms = new FormGroup({
+      userId:new FormControl(this.userId),
+      eventId:new FormControl(this.eventId),
+      comment: new FormControl(null,[Validators.required]),
+    });
   }
   ReviewForms!:FormGroup;
   userId=localStorage.getItem('userId');
   eventId=this.myActivate.snapshot.params['id'];
 
-  addReview(){
-
-    this.usrModel.setReveiw(this.userId).subscribe({
-      // next:
+  addReview(data:any){
+    console.log(data.value);
+    this.usrModel.setReveiw(this.userId,data.value).subscribe({
+      next:(res)=>{
+        if(res.message=='success'){
+          console.log("here",res.data);
+          
+          this._Router.navigate([`/profile/${this.userId}`]);
+        }
+    
+      }
     })
-  }
 
 
+
+}
 }

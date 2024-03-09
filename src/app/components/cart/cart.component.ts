@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import { CartService } from '../../services/cart-service';
 import { EventDetailsService } from '../../services/event-details.service';
 import { EventService } from '../../services/event.service';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { loadScript } from '@paypal/paypal-js';
 import { PaymentService } from '../../services/payment.service';
 import Swal from 'sweetalert2';
+import { BadgeService } from '../../services/badge.service';
 
 @Component({
   selector: 'app-cart',
@@ -34,7 +35,9 @@ export class CartComponent implements OnInit {
   constructor(
     private evtsrv: EventService,
     private evdsrv: EventDetailsService,
-    private paymentServeice: PaymentService
+    private paymentServeice: PaymentService,
+    private badgeService: BadgeService,
+    private router : Router
   ) {
     this.initPaypal();
   }
@@ -114,6 +117,9 @@ export class CartComponent implements OnInit {
     //   }
     // });
   }
+  resetCounter() {
+    this.badgeService.reset();
+  }
 
   // payment
   async initPaypal() {
@@ -142,6 +148,8 @@ export class CartComponent implements OnInit {
               console.log(this.cartInfo);
             },
             onApprove: (data: any) => {
+              this.resetCounter();
+              this.evdsrv.clearCart();
               // this.isSubmitted = true;
               // this.isSuccess = true;
 
@@ -173,7 +181,7 @@ export class CartComponent implements OnInit {
                 // console.log('cart objectttt', reservation);
                 console.log('cart res array', this.reserveData);
               });
-
+              console.log("RESERVEDATA",this.reserveData);
               this.paymentServeice.pay(this.reserveData).subscribe({
                 next: (res: any) => {
                   console.log(res);
@@ -182,8 +190,9 @@ export class CartComponent implements OnInit {
                     title: `<strong></strong>`,
                     icon: 'success',
                     html: `
-                          Your ticket is reserved successfully
+                          
                           <video class="mt-3 rounded border broder-2" style="max-height: 300px" src="../../../assets/imgs/payment_success_video.mp4" autoplay></video>
+                          Your ticket is reserved successfully
                         `,
                     showCloseButton: true,
                     // showCancelButton: true,
@@ -192,6 +201,12 @@ export class CartComponent implements OnInit {
                            OK
                         `,
                     confirmButtonColor: '#5c127e',
+                  }).then((result) => {
+                    // Check if the user clicked the "OK" button
+                    if (result.isConfirmed) {
+                      // Navigate to another page using Angular Router
+                      this.router.navigate(['home']); // Make sure to inject Router in your component
+                    }
                   });
                 },
                 error: (err: any) => {
