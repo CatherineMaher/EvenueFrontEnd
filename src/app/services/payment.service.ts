@@ -12,6 +12,8 @@ export class PaymentService {
 
   pay(data: any): Observable<any> {
     let id = window.localStorage.getItem('userId');
+    console.log("Paymeettt", data);
     return this.http.post('http://localhost:7005/users/' + id + '/res', data);
+    
   }
 }

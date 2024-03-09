@@ -18,6 +18,7 @@ import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
+import { BadgeService } from '../../services/badge.service';
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -26,9 +27,14 @@ import { RegisterComponent } from '../register/register.component';
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-  constructor(private _UserService: UserService, private _Router: Router) {}
+  constructor(private _UserService: UserService, private _Router: Router, private badgeService: BadgeService) {
+    this.badgeService.cartItemCount$.subscribe((count) => {
+      this.cartItemCount = count;
+    });
+  }
   // isSignClicked: boolean = false;
-
+  showBadge = false; // Initially, the badge is hidden
+  badgeCount = 0; 
   ngOnDestroy(): void {
     this.userSub?.unsubscribe();
   }
@@ -39,6 +45,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   imageName?: string;
   userName?: any;
   loggedIn: boolean = false;
+  cartItemCount:number = 0;
 
   private userSub?: Subscription;
   @ViewChild('exampleModal') modal: ElementRef | undefined;
@@ -95,6 +102,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.isHomeRoute = event.url === '/home';
       }
     });
+
+    this.badgeService.cartItemCount$.subscribe((count) => (this.cartItemCount = count));
   }
   logOut() {
     this._UserService.logOut();
@@ -125,4 +134,5 @@ export class NavbarComponent implements OnInit, OnDestroy {
   openCart() {
     this._Router.navigate(['/cart']);
   }
+  
 }
