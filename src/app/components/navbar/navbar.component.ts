@@ -81,6 +81,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
               console.log('user log in', res.data);
               this.imageName = res.data.image;
               this.userName = res.data.name;
+              this.role=res.data.role;
               this.showPhoto();
             }
           },

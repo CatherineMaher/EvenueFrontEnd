@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { EventDetailsService } from '../../services/event-details.service';
 import { MyEvent } from '../../interfaces/my-event';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Ticket } from '../../interface/event';
@@ -62,7 +62,8 @@ export class EventDetailsComponent implements OnInit {
   constructor(
     private detailsService: EventDetailsService,
     private myActivate: ActivatedRoute,
-    private EventModel: EventService
+    private EventModel: EventService,
+    private _Router:Router
     // private myActivate: ActivatedRoute,
     
   ) {}
@@ -150,7 +151,9 @@ export class EventDetailsComponent implements OnInit {
   }
 
   addToCart() {
-    let tickets = [];
+    let loggedIn=localStorage.getItem('userId');
+    if(loggedIn!=null){
+      let tickets = [];
 
     if (this.ReservedRegularTickets > 0) {
       tickets.push({
@@ -189,6 +192,12 @@ export class EventDetailsComponent implements OnInit {
     };
     this.detailsService.reservationDetails.push(reservation);
     console.log(this.detailsService.getReservationDetails());
+
+    }
+    else{
+      this._Router.navigate(['/login'])
+    }
+    
   }
 
   resetScroll() {

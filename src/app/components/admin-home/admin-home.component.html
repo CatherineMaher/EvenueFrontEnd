@@ -65,7 +65,12 @@
 </div>
 
 </div>
-<div class="w-50 m-auto">
-  <canvas class=" w-100" id="bar">{{ chart }}</canvas>
+<div class="d-flex justify-content-evenly p-5 mt-5">
+  <div class="w-50 ">
+    <canvas class=" w-100" id="bar">{{ chart }}</canvas>
+  </div>
+  <div class="card chart-container  flex justify-content-center w-25 " >
+    <p-chart type="pie"  [data]="data" [options]="options"></p-chart>
+  </div>
 </div>
 

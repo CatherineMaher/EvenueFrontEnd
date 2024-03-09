@@ -1,7 +1,8 @@
 .photo-container {
   position: relative;
   display: inline-block;
-  overflow: hidden; /* Ensure the overlay does not overflow */
+  overflow: hidden;
+  height: 380px;
 }
 
 .overlay {
@@ -26,6 +27,9 @@
 
 .photo-container img {
   transition: transform 0.3s ease;
+  width: 100%;
+
+  object-fit:cover;
 }
 
 .photo-container:hover img {
@@ -35,7 +39,9 @@
 .photo-container p {
   position: relative;
   z-index: 2;
+
 }
+
 .owl-prev,
 .owl-next {
   position: absolute;
@@ -50,3 +56,4 @@
 .owl-next {
   right: -2rem;
 }
+

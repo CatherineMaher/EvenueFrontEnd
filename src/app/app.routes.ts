@@ -15,6 +15,9 @@ import { AboutComponentComponent } from './components/about-component/about-comp
 import { CartComponent } from './components/cart/cart.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactUsComponent } from './components/contact-us/contact-us.component';
+import { AdminAlleventsComponent } from './admin-allevents/admin-allevents.component';
+import { AllUsersComponent } from './components/all-users/all-users.component';
+import { ErrorPageComponent } from './components/error-page/error-page.component';
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
@@ -55,8 +58,10 @@ export const routes: Routes = [
   },
 
   { path: 'about', component: AboutComponent },
-
-  { path: 'cart', component: CartComponent },
+  { path: 'cart', canActivate:[protectGuard],component: CartComponent },
   { path: 'contact-us', component: ContactUsComponent },
+  {path:'error',component:ErrorPageComponent},
+  { path: '**', redirectTo:'error',pathMatch:'full' },
+
   // ,canActivate:[adminProtectGuard]
 ];
