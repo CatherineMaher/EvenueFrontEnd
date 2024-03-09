@@ -28,7 +28,6 @@ import { UserService } from '../../services/user.service';
     ReactiveFormsModule,
     FormsModule,
     RatingModule,
-    RatingModule
   ],
 })
 export class ReviewsComponent implements OnInit{
