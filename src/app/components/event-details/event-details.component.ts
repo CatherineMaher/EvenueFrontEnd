@@ -77,7 +77,7 @@ export class EventDetailsComponent implements OnInit {
         this.organizer = this.myEvent.organizer;
         this.instructions = this.myEvent.instructions;
         this.allTickets = this.myEvent.tickets;
-        // console.log(this.allTickets);
+        console.log(this.allTickets);
         for (let i = 0; i < this.allTickets.length; i++) {
           if (
             this.allTickets[i].type == 'regular' ||

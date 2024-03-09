@@ -38,6 +38,16 @@ export const routes: Routes = [
     canActivate: [adminProtectGuard],
     component: AllReservationsComponent,
   },
+  {
+    path: 'adminevents',
+    canActivate: [adminProtectGuard],
+    component: AdminAlleventsComponent,
+  },
+  {
+    path: 'allusers',
+    canActivate: [adminProtectGuard],
+    component: AllUsersComponent,
+  },
   { path: 'register', component: RegisterComponent },
   {
     path: 'addEvent',

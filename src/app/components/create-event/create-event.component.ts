@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CreateEventService } from '../../services/create-event.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-event',
@@ -105,6 +106,7 @@ export class CreateEventComponent implements OnInit {
           }
         });
       }
+
     });
     this.tickets?.forEach((ticket, index) => {
       if (ticket.type) {
@@ -134,17 +136,19 @@ export class CreateEventComponent implements OnInit {
         console.log('result from api', res);
         if (res.message == 'success') {
           console.log('success');
-          // this._Router.navigate(['/events']);
         } else {
           this.emailErrorMessage = res.message;
         }
       },
     });
+   // this.toastr.success('Form submitted successfully!', 'Success');
+   this._Router.navigate(['/events']);
   }
 
   constructor(
     private _Router: Router,
-    private _CreateEventService: CreateEventService
+    private _CreateEventService: CreateEventService,
+   
   ) {}
 
   AddFacility() {

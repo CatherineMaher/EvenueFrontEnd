@@ -19,6 +19,9 @@ import { GoogleAPIComponent } from './components/google-api/google-api.component
 import { LoginComponent } from './components/login/login.component';
 import { SliderComponent } from './components/slider/slider.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-root',
@@ -43,7 +46,9 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     TestimonialsComponent,
     SearchByPricePipe,
     SearchLocationPipe,
-    SweetAlert2Module
+    SweetAlert2Module,
+    //ToastrModule,
+    
   ],
  
   templateUrl: './app.component.html',
