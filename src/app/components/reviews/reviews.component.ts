@@ -8,7 +8,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { RatingModule } from 'primeng/rating';
 import { UserService } from '../../services/user.service';
 
 // @Component({
@@ -23,15 +22,9 @@ import { UserService } from '../../services/user.service';
   standalone: true,
   templateUrl: './reviews.component.html',
   styleUrl: './reviews.component.css',
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule,
-    RatingModule,
-    RatingModule
-  ],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
 })
-export class ReviewsComponent implements OnInit{
+export class ReviewsComponent implements OnInit {
   constructor(
     private myActivate: ActivatedRoute,
     private usrModel: UserService
@@ -39,16 +32,13 @@ export class ReviewsComponent implements OnInit{
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }
-  ReviewForms!:FormGroup;
-  userId=localStorage.getItem('userId');
-  eventId=this.myActivate.snapshot.params['id'];
+  ReviewForms!: FormGroup;
+  userId = localStorage.getItem('userId');
+  eventId = this.myActivate.snapshot.params['id'];
 
-  addReview(){
-
+  addReview() {
     this.usrModel.setReveiw(this.userId).subscribe({
       // next:
-    })
+    });
   }
-
-
 }

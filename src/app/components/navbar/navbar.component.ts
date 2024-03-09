@@ -44,7 +44,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   private userSub?: Subscription;
   @ViewChild('exampleModal') modal: ElementRef | undefined;
-  private userSub?: Subscription;
   ngOnInit(): void {
     console.log('Navbar component initialized');
     console.log(UserService.getUser());
