@@ -51,13 +51,6 @@ export class EventDetailsComponent implements OnInit {
   ID = '0';
   email?:string=''
   feedback?:string=''
-  FeedBackForm: FormGroup = new FormGroup({
-    feedback: new FormControl(null),
-    email: new FormControl(null, [
-      Validators.required,
-      Validators.pattern('[a-z0-9]+@[a-z]+.[a-z]{2,3}'),
-    ]),
-  });
 
   constructor(
     private detailsService: EventDetailsService,
@@ -204,8 +197,4 @@ export class EventDetailsComponent implements OnInit {
     window.scrollTo(0, 0);
   }
 
-  Feedback(FeedBackForm:any){
-
-  
-  }
 }
