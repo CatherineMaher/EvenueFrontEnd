@@ -32,6 +32,8 @@ export class CartComponent implements OnInit {
   paypal: any;
   reserveData: any = [];
 
+  userId = '';
+
   constructor(
     private evtsrv: EventService,
     private evdsrv: EventDetailsService,
@@ -42,6 +44,7 @@ export class CartComponent implements OnInit {
     this.initPaypal();
   }
   ngOnInit(): void {
+    this.userId = localStorage.getItem('userId') || '';
     this.cartInfo = this.evdsrv.reservationDetails;
     this.totalQuantity = this.cartInfo.length;
     this.eventPrice = this.totalEventPrice();
@@ -129,17 +132,6 @@ export class CartComponent implements OnInit {
             onApprove: (data: any) => {
               this.resetCounter();
               this.evdsrv.clearCart();
-              // this.isSubmitted = true;
-              // this.isSuccess = true;
-
-              // this.cartInfo.forEach((ele: any) => {
-              //   const obj = {
-              //     eventID: ele.eventID,
-              //     tickets: ele.tickets,
-              //     dateTime: ele.dateTime,
-              //   };
-              //   console.log('cart objectttt', obj);
-              // });
 
               this.cartInfo.forEach((ele: any) => {
                 const ticketsArr: any = [];
@@ -186,7 +178,7 @@ export class CartComponent implements OnInit {
                     // Check if the user clicked the "OK" button
                     if (result.isConfirmed) {
                       // Navigate to another page using Angular Router
-                      this.router.navigate(['home']); // Make sure to inject Router in your component
+                      this.router.navigate([`home`]); // Make sure to inject Router in your component
                     }
                   });
                 },
