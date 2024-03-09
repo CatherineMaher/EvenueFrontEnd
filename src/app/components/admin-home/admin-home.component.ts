@@ -3,11 +3,12 @@ import { AdminServiceService } from '../../services/admin-service.service';
 import { Reservation } from '../../interfaces/reservation';
 import Chart from 'chart.js/auto';
 import { RouterModule } from '@angular/router';
-
+import { ChartModule } from 'primeng/chart';
+import { MyEvent } from '../../interfaces/my-event';
 @Component({
   selector: 'app-admin-home',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule,ChartModule],
   templateUrl: './admin-home.component.html',
   styleUrl: './admin-home.component.css'
 })
@@ -21,13 +22,24 @@ export class AdminHomeComponent implements OnInit{
   reservationMonths:number[]=[];
   reservationPrices:Number[]=[];
   Llabel2="Total Prices";
+  data: any;
+  options: any;
+  totalTickets:number=0;
+  reservedTickets:number=0;
+  Events:any;
   constructor(private _AdminService:AdminServiceService){}
   ngOnInit(): void {
   this._AdminService.getEvents().subscribe({
     next:(res)=>{
       if(res.message=="success"){
         this.allEventsNum=res.length;
-        console.log(this.allEventsNum);
+      
+        this.Events=res.data;
+        this.Events=this.Events.map((event:any)=>event.tickets)
+        
+        this.getAllticketsNumbers(this.Events);
+        this.getAllticketsReserved(this.Events);
+   
       }
     }
   });
@@ -46,9 +58,11 @@ export class AdminHomeComponent implements OnInit{
         console.log(this.allResevations);
         this.seperatePrices(this.allResevations);
         this.createReservationChart();
+        this.createPieChart();
       }
     }
   });
+
   };
 
   seperatePrices(data:any){
@@ -67,7 +81,27 @@ export class AdminHomeComponent implements OnInit{
     this.reservationMonths = Array.from(monthTotals.keys());
     this.reservationPrices= Array.from(monthTotals.values());
   }
-
+getAllticketsNumbers(Events:any){
+  for (let i = 0; i < Events.length; i++) {
+    const currentArray = Events[i]; 
+    for (let j = 0; j < currentArray.length; j++) {
+      this.totalTickets+= parseInt(currentArray[j].totalTickets) ;
+   
+    }
+  }
+ 
+}
+getAllticketsReserved(Events:any){
+  for (let i = 0; i < Events.length; i++) {
+    const currentArray = Events[i]; 
+    for (let j = 0; j < currentArray.length; j++) {
+      this.reservedTickets+= parseInt(currentArray[j].reserved) ;
+   
+    }
+  }
+  
+  
+}
   createReservationChart() {
 
     this.chart = new Chart('bar', {
@@ -99,4 +133,31 @@ export class AdminHomeComponent implements OnInit{
       },
     });
   }
+  createPieChart(){
+    const documentStyle = getComputedStyle(document.documentElement);
+    const textColor = documentStyle.getPropertyValue('--text-color');
+    this.data = {
+        labels: ['Total Tickets', 'Reserved Tickets'],
+        datasets: [
+            {
+                data: [this.totalTickets, this.reservedTickets],
+                backgroundColor: ['#333', '#7C3488'],
+                
+                
+            }
+        ]
+    };
+
+    this.options = {
+        plugins: {
+            legend: {
+                labels: {
+                    usePointStyle: true,
+                    color: textColor
+                }
+            }
+        }
+    };
+}
+  
 }

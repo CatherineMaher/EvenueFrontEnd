@@ -69,6 +69,10 @@ export class UserService {
     return this.http.get(`http://localhost:7005/users/${id}`);
   }
 
+  setReveiw(id: any): Observable<any> {
+    return this.http.get(`http://localhost:7005/users/${id}/review`);
+  }
+
   logOut(): void {
     localStorage.clear();
     UserService.user.next(false);

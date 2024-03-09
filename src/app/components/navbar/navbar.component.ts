@@ -34,6 +34,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
   isHomeRoute: boolean = false;
   path: any;
+  role: any;
   hasaphoto: boolean = false;
   imageUrl?: string;
   imageName?: string;
@@ -43,13 +44,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   private userSub?: Subscription;
   @ViewChild('exampleModal') modal: ElementRef | undefined;
-
+  private userSub?: Subscription;
   ngOnInit(): void {
     console.log('Navbar component initialized');
     console.log(UserService.getUser());
     this.loggedIn = !!UserService.getUser();
     if (localStorage.getItem('userName') != null) {
       this.userName = localStorage.getItem('userName');
+
       this.hasaphoto = false;
     }
     if (localStorage.getItem('userId') != null) {
@@ -60,6 +62,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
             this.user = res.data;
             this.imageName = res.data.image;
             this.userName = res.data.name;
+            this.role = res.data.role;
             this.showPhoto();
           }
         },
@@ -71,6 +74,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       this.loggedIn = !!user;
       if (localStorage.getItem('userName') != null) {
         this.userName = localStorage.getItem('userName');
+
         this.hasaphoto = false;
       }
       if (localStorage.getItem('userId') != null) {
@@ -81,15 +85,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
               console.log('user log in', res.data);
               this.imageName = res.data.image;
               this.userName = res.data.name;
+              this.role = res.data.role;
               this.showPhoto();
             }
           },
         });
       }
-      // else if (localStorage.getItem('userName') != null) {
-      //   this.userName = localStorage.getItem('userName');
-      //   this.hasaphoto = false;
-      // }
     });
 
     this._Router.events.subscribe((event) => {
@@ -103,19 +104,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.hasaphoto = false;
     this.imageName = undefined; // Reset image name
     this.userName = undefined; // Reset user name
+    this.role = undefined;
   }
-  // displayUserInfo() {
-  //   console.log("hereeeeeeeeeeeeeeeee");
 
-  //   if (localStorage.getItem('token') != null) {
-  //       this.showPhoto();
-  //       this.hasaphoto=true;
-  //       // this.loggedIn = true;
-  //   }
-  //   // } else {
-  //   //   this.loggedIn = false;
-  //   // }
-  // }
   showPhoto() {
     this.imageUrl = this._UserService.getImageUrl(this.imageName);
     console.log('in show photo', this.imageUrl);

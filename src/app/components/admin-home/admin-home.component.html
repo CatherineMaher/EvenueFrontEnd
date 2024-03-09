@@ -36,7 +36,7 @@
         </div>
       </div>
       <div class="bg-purple p-0 m-0 w-100 rounded-bottom-3 text-white text-center">
-        <a routerLink="/reservations"class="btn border-0 text-white" >
+        <a routerLink="/allusers"class="btn border-0 text-white" >
          more info
          <i class="fa-solid fa-circle-right fs-6 text-white"></i>
         </a>
@@ -53,7 +53,7 @@
         </div>
       </div>
       <div class="bg-purple p-0 m-0 w-100 rounded-bottom-3 text-white text-center">
-        <a routerLink="/reservations"class="btn border-0 text-white" >
+        <a routerLink="/adminevents"class="btn border-0 text-white" >
          more info
          <i class="fa-solid fa-circle-right fs-6 text-white"></i>
         </a>
@@ -65,7 +65,12 @@
 </div>
 
 </div>
-<div class="w-50 m-auto">
-  <canvas class=" w-100" id="bar">{{ chart }}</canvas>
+<div class="d-flex justify-content-evenly p-5 mt-5">
+  <div class="w-50 ">
+    <canvas class=" w-100" id="bar">{{ chart }}</canvas>
+  </div>
+  <div class="card chart-container  flex justify-content-center w-25 " >
+    <p-chart type="pie"  [data]="data" [options]="options"></p-chart>
+  </div>
 </div>
 
